@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripREC</title>
+    <script src="https://kit.fontawesome.com/80f6c102d9.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <style>
+        body{
+            font-family: 'Noto Sans TC', sans-serif;
+            margin:0;
+            background: #f9f9f9;
+        }
+
+        h2{
+            font-size: 18px;
+            padding: 10px 20px;
+            color: #575ed8;
+        }
+
+
+        #chat-window{
+            margin: 0 auto;
+            width:92%;
+            height: 420px;
+            overflow: auto;
+            background: #f9f9f9;
+        }
+
+        #output p{
+            padding: 14px 0px;
+            margin: 0 20px;
+            border-bottom: 1px solid #e9e9e9;
+            color: #555;
+        }
+
+        #feedback p{
+            color: #aaa;
+            padding: 14px 0px;
+            margin: 0 20px;
+        }
+
+        #output strong{
+            color: #575ed8;
+        }
+
+        label{
+            box-sizing: border-box;
+            display: block;
+            padding: 10px 20px;
+        }
+
+        #handle{
+            padding: 10px 20px;
+            box-sizing: border-box;
+            background: #eee;
+            border: 0;
+            display: block;
+            width: 100%;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            font-family: Nunito;
+            font-size: 16px;
+        }
+
+        #send_bar{
+            position: fixed;
+            bottom:15px;
+            left:18px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            width:90%;
+        }
+
+        #emoji_bar{
+            display: none;
+            position: fixed;
+            bottom:75px;
+            left:18px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            width:90%;
+        }
+
+        #emoji{
+            font-size:18px; 
+            margin: 0; 
+            padding:0 5px;
+        }
+
+        #emoji_bar p span{
+            text-decoration: none;
+        }
+
+        #send_bar .fa-paper-plane{
+            vertical-align: middle;
+            margin:0 5px;
+            font-size: 20px;
+            color:#3949ab;
+        }
+
+        #send_bar .fa-image{
+            vertical-align: middle;
+            margin:0 5px 0 10px;
+            font-size: 20px;
+            color:#3949ab;
+        }
+
+        #send_bar .fa-smile{
+            vertical-align: middle;
+            margin:0 5px;
+            font-size: 20px;
+            color:#3949ab;
+        }
+
+        #send_bar .fa-microphone{
+            vertical-align: middle;
+            margin:0 5px;
+            font-size: 20px;
+            color:#3949ab;
+        }
+        #send_bar .fa-stop{
+            vertical-align: middle;
+            margin:0 5px;
+            font-size: 20px;
+            color:red;
+        }
+
+        #send_bar #message{
+            padding:10px;
+            margin-left:5px;
+            border:none;
+            outline: none;
+            display: inline-block;
+            width: 50%;
+            font-family: Nunito;
+            font-size: 16px;
+        }
+
+        #function_bar{
+            width:100%;
+            height:50px;
+            
+            background-color: #3949ab;
+            display: inline-block;
+            color: #fff;
+        }
+
+        #function_bar .fa-arrow-left{
+            margin-left: 20px;
+            margin-top: 15px;
+            font-size: 18px;
+        }
+
+        #function_bar span{
+            position: relative;
+            left: 30%;
+            margin:0 auto;
+            font-size: 20px;
+        }
+        
+        #left-output{
+            display: inline-block;
+            word-wrap: break-word;
+            max-width: 200px;
+            margin:10px ;
+            margin-left: 5px;
+            margin-bottom: 5px;
+            padding: 10px 15px;
+            background-color: #3949ab;
+            color:#fff;
+            border-radius: 15px;
+        }
+        #left-left{
+            display: block;
+            text-align: left;
+        }
+        #left-left span{
+            display: block;
+            margin-left: 45px;
+            font-size:10px;
+        }
+        #left-left .fa-user-circle{
+            margin-left: 5px;
+            vertical-align: sub;
+            font-size: 30px;
+        }
+
+        #left-left #frphoto{
+            width:30px;
+            height:30px;
+            border-radius: 50%;
+            vertical-align:sub;
+        }
+        #right-right{
+            display: block;
+            text-align: right;
+        }
+        #right-input{
+            display: inline-block;
+            word-wrap: break-word;
+            max-width: 200px;
+            margin:10px ;
+            margin-bottom: 5px;
+            padding: 10px 15px;
+            background-color: #ffd31d;
+            color:#fff;
+            border-radius: 15px;
+        }
+        #right-right span{
+            display: block;
+            margin-right: 15px;
+            font-size:8px;
+        }
+        .imagemsg{
+            border-radius: 10%;
+        }
+        audio{
+            width:205px;
+        }
+    </style>
+</head>
+<body>
+    
+        <div id="function_bar">
+            <i class="fas fa-arrow-left" onclick="location.href='chatfriend.html'"></i>
+            <span id="chatname">Joanne</span>
+            
+            <!--<span id="chatname">Joanne</span>-->
+        </div>
+        <div id="chat-window">
+            <!--
+            <div id="output">
+                <div id="left-left">
+                    <i class="fas fa-user-circle"></i>
+                    <div id="left-output">6545555555555555555562562652562525984</div>
+                    <span>2020/3/21 上午12:11:58</span>
+                </div>
+                <div id="right-right">
+                    <div id="right-input">32165</div>
+                    <span id="lastchatseen">2020/3/21 上午12:11:58</span>
+                </div>
+            </div>
+
+        -->
+            <div id="output"></div>
+            <div id="feedback"></div>
+        </div>
+        
+        <div id="emoji_bar">
+            <p id="emoji">
+            </p>
+        </div>
+        <div id="send_bar">
+            <i onclick="chooseImage()" class="fas fa-image"><input type="file" id="imagefile" onchange="SendImage(this)" accept="image/*" style="display: none;"></i>
+            <i onclick="showemoji()" class="far fa-smile"></i>
+            <i id="sendaudio" onclick="record(this)" class="fas fa-microphone"></i>
+            <input id="message" onfocus="hideemoji()" type="text" placeholder="Type Message..."> 
+            <i id="send" class="fas fa-paper-plane" onclick="sendmessage()"></i>
+        </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
+    <script src="../database_setup.js"></script>
+    <script>
+        
+
+        //QUERY DOM
+        var message = document.getElementById('message');
+        //var handle = document.getElementById('handle');
+        var btn = document.getElementById('send');
+        var output = document.getElementById('output');
+        var feedback = document.getElementById('feedback');
+
+        //emit event
+
+        var url = decodeURI(location.href);
+        var friendname = url.split("?")[1].split("&")[0].split("=")[1];
+        document.getElementById('chatname').innerHTML = friendname;
+        var chatkey = url.split("?")[1].split("&")[1].split("=")[1];
+        console.log(chatkey);
+
+        var currentuserkey = url.split("?")[1].split("&")[2].split("=")[1];
+        console.log(currentuserkey);
+
+        var friendkey = url.split("?")[1].split("&")[3].split("=")[1];
+        console.log(friendkey);
+
+        function onekeydown(){
+            document.addEventListener('keydown',function(key){
+                if(key.which === 13){
+                    sendmessage();
+                }
+            })
+        }
+
+        function loadchatmessages(chatkey,friendphoto) {
+            dbtest.ref('chatMessages').child(chatkey).on('value',function(chats){
+                var messageDisplay = '';
+                chats.forEach(function (data) {
+                    var chat = data.val();
+                    console.log(chat);
+                    var sent = false;
+
+                    var msg='';
+                    if(chat.msgType === 'image'){
+                        msg = `<img src='${chat.msg}' width="195px" height="195px" class="imagemsg"/>`;
+                    }
+                    else if(chat.msgType === 'audio'){
+                        msg = `<audio controls><source src="${chat.msg}" type="video/webm"/></audio>`;
+                    }
+                    else{
+                        msg = chat.msg;
+                    }
+
+                    //dbtest.ref('friend_list').child(chat.userid);
+                    if(chat.userid !== currentuserkey){
+                        //messageDisplay += `<div id="left-left"><i class="fas fa-user-circle"></i><div id="left-output">${chat.msg}</div><span>${chat.datetime}</span></div>`;
+                        messageDisplay += `<div id="left-left"><img id="frphoto" src="${friendphoto}"><div id="left-output">${msg}</div><span>${chat.datetime}</span></div>`;
+                    }
+                    else{
+                        messageDisplay += `<div id="right-right"><div id="right-input">${msg}</div><span>${chat.datetime}</span></div>`;
+                    }
+
+                });
+                output.innerHTML = messageDisplay;
+                console.log(output.clientHeight);
+                document.getElementById('chat-window').scrollTo(0,output.clientHeight);
+            });
+        }
+
+        function sendmessage() {
+            
+            document.getElementById('emoji_bar').style="display:none";
+
+            var chatmessage = {
+                userid:currentuserkey,
+                msg:document.getElementById('message').value,
+                msgType:'normal',
+                datetime:new Date().toLocaleString()};
+
+            dbtest.ref('chatMessages').child(chatkey).push(chatmessage,function(error){
+                if(error){
+                    console.log(error);
+                }
+                else{
+                    document.getElementById('message').value = '';
+                    //var mytime=myDate.toLocaleString();
+                    //document.getElementById('message').value;
+                    //console.log(document.getElementById('message').value);
+                    //console.log(mytime);
+                    //output.innerHTML += `<div id="right-right"><div id="right-input">${document.getElementById('message').value}</div><span>${new Date().toLocaleString()}</span></div>`;
+                    //console.log(output.clientHeight);
+                    //document.getElementById('chat-window').scrollTo(0,output.clientHeight);
+                }
+            });
+
+        }
+
+        function chooseImage(){
+            document.getElementById('imagefile').click();
+        }
+
+        function SendImage(event){
+            var file = event.files[0]
+            if(!file.type.match("image.*")){
+                alert('please select image only')
+            }
+            else{
+                //alert('image send')
+                var reader = new FileReader()
+                reader.addEventListener("load",function(){
+                    var chatmessage = {
+                        userid:currentuserkey,
+                        msg:reader.result,
+                        msgType:'image',
+                        datetime:new Date().toLocaleString()};
+
+                    dbtest.ref('chatMessages').child(chatkey).push(chatmessage,function(error){
+                        if(error){
+                            console.log(error);
+                        }
+                        else{
+                            document.getElementById('message').value = '';
+                        }
+                    });
+                },false);
+                if(file){
+                    reader.readAsDataURL(file)
+                }
+            }
+        }
+
+        function loadAllemoji(){
+            var emoji = "";
+            for(var i=128512 ; i <= 128567 ; i++){
+                emoji += `<span onclick="getemoji(this)">&#${i};</span>`
+            }
+            document.getElementById('emoji').innerHTML = emoji;
+        }
+
+        function showemoji(){
+            document.getElementById('emoji_bar').style="display:block";
+        }
+        function hideemoji(){
+            document.getElementById('emoji_bar').style="display:none";
+        }
+
+        function getemoji(control){
+            document.getElementById('message').value += control.innerHTML;
+        }
+
+        
+        let chunks = [];
+        let recorder;
+        var timeout;
+
+        function record(control){
+            let device = navigator.mediaDevices.getUserMedia({audio:true});
+            device.then(stream =>{
+                if(recorder == undefined){
+                    alert('1')
+                    recorder = new MediaRecorder(stream)
+                    alert('1.1')
+                    recorder.ondataavailable = e =>{
+                        alert('1.2')
+                        chunks.push(e.data);
+                        alert('1.3')
+                        if(recorder.state === 'inactive'){
+                            alert('1.4')
+                            let blob = new Blob(chunks,{type:'audio/webm'});
+                            alert('1.5')
+                            //document.getElementById('audio').innerHTML= '<source src="' + URL.createObjectURL(blob)+'"type="video/webm"/>';
+                            
+                            var reader = new FileReader()
+                            alert('1.6')
+                            reader.addEventListener("load",function(){
+                                alert('1.7')
+                                var chatmessage = {
+                                    userid:currentuserkey,
+                                    msg:URL.createObjectURL(blob),
+                                    msgType:'audio',
+                                    datetime:new Date().toLocaleString()};
+
+                                dbtest.ref('chatMessages').child(chatkey).push(chatmessage,function(error){
+                                    if(error){
+                                        console.log(error);
+                                    }
+                                    else{
+                                        document.getElementById('message').value = '';
+                                    }
+                                });
+                            },false);
+                            alert('1.8')
+                            reader.readAsDataURL(blob)
+                            alert('1.9')
+                        }
+                    }
+                    recorder.start();
+                    alert('3.1')
+                    control.setAttribute('class','fas fa-stop');
+                    alert('3.2')
+                }
+            
+                alert('2')
+            });
+
+            if(recorder != undefined){
+                alert('4')
+                if(control.getAttribute('class').indexOf('stop') !== -1){
+                    alert('5')
+                    recorder.stop();
+                    control.setAttribute('class','fas fa-microphone')
+                }
+                else{
+                    alert('6')
+                    chunks = [];
+                    recorder.start();
+                    control.setAttribute('class','fas fa-stop')
+                }
+            }
+
+        }
+
+        loadAllemoji();
+
+        output.innerHTML = '';
+        onekeydown();
+        dbtest.ref('users').child(friendkey).on('value',function (data) {
+            var user = data.val();
+            loadchatmessages(chatkey,user.img);
+        });
+    
+        //btn.addEventListener('click',sendmessage());
+        /*
+        btn.addEventListener('click',function(){
+            var myDate = new Date(); 
+            var mytime=myDate.toLocaleString();
+            var msg = document.getElementById('message').value
+            output.innerHTML += '<div id="right-right"><div id="right-input">'+msg+'</div><span>'+mytime+'</span></div>';
+            console.log(output.clientHeight);
+            document.getElementById('chat-window').scrollTo(0,output.clientHeight);
+        });*/
+    </script>
+</body>
+</html>
+
+
+<!--<input id="handle" type="text" placeholder="Handle">-->

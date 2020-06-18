@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TripREC</title>
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width,height=device-height">
+    <!-- IOS SUPPORT -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    
+    <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+    <!-- we import arjs version without NFT but with marker + location based support -->
+    <!--<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>-->
+    <script src="https://raw.githack.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
+    <!-- UIkit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script>
+
+    <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://rawgit.com/Utopiah/googlepoly-load-component/master/googlepoly-load-component.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v5.0.1/dist/aframe-extras.min.js"></script>
+
+    <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+    <style>
+    .buttons {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 5em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+    }
+
+    .back-button {
+        position: absolute;
+        top:3%;
+        left: 5%;
+        font-size: 25px;
+        padding: 0.25em;
+        border-radius: 10px;
+        border: none;
+        background: white;
+        color: black;
+        width: 100px;
+        height: 100px;
+    }
+
+    .open-button {
+        position: absolute;
+        top:3%;
+        right: 20px;
+        font-size: 25px;
+        padding: 0.25em;
+        border-radius: 10px;
+        border: none;
+        background: white;
+        color: black;
+        width: 100px;
+        height: 100px;
+    }
+    </style>
+
+</head>
+<body style="margin : 0px; overflow: hidden;">
+    <a-scene id="scene" position="0 0 0" cursor="rayOrigin:mouse" embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
+        <a-assets>
+            <!-- Map point Image -->
+            <img id="height-1" src="heigh_1-color.png">  
+            <img id="height-2" src="heigh_2-color.png"> 
+            <img id="height-3" src="heigh_3-color.png">    
+            <img id="medium-1" src="medium_1-color.png">  
+            <img id="medium-2" src="medium_2-color.png"> 
+            <img id="medium-3" src="medium_3-color.png">    
+            <img id="entry-1" src="entry_1-color.png">  
+            <img id="entry-2" src="entry_2-color.png"> 
+            <img id="entry-3" src="entry_3-color.png">    
+        
+        </a-assets>
+    <!--<a-marker preset="hiro">-->
+    <a-marker preset="custom" type="pattern" url="./markers/patternlogo.patt" >
+
+        <a-plane animation="property: rotation; to: 0 360 0; loop: true; dur: 800;"  id="heigh_1" scale = "1 1" position='0 2 0' rotation="0 0 0" visible="false" material='src:#height-1'></a-plane>
+        <a-plane animation="property: rotation; to: 0 360 0; loop: true; dur: 800;"  id="heigh_2" scale = "1 1" position='0 2 0' rotation="0 0 0" visible="false" material='src:#height-2'></a-plane>
+        <a-plane animation="property: rotation; to: 0 360 0; loop: true; dur: 800;"  id="heigh_3" scale = "1 1" position='0 2 0' rotation="0 0 0" visible="false" material='src:#height-3'></a-plane>
+        <a-plane animation="property: rotation; to: 0 360 0; loop: true; dur: 800;"  id="medium_1" scale = "1 1" position='0 2 0' rotation="0 0 0" visible="false" material='src:#medium-1'></a-plane>
+        <a-plane animation="property: rotation; to: 0 360 0; loop: true; dur: 800;"  id="medium_2" scale = "1 1" position='0 2 0' rotation="0 0 0" visible="false" material='src:#medium-2'></a-plane>
+        <a-plane animation="property: rotation; to: 0 360 0; loop: true; dur: 800;"  id="medium_3" scale = "1 1" position='0 2 0' rotation="0 0 0" visible="false" material='src:#medium-3'></a-plane>
+        <a-plane animation="property: rotation; to: 0 360 0; loop: true; dur: 800;"  id="entry_1" scale = "1 1" position='0 2 0' rotation="0 0 0" visible="false" material='src:#entry-1'></a-plane>
+        <a-plane animation="property: rotation; to: 0 360 0; loop: true; dur: 800;"  id="entry_2" scale = "1 1" position='0 2 0' rotation="0 0 0" visible="false" material='src:#entry-2'></a-plane>
+        <a-plane animation="property: rotation; to: 0 360 0; loop: true; dur: 800;"  id="entry_3" scale = "1 1" position='0 2 0' rotation="0 0 0" visible="false" material='src:#entry-3'></a-plane>
+        
+        <!-- loot box -->
+        <a-box id="boxBody"
+            position="0 0.25 0" scale="1.2 0.6 1.2"
+            opacity="0.8"
+            event-set__enter="_event:mouseenter; color: #FFFF84"
+            event-set__leave="_event:mouseleave; color: #FFFFFF;
+                                    position: 0 0.3 0;
+                                    scale: 1.2 0.6 1.2"
+            event-set__down="_event:mousedown; 
+                                position: 0 0.15 0;
+                                scale: 1.2 0.3 1.2"
+            event-set__up="_event:mouseup; color: #FFFFFF;
+                                position: 0 0.3 0;
+                                scale: 1.2 0.6 1.2">
+        </a-box>
+
+        <!--打開後的box-->
+        <a-entity id="boxCover0" position="0.6 0.25 0" rotation="0 0 180">
+            <a-box class="board"
+                position="0.5 0 0" scale="0.8 0.05 1"
+                opacity="0.5">
+            </a-box>
+        </a-entity>
+        <a-entity  id="boxCover1" position="-0.6 0.25 0" rotation="0 0 -180">
+            <a-box class="board"
+                position="-0.5 0 0" scale="0.8 0.05 1"
+                opacity="0.5">
+            </a-box>
+        </a-entity>
+        <a-entity id="boxCover2" position="0 0.25 0.6" rotation="-180 0 0">
+            <a-box class="board"
+                position="0 0 0.5" scale="1 0.05 0.8"
+                opacity="0.5">
+            </a-box>
+        </a-entity>
+        <a-entity id="boxCover3" position="0 0.25 -0.6" rotation="180 0 0">
+            <a-box class="board"
+                position="0 0 -0.5" scale="1 0.05 0.8"
+                opacity="0.5">
+            </a-box>
+        </a-entity>
+
+        <!-- effects -->
+        <a-entity id="particles"
+                position="0 0 0"
+                particle-system="enabled: false;
+                                color: #EEFF00, #FF8800;
+                                particleCount: 50;
+                                maxParticleCount: 200;
+                                maxAge: 2;
+                                duration: 2;
+                                velocityValue: 0 5 0;
+                                velocitySpread: 5 5 5;
+                                accelerationSpread: 5 0 5;
+                texture: https://unpkg.com/aframe-particle-system-component@1.0.x/dist/images/star.png">
+        </a-entity>
+
+
+        <a-entity id="treasure"
+                visible="false"
+                scale="0.0025 0.0025 0.0025" position="0 0.3 0"
+                gltf-model="./scene.gltf">
+        </a-entity>
+
+
+        <a-entity id="coin"
+                visible="false"
+                scale="0.5 0.5 0.5"
+                animation="property: rotation; to: 360 0 0; loop: true; dur: 500" 
+                animation__2="property: position;from:0 1.5 0 to:0 2 0 ; dur:5000 ; loop:true"
+                gltf-model="./coin/scene.gltf">          
+        </a-entity>
+
+        <!-- text -->
+        <a-text value="TripREC box"
+                scale="0.2 0.2 0.2"
+                position="0 0.65 0.5" rotation="0 0 0"
+                color="#445EA0" material="side: double">
+        </a-text>
+
+        <a-text id="openInst"
+                value="Click open-button to open"
+                scale="0.4 0.4 0.4"
+                position="-0.4 0.65 0" rotation="-90 0 0"
+                color="#000000" material="side: double">
+        </a-text>
+
+        <a-text id="congra"
+                value="Attraction Get"
+                scale="0.6 0.6 0.6"
+                position="-0.4 1 0" rotation="-90 0 0"
+                color="#FFFF84" material="side: double">
+        </a-text>
+        
+        <a-text id="congra2"
+                value="Badge Get"
+                scale="0.6 0.6 0.6"
+                position="-0.25 1 0.3" rotation="-90 0 0"
+                color="#FFFF84" material="side: double">
+        </a-text>
+
+        
+    </a-marker>
+    <a-entity position="0 0 0" camera>
+        <a-entity cursor=""
+            position="0 0 0"
+            geometry="primitive:ring; radiusInner: 0.02; radiusOuter: 0.03"
+            material="color: black; shader: flat; opacity:0.1">
+        </a-entity>
+    </a-entity>
+    </a-scene>
+    
+    
+    <button class="back-button">Back!</button>
+    <button id="openbox" class="open-button">Open!</button>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
+	<script src="../database_setup.js"> </script>
+
+    <script>
+/*
+        var imgsrc= [['heigh_1',''],['heigh_2',''],['heigh_3','']
+                    ,['medium_1',''],['medium_2',''],['medium_3','']
+                    ,['entry_1',''],['entry_2',''],['entry_3','']];
+        var imgmap = new Map(imgsrc);
+        var x = Math.floor((Math.random() * 10) + 1);
+        //imgmap.get('heigh_1') 得value
+*/
+        document.querySelector(".back-button").addEventListener("click", function() {
+          // here you can change also a-scene or a-entity properties, like
+          // changing your 3D model source, size, position and so on
+          // or you can just open links, trigger actions...
+            location.href = `ARcollection.html`;
+        });
+
+        let showimagid = '';
+        let arrIndex = '';
+        // box
+        const boxBody = document.querySelector('#boxBody');
+        let boxCovers = ["boxCover0","boxCover1","boxCover2","boxCover3"];
+        const boards = document.querySelectorAll('.board');
+        const boxRotations = [];
+        const animToggle = {true: "from", false: "to"};
+        for (let i = 0; i < 4; i++) {
+            let rotI = document.getElementById(boxCovers[i]).getAttribute('rotation');
+            console.log(rotI);
+            boxRotations[i] = rotI.x + " " + rotI.y + " " + rotI.z;
+        }
+        console.log(boxRotations);
+        
+        // effects
+        const particles = document.querySelector('#particles');  
+        const treasure = document.querySelector('#treasure');      
+        let curLoot = null;       
+        const openInst = document.querySelector('#openInst');   
+        const congra = document.querySelector('#congra');
+        congra.setAttribute('visible', false);
+        const congra2 = document.querySelector('#congra2');
+        congra2.setAttribute('visible', false);
+        
+        function animBox() {
+            console.log('5555')
+            auth.onAuthStateChanged(user => {
+            if (user) {
+                console.log('user logged in: ', user);
+                console.log(1111)
+                    
+    
+            let boxOpen = false;
+            dependencies: ['raycaster'];
+          // animate box body
+        /*
+            if (boxOpen){
+                boxBody.setAttribute('visible', boxOpen);
+            } else {
+                boxBody.setAttribute('visible', !boxOpen);   
+            }
+            */
+            boxBody.setAttribute('visible', !boxOpen);
+        
+            boxBody.setAttribute('animation',
+                                "property: opacity; " + animToggle[!boxOpen] +
+                                ": 0.8; " + animToggle[boxOpen] +
+                                ": 0; dur: 500");
+        
+          // animate box covers
+            boxCovers.forEach(function(el, i) {
+                document.getElementById(el).setAttribute('animation',
+                                "property: rotation; " + animToggle[!boxOpen] +
+                                ": " + boxRotations[i] + "; " +animToggle[boxOpen] +
+                                ": 0 0 0; dur: 500");
+                boards[i].setAttribute('animation',
+                                "property: color; " + animToggle[!boxOpen] +
+                                ": #FFFFFF; " + animToggle[boxOpen] +
+                                ": #FFFF84; dur: 500");
+            });
+        
+          // show effects
+            particles.setAttribute('particle-system', "enabled:"+!boxOpen);
+          // change instructions
+        
+            openInst.setAttribute('visible', boxOpen);
+          //closeInst.setAttribute('visible', !boxOpen);
+
+            var x = Math.floor((Math.random() * 10) + 1);
+            console.log(x);
+            if(x<=1){
+                arrIndex = Math.floor(Math.random() * 3);
+                console.log(arrIndex.toString());
+                document.querySelector('#heigh_'+arrIndex.toString()).setAttribute('visible', !boxOpen);
+                //document.querySelector('#heigh_'+arrIndex.toString()).visible = !boxOpen;
+                showimagid = 'heigh_'+arrIndex.toString();
+                //imgmap.get('height_'+toString(arrIndex));
+        
+                //dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
+                
+                console.log(showimagid)
+               // console.log(judge)
+
+                //dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
+                congra.setAttribute('visible', !boxOpen);
+                congra2.setAttribute('visible', !boxOpen);
+                //coin.setAttribute('visible', !boxOpen);
+            }
+            else if(x>=2 && x<=4){
+                arrIndex = Math.floor(Math.random() * 3);
+                console.log(arrIndex.toString());
+                document.querySelector('#medium_'+arrIndex.toString()).setAttribute('visible', !boxOpen);
+                //document.querySelector('#medium_'+arrIndex.toString()).visible = !boxOpen;
+                showimagid = 'medium_'+arrIndex.toString();
+                //dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
+                console.log(showimagid)
+                //console.log(judge)
+                //dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
+                congra.setAttribute('visible', !boxOpen);
+                congra2.setAttribute('visible', !boxOpen);
+            }
+            else{
+                arrIndex = Math.floor(Math.random() * 3);
+                console.log(arrIndex.toString());
+                document.querySelector('#entry_'+arrIndex.toString()).setAttribute('visible', !boxOpen);
+                //document.querySelector('#entry_'+arrIndex.toString()).visible = !boxOpen;
+                showimagid = 'entry_'+arrIndex.toString();
+                //dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
+                console.log(showimagid)
+                //console.log(judge)
+                
+                //dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
+                congra.setAttribute('visible', !boxOpen);
+                congra2.setAttribute('visible', !boxOpen);
+            }
+            
+            //dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
+        
+            curLoot = treasure;
+            curLoot.setAttribute('visible', !boxOpen);
+            
+            dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').on('value',function(data){
+                let judge = [];
+                
+                data.forEach(function(item) {
+                    console.log(item.key+""+item.val());
+                    if(item.val() == showimagid){
+                        judge.push(item.val())
+                    }
+                    else{
+                        console.log('passed')
+                    }
+                });
+            
+                if( judge.length == 0){
+                    dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').push(showimagid)
+                }
+                else{
+                    console.log('haved')
+                }
+                console.log(showimagid)
+                console.log(judge)
+            });
+            boxOpen = !boxOpen;
+            console.log(boxOpen);
+        } else {
+                    console.log('user logged out');
+                }
+            });
+        }
+        
+        // add click listener to texts to accommodate mobile and older aframe version
+        //openInst.addEventListener('click', animBox);
+        //closeInst.addEventListener('click', animBox);
+        
+        document.getElementById('openbox').addEventListener('click', animBox);
+        //boxBody.addEventListener('click', animBox);
+        </script>
+</body>
+</html>

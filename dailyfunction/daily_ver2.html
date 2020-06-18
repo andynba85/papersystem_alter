@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Import Google Icon Font-->
+    <title>TripREC</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="./css/materialize.min.css"  media="screen,projection"/>
+    <!--Let browser know website is optimized for mobile-->
+    <!--google font-->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/80f6c102d9.js" crossorigin="anonymous"></script>
+    <!--調色盤-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"/> <!-- 'classic' theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/monolith.min.css"/> <!-- 'monolith' theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css"/> <!-- 'nano' theme -->
+    <!-- Modern or es5 bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.es5.min.js"></script>
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <style>
+      
+      body{
+        margin: 0; 
+        padding:0;
+        background-color: #e0e0e0;
+        color: #000000;
+        overflow: hidden;
+        font-family: 'Noto Sans TC', sans-serif;;
+      }
+      #show{
+        border-style: solid;
+        border-radius: 5px;
+        border-color: #eeeeee;
+        padding: 10px 20px 2px 20px;
+        display: none;
+      }
+
+      .toolbar{
+        background-color: #3949ab;
+        width: 100%;
+      }
+
+      .toolbar .combine{
+        margin: 5px;
+        display: inline-block;
+      }
+
+      .combine_bar{
+        margin: 5px;
+        display: inline-block;
+        padding-left: 5%;
+      }
+
+      .combine_bar_2{
+        display: inline-block;
+        margin-left:7%;
+        margin-top: 5px;
+      }
+
+      .combine_bar a , .combine a{
+        display: block;  
+      }
+
+      .combine_bar span{
+        margin-left: 15px;
+      } 
+
+      .combine_bar_2 span{
+        display: block;
+        color:black;
+        margin-left: 6px;
+      } 
+
+      .combine span{
+        margin-left: 8px;
+        color: #ffffff;
+      }
+      .combine_bar a i,.combine_bar_2 a i{
+        color: #3949ab;
+      }
+      .combine a i{
+        background-color: #ffd31d;
+        color: #3949ab;
+      }
+      .container{
+        background-color: #ffffff;
+        margin-top: 20px;
+        width:370px;
+      }
+      .fixed-action-button a{
+        background-color: #ffffff;
+      }
+      .grid{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+      }
+
+      .pickr_bar{
+        padding-top:10px;
+        padding-bottom: 10px;
+        text-align: center;
+        width: 150px;
+        background-color: #eeeeee;
+        border-radius: 20px;
+
+      }
+      .pickr{
+        display: inline-block;
+      }
+      .pickr-field{
+        border:none;
+        text-align: center;
+        border-radius:15px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        width:90px;
+        font-size: 18px;
+        display: inline-block;
+      }
+      .color_picker{
+        margin-left:30%;
+        margin-bottom: 55%;
+      }
+
+      .custom-class{
+        position:absolute;
+        width: 350px !important;
+        top: 68% !important;
+        left: 13px !important;
+      }
+
+      #file2{
+        display: none;
+      }
+
+      .uploadslide img , .bgslide img{
+        margin:2px;
+      }
+
+      .elementslide , .uploadslide , .bgslide{
+        display: inline-block;
+        white-space:nowrap;
+        padding-top: 5px;
+        width:100%;
+        height:70px;
+        overflow: auto;
+        overflow-Y: hidden;
+      }
+      
+      img {
+        display: inline-block;
+        border: 1px solid #eaeaea;
+        height: 60px;
+        width: 60px;
+      }
+
+      .modal .modal-content{
+        display: inline-block;
+        width:100%;
+        padding: 5px;
+      } 
+
+      #imageUploader{
+        margin-bottom: 15%;
+      }
+
+      .sidenavself{
+        height: 0px; /* 100% Full-height */
+        margin-top:5px;
+        width: 100%; /* 0 width - change this with JavaScript */
+        position: fixed;
+        z-index:1;
+        left:0;
+        bottom:0;
+        background-color: #ffffff; /* Black*/
+        transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+      }
+
+      #addtool{
+        position: fixed;
+        right:10px;
+        bottom:10px;
+        transition: 0.5s;
+      }
+
+      #addtool a i{
+        color: #3949ab;
+        background-color: #ffffff;
+      }
+
+      .close{
+        text-align:center;
+        padding-bottom:10px;
+      }
+      .fade-in{
+        position:fixed;
+        left:44%;
+        bottom:13%;
+        opacity:0;
+        transition:0.5s;
+      }
+      .fade-in a i{
+        color: #3949ab;
+        background-color:#ffffff;
+      } 
+      .close a i{
+        color: #ffffff;
+        background-color:#ffd31d;
+      }
+      
+      .effect:active{
+        background-color: #eeeeee;
+      }
+      .btn,.btn-large,.btn-floating{
+        background-color: #FFF396!important;
+      }
+      .btn:hover,.btn-large:hover,.btn-floating:hover{
+        background-color: #eeeeee!important;
+      }
+      
+      #test{
+        margin-left: 15px;
+        display: inline-block;
+        border: 1px solid #eaeaea;
+        width:340px;
+        height:350px;
+      }
+      .fa-arrow-circle-left{
+        color:#ffd31d;
+        background-color: #ffffff;
+      }
+      .combine a .fa-arrow-circle-left{
+        background-color: #ffffff;
+        color:#3949ab;
+      }
+      .material-icons:active{
+        background-color: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="toolbar">
+      
+      <div class="combine">
+        <a class="btn-floating btn effect">
+          <i onclick="location.href='./daily_input.html'" class="fas fa-arrow-circle-left"></i>
+        </a>
+        <span></span>
+      </div>
+      <div class="combine right">
+        <a class="btn-floating btn effect" id="file_download"><i class="material-icons">file_download</i></a>
+        <span>完成</span>
+      </div>
+      <div class="combine right">
+        <a class="btn-floating btn effect " id="moveup"><i class="material-icons">arrow_upward</i></a>
+        <span>上移</span>
+      </div>
+      <div class="combine right">
+        <a class="btn-floating btn effect " id="movedown"><i class="material-icons">arrow_downward</i></a>
+        <span>下移</span>
+      </div>
+      <div class="combine right">
+        <a class="btn-floating btneffect " id="redo"><i class="material-icons">navigate_next</i></a>
+        <span>重做</span>
+      </div>
+      <div class="combine right">
+        <a class="btn-floating btn effect " id="undo"><i class="material-icons">navigate_before</i></a>
+        <span>返回</span>
+      </div>
+    </div>
+
+    <div class="container">
+      <canvas id="canvas"></canvas>
+    </div>
+
+
+    <div id="addtool" class="fixed-action-btn">
+      <a class="btn-floating btn-large effect modal-trigger" href="#modaltool">
+        <i class="large material-icons">mode_edit</i>
+      </a>
+    </div>
+    <!--
+    <div>
+      <a class="btn-floating btn-large waves-effect modal-trigger" href="#modaltool-2">
+        <i class="large material-icons">mode_edit</i>
+      </a>
+    </div>
+    -->
+    <!-- Modal Structure floatbutton-->
+    <div id="modaltool" class="modal bottom-sheet">
+      <div class="modal-content">
+        <div class="grid">
+          <div class="combine_bar">
+            <a class="btn-floating btn-large yellow lighten-1 effect modal-close" id="edit_text"><i class="material-icons">edit</i></a>
+            <span>文字</span>
+          </div>
+          <div class="combine_bar">
+            <a class="btn-floating btn-large effect yellow lighten-1 modal-trigger modal-close" href="#modal-element" id="edit_effect"><i class="material-icons">widgets</i></a>
+            <span>元素</span>
+          </div>
+          <div class="combine_bar">
+            <a class="btn-floating btn-large effect yellow lighten-1 modal-trigger modal-close" href="#modal-bg" id="change_background"><i class="material-icons">texture</i></a>
+            <span>背景</span>
+          </div>
+          <div class="combine_bar">
+            <a class="btn-floating btn-large effect yellow lighten-1 modal-trigger modal-close" href="#modal-upload" ><i class="material-icons">cloud_upload</i></a>
+            <span>上傳</span>
+          </div>
+        </div>
+      </div>
+    </div>
+      
+    <div id="fade-in" class="fade-in">
+      <a class="btn-floating btn effect waves-light"><i class="material-icons">close</i></a>
+    </div>
+    <!-- Modal Structure 元件更改頁面-->
+    <div id="Sidenav" class="sidenavself">
+        <div class="grid-2">
+          <div class="combine_bar_2">
+            <a class="btn-floating btn effect yellow lighten-1" id="deleteobj"><i id="tool1" class="material-icons">delete</i></a>
+            <span>刪除</span>
+          </div>
+          <div class="combine_bar_2">
+            <a class="btn-floating btn effect yellow lighten-1" id="font_bold"><i id="tool2" class="material-icons">format_bold</i></a>
+            <span>粗體</span>
+          </div>
+          <div class="combine_bar_2">
+            <a class="btn-floating btn effect yellow lighten-1" id="font_italic"><i id="tool3" class="material-icons">format_italic</i></a>
+            <span>斜體</span>
+          </div>
+          <div class="combine_bar_2">
+            <a class="btn-floating btn effect yellow lighten-1 modal-trigger" id="" href="#font_type"><i id="tool4" class="material-icons">font_download</i></a>
+            <span>字型</span>
+          </div>
+          <div class="combine_bar_2">
+            <a class="btn-floating btn effect yellow lighten-1 modal-trigger" id="color" href="#modal-color" onclick="setTimeout('pickr.show()',500)" id="font_color">
+              <i id="tool5" class="material-icons">color_lens</i></a>
+            <span>顏色</span>
+          </div>
+        </div>
+    </div>
+
+    <div id="modal-color" class="modal bottom-sheet">
+      <div class="modal-content">
+        <div class="color_picker">
+          <div class="pickr_bar">
+            <div class="pickr"></div>
+            <input type="input" class="pickr-field" value="#FF0000" name="color"></input>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Structure 元素-->
+    <div id="modal-element" class="modal bottom-sheet">
+      <div class="modal-content">
+        <div class="elementslide" id="elementpaste">
+          <img id="paste-circle" src="paste-circle.jpg">
+          <img id="paste-rect" src="paste-rect.jpg">
+          <img id="paste-triangle" src="paste-triangle.jpg">
+          <img id="paste-heart" src="paste-heart.jpg">
+          <img id="paste-heart2" src="paste-heart2.jpg">
+          <img id="paste-heart3" src="paste-heart3.jpg">
+          <img id="paste-hand" src="paste-hand.jpg">
+          <img id="paste-star" src="paste-star.jpg">
+          <img id="paste-imagine" src="paste-imagine.jpg">
+        </div>
+      </div>
+      <div class="close">
+        <a class="btn-floating btn effect  modal-close"><i class="material-icons">close</i></a>
+      </div>
+    </div>
+    <!-- Modal Structure 元素-->
+    <div id="modal-bg" class="modal bottom-sheet">
+      <div class="modal-content">
+        <div class="bgslide" id="bgcolumn">
+          <img id="bg-0" src="bg-0.jpg">
+          <img id="bg-1" src="bg-1.jpg">
+          <img id="bg-2" src="bg-2.jpg">
+          <img id="bg-3" src="bg-3.jpg">
+          <img id="bg-4" src="bg-4.jpg">
+          <img id="bg-5" src="bg-5.jpg">
+          <img id="bg-6" src="bg-6.jpg">
+        </div>
+      </div>
+      <div class="close">
+        <a class="btn-floating btneffect  modal-close"><i class="material-icons">close</i></a>
+      </div>
+    </div>
+    
+    <!-- Modal Structure 上傳-->
+    <div id="modal-upload" class="modal bottom-sheet">
+      <div class="modal-content">
+        <div class="uploadslide" id="imgset">
+          <div class="btn yellow lighten-1" id="imageUploader" >
+            <i class="material-icons">vertical_align_top</i>
+            <input type="file" id="file2" multiple>
+          </div>
+          <img id="defaultImg" src="https://www.pakutaso.com/shared/img/thumb/neko1869IMG_9074_TP_V.jpg">
+        </div>  
+      </div>
+      <div class="close">
+        <a class="btn-floating btn effect  modal-close"><i class="material-icons">close</i></a>
+      </div>
+    </div>
+
+
+    <!-- Modal Structure -->
+    <div id="font_type" class="modal bottom-sheet">
+      <div class="modal-content">
+        <h5>Modal Header</h5>
+        <div class="collection">
+          <a id="Times New Roman" class="collection-item avatar modal-close">
+            <img src="" class="circle">
+            <span class="title">Times New Roman (Default)</span>
+          </a>
+          <a id="helvetica" class="collection-item avatar modal-close">
+            <img src="" class="circle">
+            <span class="title">helvetica</span>
+          </a>
+          <a id="Lacquer" class="collection-item avatar modal-close">
+            <img src="" class="circle">
+            <span class="title">Lacquer</span>
+          </a>
+          <a id="Squada One" class="collection-item avatar modal-close">
+            <img src="" class="circle">
+            <span class="title">Squada One</span>
+          </a>
+          <a id="Sriracha" class="collection-item avatar modal-close">
+            <img src="" class="circle">
+            <span class="title">Sriracha</span>
+          </a>
+          <a id="Roboto" class="collection-item avatar modal-close">
+            <img src="" class="circle">
+            <span class="title">Roboto</span>
+          </a>
+          <a id="Source Sans Pro" class="collection-item avatar modal-close">
+            <img src="" class="circle">
+            <span class="title">Source Sans Pro</span>
+          </a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+      </div>
+    </div>
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script src="./js/materialize.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="./js/init.js"></script>
+    <script type="text/javascript" src="./js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.2/fabric.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
+    <script src="../database_setup.js"></script>
+    <script>
+      
+      const canvas = new fabric.Canvas('canvas',{
+        width:370,
+        height:280
+      });
+
+      //alert('fabric.isTouchSupported=' + fabric.isTouchSupported); 
+      
+      var $input = $("input.pickr-field");
+      var current_color = $(".pickr-field").val() || null;
+      //
+      const pickr = new Pickr({
+        el: $(".pickr")[0],
+        theme: "monolith",
+        swatches: null,
+        defaultRepresentation: "HEXA",
+        default: current_color,
+        autoReposition: false,
+        appClass: 'custom-class',
+        comparison: false,
+        components: {
+          preview: true,
+          opacity: true,
+          hue: true,
+        }
+      });
+      
+      pickr
+        .on("change", function(color,instance) {
+          current_color = color
+            .toHEXA()
+            .toString();
+          //console.log("change", current_color);
+          $input.val(current_color).trigger("change");
+        });
+
+      // 目前狀態
+      //let state = canvas.toJSON()
+      let state 
+      // 儲存之前的步驟
+      let undo = []
+      // 儲存之後的步驟
+      let redo = []
+
+      function save() {
+         // clear the redo stack
+        redo = [];
+        $('#redo').prop('disabled', true);
+         // initial call won't have a state
+        if (state) {
+          undo.push(state);
+          $('#undo').prop('disabled', false);
+        }
+        state = JSON.stringify(canvas);
+        console.log(state);
+      }
+
+      function replay(playStack, saveStack, buttonsOn, buttonsOff) {
+        saveStack.push(state);
+        state = playStack.pop();
+        var on = $(buttonsOn);
+        var off = $(buttonsOff);
+         // turn both buttons off for the moment to prevent rapid clicking
+        on.prop('disabled', true);
+        off.prop('disabled', true);
+        canvas.clear();
+        canvas.loadFromJSON(state, function() {
+          canvas.renderAll();
+           // now turn the buttons back on if applicable
+          on.prop('disabled', false);
+          if (playStack.length) {
+            off.prop('disabled', false);
+          }
+        });
+      }
+
+      const undobtn = document.getElementById("undo")
+      //undobtn.addEventListener('click', replay(undo,redo,'#redo',this))
+      const redobtn = document.getElementById("redo")
+      //redobtn.addEventListener('click', replay(redo,undo,'#undo',this))
+      $('#undo').click(function() {
+        replay(undo, redo, '#redo', this);
+      });
+      $('#redo').click(function() {
+        replay(redo, undo, '#undo', this);
+      })
+
+      //圖層往上
+      function moveup(){
+        this.selectedobj = canvas.getActiveObject();
+        this.selectedobj.bringForward();
+      }
+
+      //圖層往下
+      function movedown(){
+        this.selectedobj = canvas.getActiveObject();
+        this.selectedobj.sendBackwards();
+      }
+
+      const move_up = document.getElementById("moveup");
+      move_up.addEventListener('click',moveup);
+      const move_down = document.getElementById("movedown");
+      move_down.addEventListener('click',movedown);
+        
+      //新增編輯文字
+      function addtext(){
+        const iText = new fabric.IText('雙擊我編輯',{
+          top:150,
+          left:70
+        });
+        iText.set({
+              transparentCorners: false,
+              borderColor: 'blue', // 邊框顏色
+              cornerColor: 'grey', // 控制點填滿色
+              cornerSize: 10, // 控制點大小
+              cornerStrokeColor: 'blue', // 控制點邊框色
+              padding: 10,
+              borderDashArray: [5, 5],
+              cornerStyle: 'circle'
+            })
+        canvas.add(iText);
+        save();
+      }
+      const edit_text = document.getElementById('edit_text');
+      edit_text.addEventListener('click',addtext);
+      
+      const bgcolumn = document.getElementById('bgcolumn')
+      bgcolumn.addEventListener('click',function(){
+        canvas.setBackgroundImage(document.getElementById(event.target.id).getAttribute('src'), () => canvas.renderAll()) 
+      })
+
+      const elementpaste = document.getElementById('elementpaste') 
+      elementpaste.addEventListener('click',function(){
+        let nowclick = event.target.id
+        if(nowclick == "paste-circle"){   
+          const circle = new fabric.Circle({
+            radius: 50, // 必要屬性
+            fill: '#eeeeee',
+            top: 120,
+            left: 120
+          })
+          circle.set({
+              transparentCorners: false,
+              borderColor: 'blue', // 邊框顏色
+              cornerColor: 'grey', // 控制點填滿色
+              cornerSize: 10, // 控制點大小
+              cornerStrokeColor: 'blue', // 控制點邊框色
+              padding: 10,
+              borderDashArray: [5, 5],
+              cornerStyle: 'circle'
+            })
+          canvas.add(circle)
+          save()
+        }
+        else if (nowclick == "paste-rect") {
+          const rect = new fabric.Rect({
+            width: 50,
+            height: 50,
+            fill: '#eeeeee',
+            top: 120,
+            left: 120 
+          })
+
+          rect.set({
+              transparentCorners: false,
+              borderColor: 'blue', // 邊框顏色
+              cornerColor: 'grey', // 控制點填滿色
+              cornerSize: 10, // 控制點大小
+              cornerStrokeColor: 'blue', // 控制點邊框色
+              padding: 10,
+              borderDashArray: [5, 5],
+              cornerStyle: 'circle'
+            })
+          canvas.add(rect)
+          save()
+        }
+        else if (nowclick == "paste-triangle") {
+          const triangle = new fabric.Triangle({
+            width: 50,
+            height: 50,
+            fill: '#eeeeee',
+            top: 120,
+            left: 120
+          })
+          triangle.set({
+              transparentCorners: false,
+              borderColor: 'blue', // 邊框顏色
+              cornerColor: 'grey', // 控制點填滿色
+              cornerSize: 10, // 控制點大小
+              cornerStrokeColor: 'blue', // 控制點邊框色
+              padding: 10,
+              borderDashArray: [5, 5],
+              cornerStyle: 'circle'
+            })
+          canvas.add(triangle)
+          save()
+        }
+        else{
+          const imgEl = document.createElement('img')
+          //imgEl.crossOrigin = "anonymous";
+          imgEl.src = document.getElementById(nowclick).getAttribute('src')
+          imgEl.onload = () => {
+            const image = new fabric.Image(imgEl, {
+              scaleX: 0.1, // 大小設置為原來的 0.1
+              scaleY: 0.1, // 大小設置為原來的 0.1
+              top: 120,
+              angle: 15,
+              left: 120,
+              crossOrigin:'anonymous'
+            })
+            image.set({
+              transparentCorners: false,
+              borderColor: 'blue', // 邊框顏色
+              cornerColor: 'grey', // 控制點填滿色
+              cornerSize: 10, // 控制點大小
+              cornerStrokeColor: 'blue', // 控制點邊框色
+              padding: 10,
+              borderDashArray: [5, 5],
+              cornerStyle: 'circle'
+            })
+            canvas.add(image)
+            save()
+          }
+        }
+
+      })
+
+      const imageUploader = document.getElementById('imageUploader')
+      const file2 = document.getElementById('file2')
+      const imgset = document.getElementById('imgset')
+      const defaultImg = document.getElementById('defaultImg')
+
+      function uploadFile (e) {
+        file2.click()
+      }
+      function handleFile () {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(this.files[0])
+        fileReader.onload = (e) => {
+          // 圖片 base64
+          const dataURL = e.target.result
+          const img = document.createElement('img')
+          img.src = dataURL
+          imgset.appendChild(img)
+        }
+      }
+      imageUploader.addEventListener('click', uploadFile, true)
+      file2.addEventListener('change', handleFile)
+
+      imgset.addEventListener('click',function(){
+        let nowclick = event.target;
+        const image = new fabric.Image(nowclick,{
+          scaleX: 0.1, // 大小設置為原來的 0.1
+          scaleY: 0.1, // 大小設置為原來的 0.1
+          top: 160,
+          angle: 15,
+          left: 100,
+          crossOrigin:'anonymous'
+        })
+        image.set({
+          transparentCorners: false,
+          borderColor: 'blue', // 邊框顏色
+          cornerColor: 'grey', // 控制點填滿色
+          cornerSize: 15, // 控制點大小
+          cornerStrokeColor: 'blue', // 控制點邊框色
+          padding: 10,
+          borderDashArray: [5, 5],
+          cornerStyle: 'circle'
+        })
+        canvas.add(image)
+      })
+
+      //刪除物件
+      function deleteobj(){
+        this.selectedobj = canvas.getActiveObject();
+        canvas.remove(this.selectedobj);
+        canvas.renderAll();
+      }
+      const delete_obj = document.getElementById("deleteobj");
+      delete_obj.addEventListener('click',deleteobj);
+
+      const fbold = document.getElementById('font_bold');
+      fbold.addEventListener('click',function(){
+        if(canvas.getActiveObject().fontWeight == 'bold'){
+          fbold.setAttribute("class","btn-floating btn effect  red")
+          canvas.getActiveObject().set({fontWeight:''})
+        }
+        else{
+          fbold.setAttribute("class","btn-floating btn effect  grey lighten-2")
+          canvas.getActiveObject().set({fontWeight:'bold'})
+        }
+        canvas.renderAll()
+      });
+
+      const fitalic = document.getElementById('font_italic')
+      fitalic.addEventListener('click',function(){
+        if(canvas.getActiveObject().fontStyle == 'italic'){
+          fitalic.setAttribute("class","btn-floating btn effect  red")
+          canvas.getActiveObject().set({fontStyle:''})
+        }
+        else{
+          fitalic.setAttribute("class","btn-floating btn effect  grey lighten-2")
+          canvas.getActiveObject().set({fontStyle:'italic'})
+        }
+        canvas.renderAll();
+      })
+
+      const ftype = document.getElementById('font_type')
+      ftype.addEventListener('click',function(e){
+        if(e.target.id != 'Times New Roman'){
+          console.log(e.target.id)
+          canvas.getActiveObject().set({fontFamily:e.target.id})
+          canvas.renderAll();
+        }      
+      })
+
+      canvas.on('selection:updated',function(e){
+        console.log(e.target.get('type'))
+        if(e.target.get('type') == 'i-text'){
+          if(canvas.getActiveObject().fontWeight == 'bold'){
+            fbold.setAttribute("class","btn-floating btn effect  grey lighten-2")
+          }
+          else{
+            fbold.setAttribute("class","btn-floating btn effect ")
+          }
+
+          if(canvas.getActiveObject().fontStyle == 'italic'){
+            fitalic.setAttribute("class","btn-floating btn effect  grey lighten-2")
+          }
+          else{
+            fitalic.setAttribute("class","btn-floating btn effect ")
+          }
+
+        }
+        else{
+          fbold.setAttribute("class","btn-floating btn effect ")
+          fitalic.setAttribute("class","btn-floating btn effect ")
+          console.log(e.target.get('type'))
+        }
+
+
+      })
+      /*
+      var firebaseConfig = {
+        apiKey: "AIzaSyDMHSqUW_e7B8-iCsXqDWfXUWr2sqagYH8",
+        authDomain: "triprec-30e5f.firebaseapp.com",
+        databaseURL: "https://triprec-30e5f.firebaseio.com",
+        projectId: "triprec-30e5f",
+        storageBucket: "triprec-30e5f.appspot.com",
+        messagingSenderId: "953678545738",
+        appId: "1:953678545738:web:4253c956a3bff4aa3e37b3"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const dbtest = firebase.database();
+      const auth = firebase.auth();
+      */
+      /*
+      var url = decodeURI(location.href);
+      var temp = url.split("?");
+      console.log(temp);
+      var name = temp[1].split("=")[1];
+      console.log(name);
+      */
+      const fdownload = document.getElementById('file_download')
+      fdownload.addEventListener('click',function(){
+        console.log(canvas.toDataURL())
+        auth.onAuthStateChanged(user => {
+        if (user) {
+                console.log('user logged in: ', user);
+                console.log('user logged in: ', user['uid']);
+                dbtest.ref('users/'+ user['uid'] +'/DIYtempdiary').update({img:canvas.toDataURL()});
+                setTimeout('location.href = "daily_input.html"',500);
+                
+            }else{
+                console.log('user logged out: ');
+            }
+        });
+        //dbtest.ref('users/St7cv6keFnbDC5JHKnkepHKsmnV2/diaryset/'+name).update({img:canvas.toDataURL()});
+        //document.getElementById('test').setAttribute('src',canvas.toDataURL())
+        //setTimeout('location.href = "daily-ex.html"',2000);
+      })
+
+      //選取物件要跳出編輯 bar
+      //選取另外一個物件時不會跑掉
+      //手機上選取物件鰻靈敏的
+      //版面調整、素材多一點
+      canvas.on('object:selected', e => {
+        console.log(e.target.get('type'));name
+        document.getElementById('Sidenav').style.height = "70px";
+        document.getElementById('fade-in').style.opacity = "1";
+        document.getElementById('addtool').style.bottom = "80px";
+      })
+
+      
+
+    /*
+      window.onclick = function(event) {
+        if (event.target.id != 'Sidenav') {
+          document.getElementById('Sidenav').style.height= "0px";
+          document.getElementById('addtool').style.bottom = "10px";
+        }
+      }
+    */  
+      document.getElementById('fade-in').addEventListener('click',function(){
+        document.getElementById('fade-in').style.opacity = "0";
+        document.getElementById('Sidenav').style.height= "0px";
+        document.getElementById('addtool').style.bottom = "10px";
+
+      })
+
+      var angleScale = {
+        angle: 0,
+        scale: 1
+      }
+      var gestureArea = document.getElementById('canvas');
+      //var scaleElement = document.getElementById('scale-element');
+
+      /*
+      var info = document.getElementById('info'); 
+      canvas.on({ 
+        'touch:gesture': function() { 
+          var text = document.createTextNode(' Gesture '); 
+          info.insertBefore(text, info.firstChild); 
+        }, 
+        'touch:drag': function() { 
+          var text = document.createTextNode(' Dragging '); 
+          info.insertBefore(text, info.firstChild); 
+        }, 
+        'touch:orientation': function() { 
+          var text = document.createTextNode(' Orientation '); 
+          info.insertBefore(text, info.firstChild); 
+        }, 
+        'touch:shake': function() { 
+          var text = document.createTextNode(' Shaking '); 
+          info.insertBefore(text, info.firstChild); 
+        }, 
+        'touch:longpress': function() { 
+          var text = document.createTextNode(' Longpress '); 
+          info.insertBefore(text, info.firstChild); 
+        } 
+      }); 
+      */
+      /*
+
+      canvas.on('selection:created',function(e){
+          document.getElementById('modaltool-2').style.display = "block";
+          document.getElementById('addtool').style.transform = "translateY(-55px)";
+  
+      })
+  */
+
+      canvas.on('mouse:down', e => { 
+        //console.log(e);
+        const active = canvas.getActiveObject();
+        console.log(active.get('type'));
+        if(canvas.getActiveObject()){
+          pickr.on('change',(color,instance)=>{
+            console.log(color.toRGBA().toString());
+            const rgbaColor = color.toRGBA().toString();
+            if(canvas.getActiveObject().get('type') == 'image'){
+              console.log(fabric.Image.filters);
+              var filter = new fabric.Image.filters.BlendColor({
+                color:rgbaColor,
+                mode:'tint',
+                opacity: 0.6,
+                alpha: 1.0,
+              });
+              canvas.getActiveObject().filters.push(filter);
+              canvas.getActiveObject().applyFilters();
+            }
+            else{
+              canvas.getActiveObject().set({fill:rgbaColor});
+            }
+            canvas.renderAll();
+            
+          })
+          //active.set({fill:'yellow'})
+
+        }
+        else{
+
+        }
+      })
+//垃圾桶、所小
+    </script>
+    
+  </body>
+</html>

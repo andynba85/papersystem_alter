@@ -1,0 +1,187 @@
+<html>
+    <head>
+        <script src="https://kit.fontawesome.com/80f6c102d9.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <title>TripREC</title>
+        <style>
+            body{
+                background-color: #3949ab;
+                margin:0 auto;
+                color:#ffffff;
+                font-family: 'Noto Sans TC', sans-serif;
+            }
+
+            .upper{
+                text-align: center;
+            }
+            .upper h1{
+                font-size: 22px;
+                font-weight: bold;
+            }
+            .btn{
+                border-radius: 20px;
+                width: 70px;
+                height: 40px;
+                background-color: #ffffff;
+                color:#0A18B9;
+                border: none;
+                font-size: 17px;
+                font-weight: bold;
+            }
+            .btn:active{
+                background-color:#EECF06;
+                color:#ffffff;
+            }
+            .upper .fa-expand{
+                position: absolute;
+                top:22px;
+                right:20px;
+                font-size: 35px;
+                
+            }
+            .upper .fa-angle-left{
+                position: absolute;
+                top:20px;
+                left:20px;
+                font-size: 40px;
+                
+            }
+            .mid{
+                text-align: center;
+                margin-top: 20px;
+                color:#ffd31d;
+            }
+
+            .bar{
+                margin:15px 0;
+                text-align: center;
+            }
+            .bar h3{
+                margin:5px 0;
+                
+            }
+            .bar h3:before , .bar h3:after{
+                position:relative;
+                display: inline-block;
+                content:"";
+                height:3px;
+                width:70px;
+                top:-5px;
+                margin:0 5px;
+                background-color:#ffd31d;
+            }
+            .card{
+                display: inline-block;
+                margin:20px 2px;
+                margin-bottom: 0;
+            }
+            .card img{
+                width: 115px;
+                height:115px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="upper">
+            <i class="fas fa-angle-left"></i>
+            <div class="mid">
+                <h1>趕快來收集徽章</h1>
+                <!--<button class="btn">等級</button>-->
+                <button class="btn">徽章</button>
+            </div>
+            <i class="fas fa-expand"></i>
+        </div>
+        <div class="content">
+            <div class="bar">
+                <h3>TripREC稀有徽章</h3>
+                <div class="card">
+                    <img id="heigh_1" src="badge-7.png">
+                    <p>超級瘋狂</p>
+                </div>
+                <div class="card">
+                    <img id="heigh_2" src="badge-10.png">
+                    <p>旅遊愛好</p>
+                </div>
+                <div class="card">
+                    <img id="heigh_3" src="badge-3.png">
+                    <p>無限手套</p>
+                </div>
+            </div>
+            <div class="bar">
+                <h3>TripREC特別徽章</h3>
+                <div class="card">
+                    <img id="medium_1" src="badge-1.png">
+                    <p>玩樂高手</p>
+                </div>
+                <div class="card">
+                    <img id="medium_2" src="badge-2.png">
+                    <p>輕旅行</p>
+                </div>
+                <div class="card">
+                    <img id="medium_3" src="badge-8.png">
+                    <p>景點獵人</p>
+                </div>
+            </div>
+            <div class="bar">
+                <h3>TripREC初階徽章</h3>
+                <div class="card">
+                    <img id="entry_1" src="badge-4.png">
+                    <p>新手上路</p>
+                </div>
+                <div class="card">
+                    <img id="entry_2" src="badge-6.png">
+                    <p>小旅人</p>
+                </div>
+                <div class="card">
+                    <img id="entry_3" src="badge-9.png">
+                    <p>初心者</p>
+                </div>
+            </div>
+        </div>
+        <button onclick="golocationar()">go</button>
+        <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
+        <script src="../database_setup.js"> </script>
+        <script>
+            function golocationar(){
+                location.href = "locationar.html"
+            }
+            document.querySelector('.fa-expand').addEventListener('click',function(){
+                location.href = 'webarcollection.html';
+            })
+            document.querySelector('.fa-angle-left').addEventListener('click',function(){
+                location.href = '../new_preindex.html';
+            })
+
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                    console.log('user logged in: ', user);
+                    dbtest.ref('users/'+ auth.currentUser.uid+'/badgeset/').on('value',function(data){
+                        data.forEach(function(item) {
+                            console.log(item.key+""+item.val());
+                            document.getElementById(item.val()).setAttribute('src',item.val()+'-color.png')
+                        });
+                    });
+                } else {
+                    console.log('user logged out');
+                }
+            });
+            /*
+            var url = location.href;
+            console.log(url);
+            if(url.indexOf("?")){
+                var temp = url.split("?")[1];
+                console.log(temp);
+                var temppp = temp.split("=")[1];
+                document.getElementById(temppp).setAttribute('src','chat.jpg')
+            }
+            else{
+                console.log('還沒掃');
+            }
+            */
+        </script>
+    </body>
+</html>

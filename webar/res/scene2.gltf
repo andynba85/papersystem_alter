@@ -1,0 +1,806 @@
+{
+  "accessors": [
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 20,
+      "max": [
+        1,
+        1,
+        0.05000000074505806
+      ],
+      "min": [
+        -1,
+        -1,
+        0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 240,
+      "componentType": 5126,
+      "count": 20,
+      "max": [
+        1,
+        1,
+        1
+      ],
+      "min": [
+        -1,
+        -1,
+        0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 20,
+      "max": [
+        0.99989241361618042,
+        0.014682241715490818,
+        0.9998924732208252,
+        1
+      ],
+      "min": [
+        0,
+        0,
+        -0.99989253282546997,
+        1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 30,
+      "max": [
+        19
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 480,
+      "componentType": 5126,
+      "count": 3574,
+      "max": [
+        0.65506327152252197,
+        0.64759445190429688,
+        5.9667034149169922
+      ],
+      "min": [
+        -0.65506327152252197,
+        -0.69009888172149658,
+        0.045625552535057068
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 43368,
+      "componentType": 5126,
+      "count": 3574,
+      "max": [
+        1,
+        1,
+        1
+      ],
+      "min": [
+        -1,
+        -1,
+        -0.92387980222702026
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 120,
+      "componentType": 5125,
+      "count": 5430,
+      "max": [
+        3573
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 86256,
+      "componentType": 5126,
+      "count": 50,
+      "max": [
+        0.52767413854598999,
+        0.52611368894577026,
+        1.2426621913909912
+      ],
+      "min": [
+        -0.53267115354537964,
+        -0.54123413562774658,
+        1.0352888107299805
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 86856,
+      "componentType": 5126,
+      "count": 50,
+      "max": [
+        1,
+        1,
+        1.2917541880597128e-06
+      ],
+      "min": [
+        -1,
+        -1,
+        -1.4352873449752224e-06
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 21840,
+      "componentType": 5125,
+      "count": 72,
+      "max": [
+        49
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 87456,
+      "componentType": 5126,
+      "count": 648,
+      "max": [
+        0.54139083623886108,
+        0.52774816751480103,
+        5.108642578125
+      ],
+      "min": [
+        -0.53521692752838135,
+        -0.67473596334457397,
+        0.066886499524116516
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 95232,
+      "componentType": 5126,
+      "count": 648,
+      "max": [
+        0.99810224771499634,
+        0.99810218811035156,
+        0.99091237783432007
+      ],
+      "min": [
+        -0.99810218811035156,
+        -0.99810224771499634,
+        -0.15081559121608734
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 22128,
+      "componentType": 5125,
+      "count": 972,
+      "max": [
+        647
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 103008,
+      "componentType": 5126,
+      "count": 32,
+      "max": [
+        0.53782021999359131,
+        0.53035134077072144,
+        1.2127485275268555
+      ],
+      "min": [
+        -0.53782021999359131,
+        -0.54528903961181641,
+        0.53521108627319336
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 103392,
+      "componentType": 5126,
+      "count": 32,
+      "max": [
+        1,
+        1,
+        0.17295961081981659
+      ],
+      "min": [
+        -1,
+        -1,
+        0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 26016,
+      "componentType": 5125,
+      "count": 48,
+      "max": [
+        31
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "Romain PERRONE (https://sketchfab.com/ob1style)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/models/0a14fe9530c24becbc7188a9888cf528",
+      "title": "Taipei 101"
+    },
+    "generator": "Sketchfab-3.18.7",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 26208,
+      "byteOffset": 0,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 103776,
+      "byteOffset": 26208,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 320,
+      "byteOffset": 129984,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 130304,
+      "uri": "scene.bin"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "Pavillon-M.001",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.0272074,
+          0.015568,
+          0.014220399999999999,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.82394172570000002
+      }
+    },
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "Material",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.083529300000000001,
+          0.053249199999999997,
+          0.054940900000000001,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.82394172570000002
+      }
+    },
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "Material.001",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.073746999999999993,
+          0.37169000000000002,
+          0.80000000000000004,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.82394172570000002
+      }
+    },
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "Windows",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.0789739,
+          0.91341799999999995,
+          0.94038600000000006,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.82394172570000002
+      }
+    },
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "Metal",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.13286200000000001,
+          0.13286200000000001,
+          0.13286200000000001,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.82394172570000002
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "BUR_T6_4_PERRONE_01.001_Pavillon-M.001_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2
+          },
+          "indices": 3,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "BUR_T6_4_PERRONE_01_Material_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 5,
+            "POSITION": 4
+          },
+          "indices": 6,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "BUR_T6_4_PERRONE_01_Material.001_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 8,
+            "POSITION": 7
+          },
+          "indices": 9,
+          "material": 2,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "BUR_T6_4_PERRONE_01_Windows_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 11,
+            "POSITION": 10
+          },
+          "indices": 12,
+          "material": 3,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "BUR_T6_4_PERRONE_01_Metal_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 14,
+            "POSITION": 13
+          },
+          "indices": 15,
+          "material": 4,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "name": "RootNode (gltf orientation matrix)",
+      "rotation": [
+        -0.70710678118654746,
+        -0,
+        -0,
+        0.70710678118654757
+      ]
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "RootNode (model correction matrix)"
+    },
+    {
+      "children": [
+        3
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "708bed87f49d47a88c36a2a089b8a763.fbx"
+    },
+    {
+      "children": [
+        4,
+        7,
+        10,
+        13,
+        16
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        5
+      ],
+      "matrix": [
+        7.5497899598708784e-06,
+        -1.3234889800848443e-21,
+        99.999999999999716,
+        0,
+        7.5497915474897782e-06,
+        99.999999999999716,
+        -5.6999340407805901e-13,
+        0,
+        -99.999999999999432,
+        7.5497915474898011e-06,
+        7.5497899598708784e-06,
+        0,
+        274.8568115234375,
+        607.4952392578125,
+        46.404411315917969,
+        1
+      ],
+      "name": "Hemi.003"
+    },
+    {
+      "children": [
+        6
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        2.2204460492503131e-16,
+        1,
+        0,
+        0,
+        -1,
+        2.2204460492503131e-16,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": ""
+    },
+    {
+      "name": ""
+    },
+    {
+      "children": [
+        8
+      ],
+      "matrix": [
+        7.5497899598708784e-06,
+        -1.3234889800848443e-21,
+        99.999999999999716,
+        0,
+        7.5497915474897782e-06,
+        99.999999999999716,
+        -5.6999340407805901e-13,
+        0,
+        -99.999999999999432,
+        7.5497915474898011e-06,
+        7.5497899598708784e-06,
+        0,
+        -274.8568115234375,
+        607.4952392578125,
+        46.404411315917969,
+        1
+      ],
+      "name": "Hemi.002"
+    },
+    {
+      "children": [
+        9
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        2.2204460492503131e-16,
+        1,
+        0,
+        0,
+        -1,
+        2.2204460492503131e-16,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": ""
+    },
+    {
+      "name": ""
+    },
+    {
+      "children": [
+        11
+      ],
+      "matrix": [
+        100,
+        0,
+        0,
+        0,
+        0,
+        99.999999999999716,
+        -7.5497901264043296e-06,
+        0,
+        0,
+        7.5497901264043296e-06,
+        99.999999999999716,
+        0,
+        0,
+        607.4952392578125,
+        321.26123046875,
+        1
+      ],
+      "name": "Hemi.001"
+    },
+    {
+      "children": [
+        12
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        2.2204460492503131e-16,
+        1,
+        0,
+        0,
+        -1,
+        2.2204460492503131e-16,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": ""
+    },
+    {
+      "name": ""
+    },
+    {
+      "children": [
+        14
+      ],
+      "matrix": [
+        100,
+        0,
+        0,
+        0,
+        0,
+        99.999999999999716,
+        -7.5497901264043296e-06,
+        0,
+        0,
+        7.5497901264043296e-06,
+        99.999999999999716,
+        0,
+        0,
+        607.4952392578125,
+        -228.452392578125,
+        1
+      ],
+      "name": "Hemi"
+    },
+    {
+      "children": [
+        15
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        2.2204460492503131e-16,
+        1,
+        0,
+        0,
+        -1,
+        2.2204460492503131e-16,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": ""
+    },
+    {
+      "name": ""
+    },
+    {
+      "children": [
+        17,
+        18
+      ],
+      "matrix": [
+        100,
+        0,
+        0,
+        0,
+        0,
+        -1.6292067939183141e-05,
+        -99.999999999998678,
+        0,
+        0,
+        99.999999999998678,
+        -1.6292067939183141e-05,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "BUR_T6_4_PERRONE_01.001"
+    },
+    {
+      "mesh": 0,
+      "name": "BUR_T6_4_PERRONE_01.001_Pavillon-M.001_0"
+    },
+    {
+      "children": [
+        19,
+        20,
+        21,
+        22
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        -2.646977960169688e-23,
+        0,
+        0,
+        2.646977960169688e-23,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "BUR_T6_4_PERRONE_01"
+    },
+    {
+      "mesh": 1,
+      "name": "BUR_T6_4_PERRONE_01_Material_0"
+    },
+    {
+      "mesh": 2,
+      "name": "BUR_T6_4_PERRONE_01_Material.001_0"
+    },
+    {
+      "mesh": 3,
+      "name": "BUR_T6_4_PERRONE_01_Windows_0"
+    },
+    {
+      "mesh": 4,
+      "name": "BUR_T6_4_PERRONE_01_Metal_0"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "OSG_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}
+

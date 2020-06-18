@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripREC</title>
+    <script src="https://kit.fontawesome.com/80f6c102d9.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <style>
+        body{
+            font-family: 'Noto Sans TC', sans-serif;
+            margin:0;
+            background-color: #fff;
+        }
+        .search_bar{
+            width: 100%;
+            height:150px;
+            background-color:#fff;
+        }
+        .search_container{
+            position: relative;
+            top:-15px;
+            width: 100%;
+            height:150px;
+            background-color:#3949ab;
+            border-radius: 20px;
+            box-shadow: 0px 3px #E3E3E3;
+        }
+        .search_container h2{
+            display: inline-block;
+            margin-bottom: 15px;
+            margin-left: 13%;
+            font-size: 30px;
+            color:#fff;
+        }
+        .search_container .fa-arrow-left{
+            margin:0 20px;
+            font-size: 30px;
+            color:#fff;
+        }
+        #search_bar{
+            margin:0 10px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 15px;
+            color:#e0e0e0;
+        }
+        #search_bar .fa-search{
+            font-size: 22px;
+            vertical-align: middle;
+            margin-bottom: 1px;
+        }
+
+        #search_bar input{
+            background-color:#fff;
+            color:#000;
+            padding: 2px 10px;
+            margin-left: 1px;
+            border: none;
+            outline: none;
+            font-size: 22px;
+        }
+        ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #e0e0e0;
+            opacity: 1; /* Firefox */
+        }
+        .userlist{
+            overflow-x: auto;
+            white-space:nowrap;
+        }
+        h3{
+            margin:0;
+            margin-left: 15px;
+            font-size: 15px;
+        }
+        .user{
+            display: inline-block;
+            text-align: center;
+            width:15%;
+            height:50px;
+            margin:10px 5px;
+            margin-left:10px;
+            margin-bottom: 0;
+        }
+        .circle img{
+            display: block;
+            width:85%;
+            height:90%;
+            margin-left: 2px;
+            border-radius: 50%;
+            border: 3px solid #ffd31d;
+        }
+        .circle2 img{
+            display: block;
+            width:85%;
+            height:90%;
+            margin-left: 2px;
+            border-radius: 50%;
+            border: 3px solid #ffd31d;
+        }
+        .circle{
+            width:100%;
+            height:50px;
+        }
+
+        .circle2{
+            width:100%;
+            height:50px;
+        }
+
+        .circle2::after{
+            content:'';
+            display: block;
+            position: relative;
+            top:-15px;
+            left:40px;
+            width: 10px;
+            height: 10px;
+            border-radius:50%;
+            border:2px solid #000;
+            background-color: grey;
+            z-index: 5;
+        }
+        .circle::after{
+            content:'';
+            display: block;
+            position: relative;
+            top:-15px;
+            left:40px;
+            width: 10px;
+            height: 10px;
+            border-radius:50%;
+            border:2px solid #000;
+            background-color: chartreuse;
+            z-index: 5;
+        }
+        .user span{
+            display: block;
+            font-size: 12px;
+        }
+        
+        .messagelist{
+            padding-top: 10px;
+            border-top: 1px solid #C7C7C7;
+            width:100%;
+        }
+
+        .message{
+            display: inline-block;
+            width:365px;
+            height:80px;
+            background-color: #fff;
+            padding-left: 10px;
+        }
+        .message .content{
+            display: inline-block;
+            padding-left: 10px;
+            max-width:280px;
+        }
+        .message .content h2{
+            margin:0;
+        }
+        .message .content p{
+            margin:0;
+            color:#C7C7C7;
+            font-size: 15px;
+        }
+        .message img{
+            margin:0 auto;
+            vertical-align: text-bottom;
+            width:15%;
+            height:55px;
+            border-radius: 50%;
+        }
+
+        ::-webkit-scrollbar { width : 0  !important }
+
+
+
+
+
+        .lds-facebook {
+            display: inline-block;
+            position: absolute;
+            left:145px;
+            top:280px;
+            width: 80px;
+            height: 80px;
+        }
+        .lds-facebook div {
+            display: inline-block;
+            position: absolute;
+            left:50px;
+            width: 20px;
+            background: #FFEE8E;
+            animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+        }
+        .lds-facebook div:nth-child(1) {
+            left: 8px;
+            animation-delay: -0.24s;
+        }
+        .lds-facebook div:nth-child(2) {
+            left: 32px;
+            animation-delay: -0.12s;
+        }
+        .lds-facebook div:nth-child(3) {
+            left: 56px;
+            animation-delay: 0;
+        }
+        @keyframes lds-facebook {
+        0% {
+            top: 8px;
+            height: 80px;
+        }
+        50%, 100% {
+            top: 30px;
+            height: 32px;
+        }
+        }
+    </style>
+</head>
+<body>
+    <div class="search">
+        <div class="search_container">
+            <i class="fas fa-arrow-left" onclick="location.href = '../new_preindex.html'"></i>
+            <h2>Let's Chat</h2>
+            <div id="search_bar">
+                <i class="fas fa-search"></i>
+                <input id="search_friend" type="text" placeholder="search..." data-table="userlist"> 
+            </div>
+        </div>
+    </div>
+    <div id="content">
+        <h3>ALL Users</h3>
+        <div id="ulist" class="userlist">
+            
+        </div>
+
+        <div id="msglist" class="messagelist">
+            <!--
+            <div class="message">
+                <img src="me.jpg">
+                <div class="content">
+                    <h2>andy</h2>
+                    <p>是在哈囉66666</p>
+                </div>
+            </div>
+            <div class="message">
+                <img src="me.jpg">
+                <div class="content">
+                    <h2>andy</h2>
+                    <p>是在哈囉66666</p>
+                </div>
+            </div>
+            <div class="message">
+                <img src="me.jpg">
+                <div class="content">
+                    <h2>andy</h2>
+                    <p>是在哈囉66666</p>
+                </div>
+            </div>
+            <div class="message">
+                <img src="me.jpg">
+                <div class="content">
+                    <h2>andy</h2>
+                    <p>是在哈囉66666</p>
+                </div>
+            </div>
+            <div class="message">
+                <img src="me.jpg">
+                <div class="content">
+                    <h2>andy</h2>
+                    <p>是在哈囉66666</p>
+                </div>
+            </div>
+            <div class="message">
+                <img src="me.jpg">
+                <div class="content">
+                    <h2>andy</h2>
+                    <p>是在哈囉66666</p>
+                </div>
+            </div>
+            <div class="message">
+                <img src="me.jpg">
+                <div class="content">
+                    <h2>andy</h2>
+                    <p>是在哈囉66666</p>
+                </div>
+            </div>
+        -->
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
+    <script src="../database_setup.js"></script>
+    <script>
+
+        document.getElementById('content').innerHTML = '<div class="lds-facebook"><div></div><div></div><div></div></div>'
+        
+        var currentuserkey = "" ;
+        var chatkey = "";
+
+        function startchat(friendkey,friendname) {
+            console.log(friendname);
+            var friendlist = {friendid:friendkey , userid:currentuserkey};
+            var flag = false;
+            dbtest.ref('friend_list').on('value',function(friends){
+                //var user;
+                friends.forEach(function(data){
+                    var user = data.val();
+                    if((user.friendid === friendlist.friendid && user.userid === friendlist.userid )||(user.friendid === friendlist.userid && user.userid === friendlist.friendid )){
+                        flag = true;
+                        chatkey = data.key;
+                        console.log(chatkey);
+                    }
+                });
+                console.log(chatkey);
+                if( flag === false){
+                    chatkey = dbtest.ref('friend_list').push(friendlist).getKey();
+                    console.log(chatkey);
+                    location.href = "chatindex.html?name="+friendname+"&chatkey="+chatkey+"&currentuserkey="+currentuserkey+"&friendkey="+friendkey;
+                }
+                else{
+                    location.href = "chatindex.html?name="+friendname+"&chatkey="+chatkey+"&currentuserkey="+currentuserkey+"&friendkey="+friendkey;
+                }
+                //loadchatmessages(chatkey);
+            });
+
+        }
+        
+        var listchat = '' ;
+        function loadchatlist(){
+            listchat = ''
+            dbtest.ref('friend_list').on('value',function (lists) {
+                lists.forEach(function (data) {
+                    var lst = data.val();
+                    var friendkey = '';
+                    if(lst.friendid === currentuserkey){
+                        friendkey = lst.userid;
+                    }
+                    else if(lst.userid === currentuserkey){
+                        friendkey = lst.friendid;
+                    }
+                    console.log(data.val());
+                    console.log(friendkey);
+
+                    if(friendkey !== ""){
+                        dbtest.ref('users').child(friendkey).on('value',function (data) {
+                        var user = data.val();
+                        listchat += `<div class="message" onclick="startchat('${data.key}','${user.username}')">
+                                        <img src="${user.img}">
+                                        <div class="content">
+                                            <h2>${user.username}</h2>
+                                            <p>Some Message...</p>
+                                        </div>
+                                    </div>`;
+                        });
+                    }
+                })
+                combine += ' <h3>ALL Users</h3><div id="ulist" class="userlist">'+onlineuser+'</div>'+'<div id="msglist" class="messagelist">'+listchat+'</div>';
+                document.getElementById('content').innerHTML = combine;
+            });
+            
+
+        }
+        var combine = '';
+        var onlineuser = "";
+
+        dbtest.ref('users').on('value',function(snapshot){
+            document.getElementById('content').innerHTML = "";
+            //document.getElementById('msglist').innerHTML = "";
+            var data = snapshot.val();
+            console.log(data);
+            combine = '';
+            onlineuser = "";
+            snapshot.forEach(function(data){
+                //檢查使用者是否在線上
+                //把自己排除掉
+                //有上下線變動就更新
+                console.log(data)
+                var user = data.val();
+                if(user.useremail !== auth.currentUser.email){
+                    if(user.onlinestatus == true){
+                        onlineuser +=  `<div id="${user.username}" 
+                            class="user" onclick="startchat('${data.key}','${user.username}')">
+                            <div class='circle'>
+                                <img src="${user.img}">
+                            </div>
+                            <span>${user.username}</span>
+                        </div>`;
+                        /*
+                        document.getElementById('ulist').innerHTML += `<div id="${data.val().username}" 
+                            class="user" onclick="prechat()">
+                            <div class='circle'>
+                                <img src="me.jpg">
+                            </div>
+                            <span>${data.val().username}</span>
+                        </div>`*/
+                        console.log(data.val().username);
+                    }
+                    else{
+                        onlineuser +=  `<div id="${user.username}" 
+                            class="user" onclick="startchat('${data.key}','${user.username}')">
+                            <div class='circle2'>
+                                <img src="${user.img}">
+                            </div>
+                            <span>${user.username}</span>
+                        </div>`;
+                        /*
+                        document.getElementById('ulist').innerHTML += `<div id="${data.val().username}" 
+                            class="user" onclick="prechat()">
+                            <div class='circle'>
+                                <img src="me.jpg">
+                            </div>
+                            <span>${data.val().username}</span>
+                        </div>`*/
+                        console.log(data.val().username);
+                    }
+                
+                }
+                else{
+                    currentuserkey = data.key;
+                }
+            });
+            loadchatlist();
+            //console.log(listchat);
+            //combine += ' <h3>Online users</h3><div id="ulist" class="userlist">'+onlineuser+'</div>'+'<div id="msglist" class="messagelist">'+listchat+'</div>';
+            //document.getElementById('content').innerHTML = ' <h3>Online users</h3><div id="ulist" class="userlist">'+onlineuser+'</div>';
+            //document.getElementById('content').innerHTML = combine;
+        });
+        //document.getElementById('content').innerHTML = ' <h3>Online users</h3>'+onlineuser+'';
+        //loadchatlist();
+
+        //邊input邊搜尋
+        $("#search_friend").keyup(function(){
+            var searchword = $('#search_friend').val();
+            if(searchword !==''){
+                $('.user').css("display","none");
+                console.log( $('.user').find(":contains('" + searchword + "')").parent());
+                $('.user').find(":contains('" + searchword + "')").parent().css("display","inline-block");
+            }else{
+                $('.user').css("display","inline-block");
+            }
+        })
+
+        function prechat(){
+            console.log(event.target.id);
+            location.href = 'chatindex.html'   
+        } 
+        //onfirebaseStateChanged();
+    </script>
+</body>
+</html>

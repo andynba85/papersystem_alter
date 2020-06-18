@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripREC</title>
+	<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <script src="https://kit.fontawesome.com/80f6c102d9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/css-loader.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pulltorefreshjs/0.1.20/index.umd.js"></script>
+
+    <style>
+		body{
+            color: #000;
+            font-family: 'Noto Sans TC', sans-serif;
+            margin:0;
+            
+        }
+        
+        .top_bar{
+            position: fixed;
+            top:0;
+            overflow: hidden;
+            display: inline-block;
+            background-color: #fff;
+            border-bottom: 2px #dbdbdb solid;
+            width:100%;
+            height:65px;
+            padding-top: 10px;
+            padding-bottom: 8px;
+            z-index:1;
+        }
+        .profile_pic{
+            width:35px;
+            height:35px;
+            border-radius: 50%;
+            border-color: 5px solid #000000;
+            background-color: #ffffff;
+            position:relative;
+            top:2px;
+            right: 5px;
+        }
+        .logo{
+            width:75px;
+            height:65px;
+            margin-left: 3%;
+        }
+        .fa-bars{
+            margin-top: 6%;
+            margin-right: 5%;
+            float: right;
+            font-size: 26px;
+        }
+        .welcome{
+            text-align: center;
+            margin-top:100px;
+            margin-bottom: 15px;
+        }
+
+        #welcomename{ 
+            margin-top: 0;
+            margin-bottom:0;
+            margin-right: 5px;
+            font-weight: bold;
+            font-size:24px;
+        }
+
+        #motto{
+            display: inline-block;
+            margin: 0;
+            margin-top:10px;
+            font-size:15px;
+        }
+
+        .card {
+            /* Add shadows to create the "card" effect */
+            margin:15px 0;
+            /*box-shadow: 0 4px 6px 0 rgba(0,0,0,0.2);*/
+            transition: 0.3s;
+             /* 5px rounded corners */
+            background-color: #ffffff;
+        }
+
+        /* On mouse-over, add a deeper shadow */
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+
+        /* Add some padding inside the card container */
+        .container {
+            padding: 2px 10px;
+            background-color: #ffffff;
+            border-radius: 10px;
+        }
+        .card_img {
+            border-top: 1px #e4e4e4 solid;
+            border-bottom: 1px #e4e4e4 solid;
+            margin:5px 0 5px;
+            max-height:250px;
+        }
+        .card_bar{
+            
+            margin-bottom: 10px;
+            
+        }
+
+        .card_profile_pic{
+            width:40px;
+            height:40px;
+            margin-top: 10px;
+            margin-left:10px;
+            border-radius: 50%;
+            border-color: 5px solid #000000;
+            background-color: #ffffff;
+        }
+        .card_span{
+            position: relative;
+            top:-10px;
+            margin-left: 2%;
+            font-size: 18px;
+        }
+        .container_span{
+            font-size: 17px;
+        }
+        .container p{
+            margin-left: 2%;
+            width:240px;
+            word-break: break-all; /*自動換行*/
+            /*
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            */
+        }
+        .fa-heart{
+            font-size: 25px;
+            margin: 0 5px;
+            vertical-align: sub;
+        }
+
+        .fa-compass{
+            float: right;
+            font-size: 30px;
+            margin-right: 2%;
+            vertical-align: sub;
+        }
+        
+        /*sidenav*/
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            background-color: #FFF;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 34px;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #ffd31d;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: -15px;
+            right: 0px;
+            font-size: 29px;
+            margin-left: 50px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+
+        .fa-suitcase-rolling,.fa-book,.fa-comments,.fa-mobile-alt{
+            vertical-align: super;
+            margin-right: 10px;
+            margin-left: 8px;
+            font-size: 25px;
+        }
+        .fun{
+            display: inline-block;
+            position: relative;
+            right:-60px;
+            top:-18px;
+        }
+        .funbtn {
+            display: inline-block;
+            width:180px;
+            position: relative;
+            top:12px;
+            right:15px;
+            text-align: center;
+        }
+        .funbtn span{
+            font-size: 16px;
+            margin:0 5px;
+        }
+        #content{
+            border-top: 2px #dbdbdb solid;
+            background-color: #efefef;
+        }
+        .topic{
+            display: inline-block;
+            position: relative;
+            left:13px;
+            top:-10px;
+            width:90px;
+            font-size:20px;
+        }
+        .hred{
+            color:red;
+        }
+
+        .mapposition{
+            width:100%;
+            height: 200px;
+            background-color: #ffd31d;
+        }
+        .dayday{
+            border-top: 2px #e0e0e0 solid;
+            margin-bottom: 5px;
+        }
+        .day{
+            display: inline-block;
+            text-align: center;
+            border-radius: 12px;
+            padding: 5px 0;
+            margin: 10px 3px;
+            width:100px;
+            background-color: #fff;
+            border: 2px #ffd31d solid;
+        }
+        .content{
+            overflow: scroll;
+            width:100%;
+            border-top: 2px #e0e0e0 solid;
+            padding-top: 10px;
+        }
+        
+        .contenttt img{
+            width: 75px;
+            height: 75px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+
+        .contenttt{
+            height:100px;
+        }
+
+        .contenttt h4{
+            display: inline-block;
+            margin: 0;
+            position: relative;
+            top: -55px;
+            left: 20px;
+            width:165px;
+            font-size: 15px;
+        }
+        .contenttt p{
+            display: inline-block;
+            position: relative;
+            top: -55px;
+            left: 156px;
+            font-size: 12px;
+            margin: 0;
+        }
+        .contenttt span{
+            background-color: #fff;
+            border: 2px #3949ab solid;
+            width: 30px;
+            height: 27px;
+            margin-left: 10px;
+            top: -37px;
+            position: relative;
+            border-radius: 50%;
+            text-align: center;
+            display: inline-block;
+        }
+        .card_bar p{
+            display: inline-block;
+            float: right;
+            margin-right: 10px;
+            margin-top: 20px;
+        }
+	</style>
+</head>
+<body>
+    <div id="load" class="loader loader-default is-active" data-text></div>
+	<div class="top_bar">
+        <img class="logo" src="logo3.png">  
+        <div class="fun">
+            <div class="funbtn">
+                
+                <i onclick="goplan()" class="fas fa-suitcase-rolling"></i>
+                <i onclick="goar()" class="fas fa-mobile-alt"></i>  
+                <i onclick="godaily()" class="fas fa-book"></i>
+                <i onclick="gochat()" class="far fa-comments"></i>
+                <span>Plan</span>
+                <span>AR</span>
+                <span>Post</span>
+                <span>Chat</span>
+                
+            </div>
+            <img id="imgProfile" class="profile_pic" onclick="gosetting()">
+        </div>
+    </div>
+    
+    <div class="welcome">
+        <h3 id="welcomename"></h3>
+        <p id="motto"></p> 
+    </div>
+    <div id="content">
+
+    </div>
+    
+
+    <div id="mySidenav" class="sidenav" >
+
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div id="mapppp" class="mapposition">
+
+        </div>
+        <div class="planposition">
+            <div id="co" class="plancontent">
+                <div id="dd" class="dayday">
+
+                </div>
+                <div id="cc" class="content">
+
+                </div>
+            </div>
+            <!--
+            <div id="co" class="plancontent">
+                <div class="dayday">
+                    <div class="day">day1</div>
+                    <div class="day">day2</div>
+                </div>
+                <div class="content">
+                    <div class="contenttt line">
+                        <span>1</span>
+                        <img id="${attraction_name}" src="chat_nav.png"">
+                        <h4 class="content2">景觀</h4>
+                        <p id="p_${i+1}">我知道了</p>
+                    </div>
+                    <div class="contenttt">
+                        <span>2</span>
+                        <img id="${attraction_name}" src="chat_nav.png"">
+                        <h4 class="content2">景觀</h4>
+                        <p id="p_${i+1}">我知道了</p>
+                    </div>
+                    <div class="contenttt">
+                        <span>3</span>
+                        <img id="${attraction_name}" src="chat_nav.png"">
+                        <h4 class="content2">景觀</h4>
+                        <p id="p_${i+1}">我知道了</p>
+                    </div>
+                    <div class="contenttt">
+                        <span>4</span>
+                        <img id="${attraction_name}" src="chat_nav.png"">
+                        <h4 class="content2">景觀</h4>
+                        <p id="p_${i+1}">我知道了</p>
+                    </div>
+                </div>
+
+            </div>
+            -->
+        </div>
+
+    </div>
+    
+    
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_crn8-2St09n9dRSmb7GBD85Qaxkd8G0"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
+    <script src="database_setup2.js"> </script>
+	<script>
+
+        
+
+        var myMap = new Map();
+        var mapdistance = new Map();
+        var distanceservice = new google.maps.DistanceMatrixService;
+        var directionsService = new google.maps.DirectionsService;
+        var directionsRenderer = new google.maps.DirectionsRenderer;
+        var map = new google.maps.Map(document.getElementById('mapppp'), {
+            zoom: 6,
+            center: {lat: 41.85, lng: -87.65},
+            mapTypeControl:false,
+            streetViewControl:false,
+            zoomControlOptions:{position:google.maps.ControlPosition.LEFT_BOTTOM}
+        });
+
+        directionsRenderer.setMap(map);
+        //distance(distanceservice);
+
+        function calculateAndDisplayRoute(directionsService, directionsRenderer, mode) {
+            var waypts = [];
+            var checkboxArray = document.getElementById('cc').children; //list-item數目-2
+            console.log(checkboxArray.length)
+            console.log(checkboxArray[0].id)
+            console.log(checkboxArray[1].id)
+            //console.log(checkboxArray[2].id)
+            //console.log(myMap.get(checkboxArray[checkboxArray.length-1].id))
+            console.log(myMap)
+            console.log(mapdistance)
+            //console.log(waypts)
+            for (var i = 0; i < (checkboxArray.length)-2; i++) {
+                waypts.push({
+                    location: {lng:parseFloat(myMap.get(checkboxArray[i+1].id)[0]),lat:parseFloat(myMap.get(checkboxArray[i+1].id)[1])},
+                    stopover: true
+                }); 
+            }
+            console.log(waypts)
+            
+            directionsService.route({
+                origin: {lng:parseFloat(myMap.get(checkboxArray[0].id)[0]),lat:parseFloat(myMap.get(checkboxArray[0].id)[1])},
+                destination: {lng:parseFloat(myMap.get(checkboxArray[(checkboxArray.length)-1].id)[0]),lat:parseFloat(myMap.get(checkboxArray[(checkboxArray.length)-1].id)[1])},
+                waypoints: waypts,
+                optimizeWaypoints: true,
+                travelMode: mode
+            }, function(response, status) {
+                if (status === 'OK') {
+                    console.log('sucess')
+                    directionsRenderer.setDirections(response);
+                } 
+                else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+            
+        }
+
+        function distance(directionsService){	
+            var checkboxArray = document.getElementById('cc').children;
+            var waypts = [];
+            for (var i = 0; i < checkboxArray.length; i++){
+                waypts.push({lng:parseFloat(myMap.get(checkboxArray[i].id)[0]),lat:parseFloat(myMap.get(checkboxArray[i].id)[1])});	
+            }
+            console.log(waypts);
+
+            directionsService.getDistanceMatrix({
+                origins: waypts,
+                destinations: waypts,
+                travelMode: 'DRIVING',
+                unitSystem: google.maps.UnitSystem.METRIC,
+                avoidHighways: false,
+                avoidTolls: false
+            }, function(response, status) {
+                if (status !== 'OK') {
+                    alert('Error was: ' + status);
+                } 
+                else {
+                    console.log(response)
+                    var originList = response.originAddresses;
+                    console.log(originList);
+                    var destinationList = response.destinationAddresses;
+                    console.log(destinationList);
+                    
+                    for (var j = 0 ; j < originList.length; j++){
+                        var outputDiv = document.getElementById('p_'+(j+1).toString());
+                        console.log(outputDiv);
+                        outputDiv.innerHTML = '';
+                    }
+                    
+                    var distanceSeq = document.querySelectorAll('div.contenttt > p');
+                    var nameSeq = document.querySelectorAll('h4.content2');
+                    console.log(distanceSeq[0]);
+                    console.log(distanceSeq[1]);
+                    console.log(distanceSeq[2]);
+                    console.log(nameSeq[0].innerText);
+                    console.log(nameSeq[1]);
+                    console.log(nameSeq[2]);
+                    for (var i = 0; i < originList.length; i++) {
+                        var outputDiv = distanceSeq[i];
+                        //var outputName = nameSeq[i];
+                        console.log(outputDiv);
+                        
+                        //outputDiv.innerHTML = originList[(distanceSeq[i].id).split('_')[1]-1] + ' to ' + destinationList[(distanceSeq[i+1].id).split('_')[1]-1] + ': ' + results.distance.text + ' in ' + results.duration.text + '<br>';
+                        if( i != originList.length-1 ){
+                            var results = response.rows[(distanceSeq[i].id).split('_')[1]-1].elements[(distanceSeq[i+1].id).split('_')[1]-1];
+                            outputDiv.innerHTML = nameSeq[i].innerText + ' to ' + nameSeq[i+1].innerText + ': <br> 距離 : ' + results.distance.text + ' 時間 : ' + results.duration.text;
+                            console.log(outputDiv);
+                        }
+                        else{
+                            outputDiv.innerHTML = '最後一個行程'+ nameSeq[i].innerText +' : <br> 祝您有個美好的Ending'
+                            console.log(outputDiv);
+                        }
+                    }
+                }
+                
+                }	
+            );
+        }
+        
+        
+        
+        function openNav(e) {
+            //document.getElementById('mySidenav').innerHTML = "";
+            document.getElementById("mySidenav").style.width = "100%";
+            auth.onAuthStateChanged(user=>{
+                if(user){
+                    dbtest.ref('onlinepost/'+e+'/plan').once('value', function (snapshot) {
+                        var data = snapshot.val();
+                        console.log(snapshot);
+                        console.log(data);
+                        document.getElementById('dd').innerHTML = "";
+                        document.getElementById('cc').innerHTML = "";
+                        var i = 1;
+                        snapshot.forEach(function(item){
+                            if(item.key == "第1天"){
+                                document.getElementById('dd').insertAdjacentHTML('beforeend',`
+                                    <div id="第1天" class="day" onclick="anotherday('第${i}天','${e}')">${item.key}</div>
+                                `)
+                                document.getElementById('第1天').style.backgroundColor = '#ffd31d';
+                                console.log(item.key)
+                                console.log(item.val().date)
+                                console.log(item.val())
+                                var list = []
+                                for( var con in item.val()){
+                                    console.log(con)
+                                    if( con!="date" && con!="time"){
+                                        list.push(con)
+                                        console.log(list)
+                                    }
+                                }
+                                
+                                for( var test in list){
+                                    var num = (parseInt(test)+1).toString()
+                                    console.log(list[test])
+                                    console.log(item.val()[list[test]])
+                                    console.log(item.val()[list[test]]['圖片'])
+                                    myMap.set("div"+num,[item.val()[list[test]]['經度'],item.val()[list[test]]['緯度']]);
+                                    mapdistance.set(item.val()[list[test]]['名字'],[item.val()[list[test]]['經度'],item.val()[list[test]]['緯度']]);
+                                    document.getElementById("cc").insertAdjacentHTML('beforeend',`
+                                    <div id="div${num}" class="contenttt">
+                                        <span>${num}</span>
+                                        <img id="${item.val()[list[test]]['名字']}" src="${item.val()[list[test]]['圖片']}">
+                                        <h4 class="content2">${item.val()[list[test]]['名字']}</h4>
+                                        <p id="p_${num}">我知道了</p>
+                                    </div>
+                                    `)
+                                }
+                                calculateAndDisplayRoute(directionsService, directionsRenderer,'DRIVING');
+                                distance(distanceservice);
+                                i=i+1;
+                            }else{
+                                document.getElementById('dd').insertAdjacentHTML('beforeend',`
+                                    <div id="第${i}天" class="day" onclick="anotherday('第${i}天','${e}')">${item.key}</div>
+                                `)
+                                i=i+1;
+                            }
+    
+                        });
+                    })
+                }
+            })
+        }
+        
+        function anotherday(c,e){
+            document.querySelectorAll('.day').forEach(el => {
+                el.style.backgroundColor ="#ffffff";
+            });
+            document.getElementById(c).style.backgroundColor = '#ffd31d';
+            auth.onAuthStateChanged(user=>{
+                if(user){
+                    dbtest.ref('onlinepost/'+e+'/plan/'+c).once('value', function (snapshot) {
+                        var data = snapshot.val();
+                        console.log(snapshot);
+                        console.log(data);
+                        document.getElementById('cc').innerHTML = "";
+                        var i = 1;
+
+                        var list = []
+                        for( var con in data){
+                            console.log(con)
+                            if( con!="date" && con!="time"){
+                                list.push(con)
+                                console.log(list)
+                            }
+                        }
+                        myMap.clear()
+                        mapdistance.clear()
+                        for( var test in list){
+                            var num = (parseInt(test)+1).toString()
+                            console.log(list[test])
+                            console.log(data[list[test]])
+                            console.log(data[list[test]]['圖片'])
+                            myMap.set("div"+num,[data[list[test]]['經度'],data[list[test]]['緯度']]);
+                            mapdistance.set(data[list[test]]['名字'],[data[list[test]]['經度'],data[list[test]]['緯度']]);
+                            document.getElementById("cc").insertAdjacentHTML('beforeend',`
+                            <div id="div${num}" class="contenttt">
+                                <span>${num}</span>
+                                <img id="${data[list[test]]['名字']}" src="${data[list[test]]['圖片']}">
+                                <h4 class="content2">${data[list[test]]['名字']}</h4>
+                                <p id="p_${num}">我知道了</p>
+                            </div>
+                            `)
+                        }
+
+                        calculateAndDisplayRoute(directionsService, directionsRenderer,'DRIVING');
+                        distance(distanceservice);
+                        /*
+                        snapshot.forEach(function(item){
+                            if(item.key == "第1天"){
+                                document.getElementById('dd').insertAdjacentHTML('beforeend',`
+                                    <div id="第1天" class="day" onclick="anotherday()">${item.key}</div>
+                                `)
+                                console.log(item.key)
+                                console.log(item.val().date)
+                                console.log(item.val())
+                                var list = []
+                                for( var con in item.val()){
+                                    console.log(con)
+                                    if( con!="date" && con!="time"){
+                                        list.push(con)
+                                        console.log(list)
+                                    }
+                                }
+                                
+                                for( var test in list){
+                                    var num = (parseInt(test)+1).toString()
+                                    console.log(list[test])
+                                    console.log(item.val()[list[test]])
+                                    console.log(item.val()[list[test]]['圖片'])
+                                    myMap.set("div"+num,[item.val()[list[test]]['經度'],item.val()[list[test]]['緯度']]);
+                                    mapdistance.set(item.val()[list[test]]['名字'],[item.val()[list[test]]['經度'],item.val()[list[test]]['緯度']]);
+                                    document.getElementById("cc").insertAdjacentHTML('beforeend',`
+                                    <div id="div${num}" class="contenttt">
+                                        <span>${num}</span>
+                                        <img id="${item.val()[list[test]]['名字']}" src="${item.val()[list[test]]['圖片']}">
+                                        <h4 class="content2">${item.val()[list[test]]['名字']}</h4>
+                                        <p id="p_${num}">我知道了</p>
+                                    </div>
+                                    `)
+                                }
+                                calculateAndDisplayRoute(directionsService, directionsRenderer,'DRIVING');
+                                distance(distanceservice);
+                                i=i+1;
+                            }else{
+                                document.getElementById('dd').insertAdjacentHTML('beforeend',`
+                                    <div id="第${i}天" class="day" onclick="anotherday()">${item.key}</div>
+                                `)
+                                i=i+1;
+                            }
+    
+                        });*/
+                    })
+                }
+            })
+        }
+
+        /* Set the width of the side navigation to 0 */
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+
+        const ptr = PullToRefresh.init({
+                mainElement: '#content',
+                refreshTimeout:2000,
+                onRefresh() {
+                    //window.location.reload();
+                    document.getElementById('content').innerHTML='';
+                    onfirebaseStateChanged();
+                }
+        });
+
+        function good(){
+            event.target.setAttribute('class','fas fa-heart hred')
+            var next = event.target.nextSibling.nextElementSibling.id
+            console.log(next)
+            var newvalue = parseInt(document.getElementById(next).innerHTML.split('個')[0])+1
+            console.log(newvalue)
+            document.getElementById(next).innerHTML = newvalue.toString()+"個讚"
+            dbtest.ref('onlinepost/'+next).update({"good":newvalue.toString()})
+            auth.onAuthStateChanged(user => {
+                if(user){
+                    dbtest.ref('users/'+auth.currentUser.uid+"/goodpost/").push(next);
+                }
+                else[
+                    console.log('fail')
+                ]
+            })
+        }
+
+        onfirebaseStateChanged();
+        
+		function gosetting(){
+			window.location.href = "setting.html";
+        }
+        
+        function godaily(){
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                        console.log('user logged in: ', user);
+                        console.log('user logged in: ', user['uid']);
+                        dbtest.ref('users/'+ user['uid']+"/DIYtempdiary").remove();
+                        location.href = './dailyfunction/daily_input.html';
+                }else{
+                    console.log('user logged out: ');
+                }
+            });
+        }
+        function goplan(){
+            window.location.href = "./plantrip/planindex.html";
+        }
+        function goar(){
+            window.location.href = "./webar/ARcollection.html";
+        }
+        function gochat(){
+            window.location.href = "./chatroom/chatfriend.html";
+        }
+        
+        
+	</script>

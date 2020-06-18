@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Mukta|Noto+Sans+TC:300&display=swap" rel="stylesheet">
+  <title>TripREC</title>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+  	body{
+  		background-color: #f5f5f5;
+  		font-family: 'Mukta', sans-serif;
+  	}
+  	.search-box{
+  		margin: auto;
+  		width: 85%;
+		background-color: #e0e0e0;
+		border-radius: 10px;
+		padding-top: 10px;
+		padding-left: 10px ;
+		padding-bottom: 10px;
+  	}
+  	
+  	input{
+  		background-color:#e0e0e0; 
+  		color: #e84118;
+  		text-decoration: none;
+  		border: none;
+  		margin-left: 2px;
+  		margin-top: 8px;
+  		font-size: 10px; 
+  		outline:none;
+  	}
+
+  	.material-icons{
+  		vertical-align:middle;
+
+  	}
+
+  	.search-result{
+  		padding-top : 4px;
+  		margin:auto;
+  		background-color: #ffffff;
+  		border-radius: 20px;
+  		width: 85%;
+  		margin-top: 10px;
+  		margin-bottom: 20px;
+  		box-shadow: 3px 3px 5px #e0e0e0;
+  	}
+
+  	img{
+  		vertical-align: middle;
+  		display: inline-block;
+		height: 25%;
+		width: 30%;
+		border-radius: 5px;
+		margin-top: 10px;
+		margin-left: 15px;
+		margin-bottom: 10px;
+  	}
+
+  	.text-display{
+		float: right;
+  		margin-right: 10px;
+  		margin-top: 10px;
+		width: 55%;
+		vertical-align: top;
+  	}
+
+  	h4{
+  		display: inline-block;
+  		margin-top: 5px;
+		margin:5px;
+  		margin-bottom: 2px;
+  		font-weight: bold;
+  		font-family: 'Noto Sans TC', sans-serif;
+  	}
+  	.container{
+  		margin-top: 10px;
+  		overflow: auto;
+  	}
+ 
+  	.full_star {
+		width: 75%; /*調整寬度可變更星等*/
+		left: 0;
+		top: 0;
+		right: 0;
+		color: #D56A16; /*前景星星顏色*/
+		display: inline-block;
+		font-size: 8px;
+	}
+	.divider{
+		height: 15px;
+	}
+
+	.rank{
+		float: right;
+	}
+	.search-result .material-icons{
+		display: block;
+		vertical-align: middle;
+	}
+	span{
+		font-size: 10px;
+	}
+	.icon-bar {
+	  width: 100%; /* Full-width */
+	  background-color: #ffffff; /* Dark-grey background */
+	  overflow: hidden; /* Overflow due to float */
+	  position: fixed;
+	  left: 0;
+	  bottom: 0;
+	}
+
+	.icon-bar a {
+	  float: left; /* Float links side by side */
+	  display: block;
+	  text-align: center; /* Center-align text */
+	  width: 20%; /* Equal width (5 icons with 20% width each = 100%) */
+	  padding: 12px 0; /* Some top and bottom padding */
+	  transition: all 0.3s ease; /* Add transition for hover effects */
+	  color: #bdbdbd; /* White text color */
+	  font-size: 15px; /* Increased font size */
+	}
+
+	.icon-bar a:hover {
+	  background-color: #FAF385; /* Add a hover color */
+	}
+
+	.text-display i{
+		float: right;
+		margin-top:25px; 
+		margin-right: 8px;
+		display: inline-block;
+		text-align: right;
+	}
+	.avatar{
+	  vertical-align: middle;
+	  width: 50px;
+	  height: 50px;
+	  border-radius: 50%;
+	  float: right;
+	  margin: 5px 8px;
+	}
+	.header h2{
+		display: inline-block;
+		margin: 13px 10px; 
+		font-size: 35px;
+	}
+	.search-result:active{
+		background-color: #e0e0e0;
+		margin-top: 15px;
+		margin-bottom: 15px;
+		width: 75%;
+		height: 75%;
+	}
+	body::webkit-scrollbar{
+		display: none;
+	}
+
+	#snackbar {
+	  visibility: hidden; /* Hidden by default. Visible on click */
+	  min-width: 250px; /* Set a default minimum width */
+	  margin-left: -125px; /* Divide value of min-width by 2 */
+	  background-color: #333; /* Black background color */
+	  color: #fff; /* White text color */
+	  text-align: center; /* Centered text */
+	  border-radius: 2px; /* Rounded borders */
+	  padding: 16px; /* Padding */
+	  position: fixed; /* Sit on top of the screen */
+	  z-index: 1; /* Add a z-index if needed */
+	  left: 45%; /* Center the snackbar */
+	  bottom: 30px; /* 30px from the bottom */
+	}
+
+	/* Show the snackbar when clicking on a button (class added with JavaScript) */
+	#snackbar.show {
+	  visibility: visible; /* Show the snackbar */
+	  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+	  However, delay the fade out process for 2.5 seconds */
+	  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	}
+
+	/* Animations to fade the snackbar in and out */
+	@-webkit-keyframes fadein {
+	  from {bottom: 0; opacity: 0;}
+	  to {bottom: 30px; opacity: 1;}
+	}
+
+	@keyframes fadein {
+	  from {bottom: 0; opacity: 0;}
+	  to {bottom: 30px; opacity: 1;}
+	}
+
+	@-webkit-keyframes fadeout {
+	  from {bottom: 30px; opacity: 1;}
+	  to {bottom: 0; opacity: 0;}
+	}
+
+	@keyframes fadeout {
+	  from {bottom: 30px; opacity: 1;}
+	  to {bottom: 0; opacity: 0;}
+	}
+	.plus_bg{
+		float: right;
+		position: relative;
+		background-color: #f5f5f5;
+		border-radius: 50%;
+		width:40px;
+		height:40px;
+		top:-85px;
+		right:40px;
+		z-index:2;
+	}
+	.fa-plus{
+		margin-top: 12px;
+		margin-left: 13px;
+		color: #F5CD05;
+	}
+
+  </style>
+</head>
+
+<body>
+	<div class="header">
+		<h2>Plan</h2>
+		<img src="me.jpg" alt="Avatar" class="avatar">
+	</div>
+
+	<div class="search-box">
+		<i class="small material-icons ">search</i>
+		<input type="text" name="" placeholder="type place to search">
+	</div>
+    <div class="container">
+		<div class="search-result">
+			<img src="背景.jpg">
+			<div class="text-display">
+				<div class="col-3">
+					<h4>陽陽與安安</h4>
+				</div>
+				<div class="full_star col-3">
+					★★★★★
+					<span>5.0 </span>
+				</div>
+			</div>	
+		</div>
+		<div class='plus_bg'><i class="fa fa-plus"></i></div>
+
+		
+		<div class="search-result">
+			<img src="背景.jpg">
+			<div class="text-display">
+				<div class="col-3">
+					<h4>陽陽與安安</h4>
+				</div>
+				<div class="full_star col-3">
+					★★★★★
+					<span>5.0 </span>
+				</div>
+			</div>	
+		</div>
+		<div class='plus_bg'><i class="fa fa-plus"></i></div>
+		
+		<div class="search-result">
+			<img src="背景.jpg">
+			<div class="text-display">
+				<div class="col-3">
+					<h4>陽陽與安安</h4>
+				</div>
+				<div class="full_star col-3">
+					★★★★★
+					<span>5.0 </span>
+				</div>
+			</div>	
+		</div>
+		<div class='plus_bg'><i class="fa fa-plus"></i></div>
+		
+		<div class="search-result">
+			<img src="背景.jpg">
+			<div class="text-display">
+				<div class="col-3">
+					<h4>陽陽與安安</h4>
+				</div>
+				<div class="full_star col-3">
+					★★★★★
+					<span>5.0 </span>
+				</div>
+			</div>	
+		</div>
+		<div class='plus_bg'><i class="fa fa-plus"></i></div>
+		
+		<div class="search-result">
+			<img src="背景.jpg">
+			<div class="text-display">
+				<div class="col-3">
+					<h4>陽陽與安安</h4>
+					<i class="fa fa-plus"></i>
+				</div>
+				<div class="full_star col-3">
+					★★★★★
+					<span>5.0 </span>
+				</div>
+			</div>	
+		</div>
+			
+		<div class="search-result">
+			<img src="背景.jpg">
+			<div class="text-display">
+				<div class="col-3">
+					<h4>陽陽與安安</h4>
+					<i class="fa fa-plus"></i>
+				</div>
+				<div class="full_star col-3">
+					★★★★★
+					<span>5.0 </span>
+				</div>
+			</div>	
+		</div>
+		
+		<div class="search-result">
+			<img src="背景.jpg">
+			<div class="text-display">
+				<div class="col-3">
+					<h4>陽陽與安安</h4>
+					<i class="fa fa-plus"></i>
+				</div>
+				<div class="full_star col-3">
+					★★★★★
+					<span>5.0 </span>
+				</div>
+			</div>	
+		</div>
+		
+    </div>
+
+    <div id="snackbar">Spot is added</div>
+
+		<div class="icon-bar">
+			<a href="#"><i class="fas fa-tablet-alt"></i></a>
+			<a href="#"><i class="far fa-edit"></i></a>
+			<a href="#"><i class="fas fa-hiking"></i></a>
+			<a href="#"><i class="fas fa-robot"></i></a>
+			<a href="#"><i class="far fa-comment-dots"></i></a>
+		</div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+ 	<script>
+		
+		function add_spot(e){
+			// Get the snackbar DIV
+		  var x = document.getElementById("snackbar");
+
+		  // Add the "show" class to DIV
+		  x.className = "show";
+
+		  // After 3 seconds, remove the show class from DIV
+  		  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+
+		}
+ 		
+ 	
+ 	</script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geolocation</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+        html, body{
+            width: 100%;
+            height: 100%;
+        }
+        #map{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="map">
+    </div>
+    <input id="submit" type="button" value="Geocode">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
+      var map, infoWindow;
+
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          //一定要設的初始經緯度
+          center: {lat: 25.04775, lng: 121.51705},
+          zoom: 14
+          //maptypeid 改變地圖樣式
+        });
+      
+        
+        //位置點上的顯示window
+        infoWindow = new google.maps.InfoWindow({
+          content: 'My Location'
+        });
+        
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            var marker = new google.maps.Marker({
+              position:pos,
+              map: map,
+            });
+
+            marker.addListener('click',function(){
+              infoWindow.open(map,marker);
+            });
+
+            map.setCenter(pos);
+
+            var cityCircle = new google.maps.Circle({
+              strokeColor: '#FF0000',
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              fillColor: '#FF0000',
+              fillOpacity: 0.35,
+              map: map,
+              center: pos,
+              radius: 5000
+            });
+
+            var geocoder = new google.maps.Geocoder();
+            
+            var openUrl= "https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindTypeJ&category=6";
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET',openUrl,true);
+            xhr.send();
+            
+            xhr.onreadystatechange = function(){
+             if(this.readyState === 4 && this.status === 200){
+             var data = JSON.parse(this.responseText);
+              console.log(data);
+              console.log(data[0]);
+              console.log(data[0].showInfo[0].locationName);
+              document.getElementById('submit').addEventListener('click', function() {
+                
+                geocodeAddress(data ,geocoder, map, cityCircle);
+              });
+             }
+            };
+          
+            //console.log(data);
+            
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+
+      }
+
+
+
+      function geocodeAddress(data ,geocoder, resultsMap, circle) {
+       
+          var address = data[1].showInfo[0].locationName;
+          console.log(address);
+          geocoder.geocode({'address': address}, function(results, status) {
+            if (status === 'OK') {
+              
+              //偵測圓圈內
+              if(circle.getBounds().contains(results[0].geometry.location)){
+                var marker = new google.maps.Marker({
+                  map: resultsMap,
+                  position: results[0].geometry.location
+                });
+                console.log(111111111);
+              }else{
+                console.log(222222222222);
+              }
+
+            } else {
+              alert('Geocode was not successful for the following reason: ' + status);
+            }
+         });
+
+        
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
+  
+    </script>
+    <script>
+      
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_crn8-2St09n9dRSmb7GBD85Qaxkd8G0&callback=initMap">
+    </script>
+  </body>
+</html>
+
+<!--
+var address = "台北市內湖區內湖路二段300號";
+          geocoder.geocode({'address': address}, function(results, status) {
+            if (status === 'OK') {
+              var marker = new google.maps.Marker({
+                  map: resultsMap,
+                  position: results[0].geometry.location
+              });
+              //偵測圓圈內
+              if(circle.getBounds().contains(marker.position)){
+                console.log(111111111);
+              }else{
+                console.log(222222222222);
+              }
+
+            } else {
+              alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+-->

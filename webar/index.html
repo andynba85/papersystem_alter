@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ar test</title>
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width,height=device-height">
+    <!-- IOS SUPPORT -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+<!doctype HTML>
+<html>
+<script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+<script src="https://raw.githack.com/jeromeetienne/AR.js/2.0.8/aframe/build/aframe-ar.js"></script>
+<script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+<script>
+  // Invitation Video Handler
+            
+  AFRAME.registerComponent('video-vidhandler', {
+    init: function() {
+      this.toggle = false;
+      this.vid = document.querySelector("#video101");
+      this.vid.pause();
+    },
+    tick: function() {
+      if (this.el.object3D.visible == true) {
+        if (!this.toggle) {
+            this.toggle = true;
+            this.vid.play();
+        }
+      } else {
+        this.toggle = false;
+        this.vid.pause();
+      }
+    }
+  });
+
+  // Mappoint component
+  AFRAME.registerComponent('mappoint-handler', {
+    dependencies: ['raycaster'],
+    init: function() {
+      //console.log("I was triggered");
+      const marker3 = document.querySelector("#marker3");
+      const imgMap = document.querySelector("#img-map");
+      marker3.addEventListener('click', function(ev, target) {
+        const intersectedElement = ev && ev.detail && ev.detail.intersectedEl;
+        if (imgMap && intersectedElement === imgMap) {
+          console.log("Clicked");
+          //document.location.href = "https://goo.gl/maps/gRsth6SHo5AgwMbT7";
+        }
+      });
+    }
+  });
+</script>
+
+
+  <body style='margin : 0px; overflow: hidden;'>
+
+    <a-scene cursor="rayOrigin:mouse" embedded arjs>
+
+       <a-assets>
+            <!-- Invitation  Video -->
+            <video  preload="none" id="video101" response-type="arraybuffer" loop="false" crossorigin webkit-playsinline playsinline controls>
+                <source  src="videos/101.mp4">
+            </video>
+            <!-- Map point Image -->
+            <img id="map-point" src="images/map-navigate.jpg">     
+            
+      </a-assets>
+        
+      <a-marker id="marker1" type='pattern' url='markers/invi-pattern-marker.patt' video-vidhandler>
+        <a-entity position='0 0 0' rotation="-90 0 0" text="width:2; value: I am Andy.I love you Joanne!;color:#000000"></a-entity>
+          <a-entity position='0 0 0' rotation="-90 0 0" scale="0.001 0.001 0.001" gltf-model="./scene.gltf"> 
+            <!--animation="property:rotation; to:0 360 0;dur:9000;loop:true;easing:linear">--> </a-entity>
+         <a-plane scale = "2 1" position='0 0.5 0.5' rotation="-90 0 0" material='transparent:true; src:#video101' controls></a-plane>
+      </a-marker>
+
+       <!--map-->
+     <!--
+      <a-marker id="marker3" type='pattern' url='markers/map-pattern-marker.patt' emitevents="true" cursor="rayOrigin: mouse" mappoint-handler>
+          <a-plane id="img-map" scale = "2 2" position='0 0.1 0' rotation="-90 0 0" material='transparent:true; src:#map-point'></a-plane>
+      </a-marker>     
+    -->
+
+      <!--<a-marker preset="custom" type="pattern" url="./res/pattern-treasure.patt">-->
+      <a-marker-camera cursor="rayOrigin:mouse" preset="hiro" >
+
+           <a-entity id="boxCover1"
+                    position="-0.6 0.25 0" rotation="0 0 -180">
+            <a-box class="board"
+                   position="-0.5 0 0" scale="0.8 0.05 1"
+                   opacity="0.5"
+                   event-set__enter="_event:mouseenter ; color: #FFFF84">
+            </a-box>
+          </a-entity>
+          
+      </a-marker-camera>
+      <a-entity >
+
+      </a-entity>
+    </a-scene>
+  
+  </body>
+
+</html>
+
+<!--
+    <a-box id="boxBody"
+                 position="0 0.25 0" scale="1.2 0.6 1.2"
+                 opacity="0.8"
+                 event-set__enter="_event:mouseenter ; color: #FFFF84"
+                 event-set__leave="_event:mouseleave ; color: #FFFFFF;
+                                        position: 0 0.3 0;
+                                        scale: 1.2 0.6 1.2"
+                 event-set__down="_event: mousedown;position: 0 0.15 0;
+                                       scale: 1.2 0.3 1.2"
+                 event-set__up="_event: mouseup;color: #FFFFFF;
+                                     position: 0 0.3 0;
+                                     scale: 1.2 0.6 1.2">
+          </a-box>
+          <a-entity id="boxCover1"
+                    position="-0.6 0.25 0" rotation="0 0 -180">
+            <a-box class="board"
+                   position="-0.5 0 0" scale="0.8 0.05 1"
+                   opacity="0.5">
+            </a-box>
+          </a-entity>
+
+
+          <a-entity id="boxCover0"
+                    position="0.6 0.25 0" rotation="0 0 180">
+            <a-box class="board"
+                   position="0.5 0 0" scale="0.8 0.05 1"
+                   opacity="0.5">
+            </a-box>
+          </a-entity>
+-->
+

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Using CSS Grid</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Dancing+Script|Indie+Flower|Lobster|Pacifico|Slabo+27px&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/80f6c102d9.js" crossorigin="anonymous"></script>
+    <!--Let browser know website is optimized for mobile-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.css">
+    <link rel="stylesheet" href="./css/css-loader.css">
+    <style>
+        body{
+            margin:0;
+            font-family: "arial";
+        }
+        .nav h2{
+            position: relative;
+            display: inline-block;
+            text-align: center;
+            color:#D6D6D6;
+            font-size: 20px;
+            left:67px;
+        }
+        .fa-angle-left{
+            max-width: 26.25px;
+            font-size: 30px;
+            margin-top:15px;
+            margin-left:15px;
+            margin-right: 10px;
+            vertical-align:sub;
+        }
+        .circle{
+            background-color:#ffffff;
+            border-radius: 50%;
+            border:2.5px solid #D6D6D6;
+            width:140px;
+            height:140px;
+            margin-left: 30%;
+            margin-bottom:25px;
+            text-align: center;
+        }
+        .change span{
+            font-size: 15px;
+        }
+        .profile-pic{
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 15px;
+        }
+        .profile-pic img{
+            margin-top: 10px;
+            background-color: #ffffff;
+            width:120px;
+			height:120px;
+            border-radius: 50%;
+        }
+        .username,.account,.help,.motto,.logout{
+            margin-left:10px;
+        }
+        .username h3{
+            display: inline-block;
+            text-align: left;
+            width:105px;
+            font-size: 16px;
+        }
+        .account h3{
+            display: inline-block;
+            text-align: left;
+            width:105px;
+            font-size: 16px;
+        }
+        .help h3{
+            display: inline-block;
+            text-align: left;
+            width:105px;
+            font-size: 16px;
+        }
+        .motto h3{
+            display: inline-block;
+            text-align: left;
+            width:105px;
+            font-size: 16px;
+        }
+        .logout h3{
+            display: inline-block;
+            text-align: left;
+            width:105px;
+            font-size: 16px;
+        }
+        .fa-question-circle , .fa-user,.fa-address-book,.fa-hand-paper,.fa-sign-out-alt{
+            max-width: 26.25px;
+            font-size: 25px;
+            margin-top:15px;
+            margin-right: 10px;
+            vertical-align:sub;
+        }
+        .content{
+            margin-top: 20px;
+        }
+        .content input{
+            width:200px;
+            border:0;
+            font-size: 18px;
+        }
+        hr{
+            margin:4px 0px;
+        }
+        .my-image{
+            width:150px;
+            height:150px;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            position: relative;
+            background-color: #ffffff;
+            margin: auto;
+            padding: 0;
+            border: 1px solid #888;
+            width: 90%;
+            height:400px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+        }
+
+        .modal-content p{
+            margin-top: 8px;
+            margin-left: 30%;
+            margin-bottom: 10px;
+            font-size:20px;
+        }
+
+        /* Add Animation */
+        @-webkit-keyframes animatetop {
+            from {top:-300px; opacity:0} 
+            to {top:0; opacity:1}
+        }
+
+        @keyframes animatetop {
+            from {top:-300px; opacity:0}
+            to {top:0; opacity:1}
+        }
+
+        /* The Close Button */
+        .close {
+            color: black;
+            float: right;
+            margin-right: 10px;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-header {
+            padding: 2px 16px;
+            background-color: #5cb85c;
+            color: white;
+        }
+
+        .modal-body {padding: 2px 16px;}
+
+        .modal-footer {
+            padding: 2px 16px;
+            background-color: #5cb85c;
+            color: white;
+        }
+        #btn{
+            position: relative;
+            text-align: center;
+            top:290px;
+            padding:10px 0 ;
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div id="load" class="loader loader-default is-active" data-text></div>
+    <div class='nav'>
+        <i class="fas fa-angle-left" onclick="goindex()"></i>
+        <h2>Account Setting</h2>
+        <hr/>
+    </div>
+
+    <div class="profile-pic">
+        <div class="circle">
+            <label for="input">
+                <img id="upload" src="account.jpg">
+            </label>
+            <input hidden id="input" type="file" />
+        </div>  
+        <div class="change">
+            <span>change photo</span>  
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Cut Your want</p>
+            <div id="btn"> Done! </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <hr/>
+        <div class="username">
+            <i class="fas fa-address-book"></i>
+            <h3>Username</h3>
+            <input type="text" id="name" value="" maxlength="11" onchange="inputname_change('name')">
+        </div>
+        <hr/>
+        <div class="account">
+            <i class="fas fa-user"></i>
+            <h3>Account</h3>
+            <input type="text" id="accountname" value="" maxlength="11" disabled>
+        </div>
+        <hr/>
+        <div class="motto">
+            <i class="fas fa-hand-paper"></i>
+            <h3>Motto</h3>
+            <input type="text" id="inputmotto" placeholder="input motto..." value="" maxlength="11" onchange="inputmotto_change('inputmotto')">
+        </div>
+        <hr/>
+        <div class="help">
+            <i class="fas fa-question-circle"></i>
+            <h3>Help Center</h3>
+        </div>
+        <hr/>
+        <div id="logoutbtn" class="logout">
+            <i class="fas fa-sign-out-alt"></i>
+            <h3>logout</h3>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+    </script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
+    <script src="database_setup.js"> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.js"></script>
+    <script>
+
+        // Get the modal
+        var modal = document.getElementById("myModal");
+        // Get the button that opens the modal
+        var btn = document.getElementById("upload");
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0]; 
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        var basic = $('.modal-content').croppie({
+            viewport: {
+                width: 140,
+                height: 140,
+                type:'circle'
+            },
+            boundary: { width: 200, height: 200 },
+        });
+        $('#input').change(function(){
+            var file = $('#input')[0].files[0];
+            console.log(file);
+            var reader = new FileReader;
+            reader.onload = function(e) {
+                console.log(e.target.result);
+                basic.croppie('bind',{
+                    url:e.target.result
+                })
+                //$('#upload').attr('src', e.target.result);
+                // When the user clicks the button, open the modal
+                modal.style.display = "block"; 
+            };
+            reader.readAsDataURL(file);
+        });
+
+        $('#btn').click(function () {
+            basic.croppie('result', {
+                type: 'base64',
+                size: 'viewport'
+            }).then(function (resp) {
+                $('#upload').attr('src', resp);
+                auth.onAuthStateChanged(user => {
+                if (user) {
+                        console.log('user logged in: ', user);
+                        dbtest.ref('users/'+auth.currentUser.uid).update({img:resp})
+                    } else {
+                        console.log('user logged out');
+                    }
+                });
+                
+                modal.style.display = "none";
+                
+            });
+        });
+
+        function goindex(){
+            window.location.href = 'new_preindex.html';
+        }
+        /*
+
+        $('#input').change(function(){
+            var file = $('#input')[0].files[0];
+            console.log(file);
+            var reader = new FileReader;
+            reader.onload = function(e) {
+                console.log(e.target.result);
+                $('#upload').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(file);
+        });
+        */
+
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                console.log('user logged in: ', user);
+                
+                dbtest.ref('users/'+auth.currentUser.uid).on('value',function(data){
+                    console.log(data.val().username);
+                    document.getElementById('name').setAttribute("value",data.val().username);
+                    document.getElementById('accountname').setAttribute("value",data.val().useremail);
+                    if(data.val().motto!=null){
+                        document.getElementById('inputmotto').setAttribute("value",data.val().motto);
+                    }
+                    if(data.val().img!=null){
+                        document.getElementById('upload').setAttribute("src",data.val().img);
+                    }
+                    $('#load').removeClass("is-active");
+                });
+                
+            } else {
+                console.log('user logged out');
+            }
+        });
+
+        const logout = document.querySelector('#logoutbtn');
+		logout.addEventListener('click', (e) => {
+            e.preventDefault();
+            dbtest.ref('users/'+auth.currentUser.uid).update({'onlinestatus':false});
+			auth.signOut().then(() => {
+				window.location.href="index.html";
+			})
+        });
+        //document.getElementById('name').addEventListener('onchange',input_change())
+        function inputname_change(id){
+            var value = document.getElementById(id).value;
+            auth.onAuthStateChanged(user => {
+                dbtest.ref('users/'+auth.currentUser.uid).update({username:value});
+            });
+        }
+        function inputmotto_change(id){
+            var value = document.getElementById(id).value;
+            auth.onAuthStateChanged(user => {
+                dbtest.ref('users/'+auth.currentUser.uid).update({motto:value});
+            });
+        }
+
+    </script>
+</body>
+</html>

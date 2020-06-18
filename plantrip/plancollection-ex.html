@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Indie+Flower|Lobster|Pacifico|Slabo+27px|Noto+Sans+TC:300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/80f6c102d9.js" crossorigin="anonymous"></script>
+  <script src="swiped.js"></script>
+  <!--Let browser know website is optimized for mobile-->
+  <title>TripREC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body{
+      margin: 0;
+      font-family: 'Noto Sans TC', sans-serif;
+      background-color: #e0e0e0;
+    }
+    .topimg{
+      position: relative;
+      background-color: #ffffff;
+      width: 100%;
+      margin: 0;
+    }
+    .lefttop h2{
+      display: inline-block;
+      margin-left:25px;
+      margin-bottom: 0px;
+      font-size: 30px;
+    }
+    .lefttop span{
+      margin-left:25px;
+    }
+    .lefttop button{
+      border: none;
+      padding: 10px;
+      font-size: 20px;
+      margin-left:20px;
+      margin-top: 10px;
+      width: 100px;
+      border-radius: 10px;
+      background-color: #ffd31d;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight:bold;
+    }
+    .topimg img{
+      position: absolute;
+      left: 40%;
+      vertical-align: bottom;
+      display: inline-block;
+      width: 60%;
+    }
+    .lefttop{
+
+      width: 40%;
+      height: 225px;
+      display: inline-block;
+    }
+
+    .tripindex{
+      padding: 2px;
+      margin-top: 5px;
+      background-color: #e0e0e0;
+      width: 371px;
+      height: 362px;
+      border-radius: 30px;
+      text-align: center;
+      overflow: auto;
+      z-index: 0;
+      position: relative;
+    }
+    
+    .tripindex img{
+      margin: 10px;
+      width: 90%;
+      border-radius: 10px;
+    }
+
+    .card:active{
+      background-color: #FFEDCE;
+      box-shadow: 1px 2px 2px #eeeeee;
+    }
+    .roundadd{
+      border: none;
+      padding: 10px;
+      font-size: 20px;
+      margin-left: 25%;
+      width: 50px;
+      height: 50px;
+      border-radius: 50px;
+      background-color: #ffffff;
+
+    }
+
+    .roundback{
+      border: none;
+      padding: 10px;
+      font-size: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50px;
+      background-color: #ffffff;
+      margin-left: 15px;
+    }
+
+    .roundback:active ,.roundadd:active{
+      background-color: #FFEDCE;
+    }
+    .footer{
+      border-top: 2px solid #ffffff;
+      padding-top: 10px; 
+      margin-top: 10px;
+      position: fixed;
+      width: 100%;
+      bottom: 10px;
+    }
+
+    .tripindex #pre{
+      margin-top: 30%;
+      border-radius: 10px;
+    }
+
+
+    /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  font-family: 'Noto Sans TC', sans-serif;
+  position: relative;
+  background-color: #fefefe;
+  border-radius: 5px;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #F8A588;
+  color: white;
+}
+
+.modal-body {
+  padding: 10px;
+  font-size: 20px;
+}
+.modal-body input{
+  border: none;
+  padding: 10px;
+  border-radius: 10%;
+  background-color: beige;
+  margin-left: 5px;
+  font-size: 18px;
+}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #F8A588;
+  text-align: center;
+  color: white;
+}
+.rect{
+      border: none;
+      padding: 10px;
+      margin:10px;
+      font-size: 20px;
+      width: 100px;
+      height: 50px;
+      border-radius: 10px;
+      background-color: #ffffff;
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+.rect:active{
+  background-color: beige;
+}
+
+.card-content{
+  position: absolute;
+  z-index:0;
+}
+
+.card{
+  position: relative;
+    display: inline-block;
+    width:340px;
+    padding: 5px;
+    margin: 10px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    z-index: 2;
+}
+.card .test{
+    display: inline-block;
+}
+.deletecard{
+  padding-top: 25px;
+  position: absolute;
+  top:10px;
+  right:11px;
+  width:95px;
+  height:50px;
+  z-index:0;
+  color: #ffffff;
+  background-color: red;
+  border-radius: 11px;
+}
+
+.card-content2{
+  position: absolute;
+  top:90px;
+  z-index:0;
+}
+
+.card-content3{
+  position: absolute;
+  top:180px;
+  z-index:0;
+}
+.card-content4{
+  position: absolute;
+  top:270px;
+  z-index:0;
+}
+
+
+
+  </style>
+</head>
+<body>
+  <div class="topimg">
+    <div class="lefttop">
+      <h2>Trip Youself</h2>
+      <span>My Schedule</span>
+      <button id="num"></button>
+      <div id="total" style="display: none;"></div>
+    </div>
+    <img src="3369736.jpg">
+  </div>
+
+  <div id="list" class="tripindex">
+    <h3 id="pre"></h3>
+  </div>
+
+  <div class="footer">
+    <button id="back" class="roundback"><i class="fa fa-angle-left"></i></button>
+    <button id="newplan" class="roundadd"><i class="fa fa-plus"></i></button>
+  </div>
+
+    <!-- The Modal -->
+  <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>請輸入行程名稱</h2>
+      </div>
+      <div class="modal-body">
+        <i class="far fa-edit"></i>
+        <input id="name" type="text" placeholder="請輸入...">
+      </div>
+      <div class="modal-footer">
+        <button id="sure" class="rect">確定</button>
+        <button id="close" class="rect">取消</button>
+      </div>
+    </div>
+  </div>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
+<script src="../database_setup.js"></script>
+<script>
+  document.getElementById('back').addEventListener('click',function(){
+    window.location.href = "planindex.html";
+  })
+    let count = 0 ; 
+    var modal = document.getElementById('myModal');
+    var btn = document.getElementById('newplan');
+    var close = document.getElementById('close');
+    var sure = document.getElementById('sure');
+    // When the user clicks on <span> (x), close the modal
+
+    close.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    //var userkey =''
+
+    auth.onAuthStateChanged(user => {
+			if (user) {
+				console.log('user logged in: ', user);
+        console.log('user logged in: ', user['uid']);
+        //userkey = user['uid'];
+        dbtest.ref('users/'+user['uid']+'/tempplan').remove();
+        dbtest.ref('users/'+ user['uid'] +'/planset').once('value', function (snapshot) {
+        var data = snapshot.val();
+        console.log(snapshot);
+        console.log(data);
+        if(data != null){
+          var number = 0;
+          var offset = -90;
+          document.getElementById('list').innerHTML='';
+          snapshot.forEach(function (item) {
+              console.log(item);
+              console.log(item.key);
+              offset+=90;
+              document.getElementById('list').insertAdjacentHTML('beforeend',
+                ` <div id="${item.key}" class="card-content" style="top:${offset}px">
+                    <div class="card">
+                      <h3 class="test">${item.key}</h3>
+                    </div>
+                    <div id="${number}" class="deletecard" onclick="deleteplan(this)">
+                      delete
+                    </div>
+                  </div> 
+              `)
+              /*
+              document.getElementById('list').insertAdjacentHTML('beforeend',
+                ` <div class="card">
+                    <h3 id="${item.key}">${item.key}</h3>
+                  </div>  
+              `)
+              */
+              number+=1;
+              console.log(number)
+              console.log(item.val());
+          })
+          var s1 = Swiped.init({
+              query: '.card',
+              right: 100
+          });
+          document.getElementById('num').innerText=`共${number}個`
+          document.getElementById('total').innerText=`${number}`
+        }
+        else{
+          document.getElementById('pre').innerHTML='Click button 新增行程';
+        }
+      }); 
+			} else {
+				console.log('user logged out');
+			}
+    });
+
+   // console.log(userkey);
+    //readdata();
+
+    sure.addEventListener('click',function(){
+      /*
+      var name = document.getElementById('name');
+      var namevalue = name.value;
+      count+=1;
+      var plannum ='plan'+count.toString();
+      console.log(namevalue);
+      console.log(plannum);
+      //dbtest.ref('users/St7cv6keFnbDC5JHKnkepHKsmnV2/planset').update(namevalue);
+      //document.getElementById('list').innerHTML='';
+      dbtest.ref('users/St7cv6keFnbDC5JHKnkepHKsmnV2/planset').once('value', function (snapshot) {
+          var data = snapshot.val();
+
+          console.log(data);
+      });
+      */
+      var name = document.getElementById('name');
+      var namevalue = name.value;
+      if(namevalue !=""){
+        location.href = "search-ex.html?name="+namevalue;
+        modal.style.display = "none";
+      }
+      else{
+        alert('記得要填寫行程名稱喔');
+      }
+    });
+
+    btn.addEventListener('click',function(){
+      modal.style.display = "block";
+    });
+    /*
+    var s1 = Swiped.init({
+              query: '.card',
+              right: 100
+          });
+    */
+    /*
+      document.getElementById("list").innerHTML = '';
+      count += 1;
+      var str = `<div id="${count}" class="card">
+                  <h3></h3>
+                </div> `
+      document.getElementById("list").appendChild(str);
+    */
+  function deleteplan(e){
+      var Bigparent = document.getElementById(e.id).parentNode.parentNode;
+      var Smallparent = document.getElementById(e.id).parentNode;
+      var now = document.getElementById(e.id).parentNode;
+      //console.log(Bigparent);
+      //console.log(Smallparent);
+      //console.log(Smallparent);
+      console.log(now.id);
+      //console.log(e.previousSibing);
+      //now.nextElementSibling.style="top:0px"
+      //console.log(now.nextElementSibling.style.top)
+      auth.onAuthStateChanged(user => {
+			  if (user) {
+          dbtest.ref('users/'+ user['uid'] +'/planset/'+now.id).remove();
+        }
+        else{
+
+        }
+      })
+
+      var nowelement= document.getElementById(e.id);
+      //console.log(nowelement)
+      var delnext = document.getElementById(e.id).parentNode.nextElementSibling;
+      Bigparent.removeChild(Smallparent);  
+      console.log(delnext)
+
+      var total = document.getElementById('total').innerText
+      console.log(total)
+      total -= 1
+      document.getElementById('num').innerText=`共${total}個`
+      document.getElementById('total').innerText = total
+      while(delnext != null){
+        console.log(delnext)
+        var nowtop = parseInt(delnext.style.top.split('p')[0])
+        console.log(nowtop)
+        var newtop = nowtop-90
+        console.log(newtop)
+        delnext.style.top = `${newtop}px`
+        delnext = delnext.nextElementSibling
+      }    
+      //Bigparent.removeChild(Smallparent);
+      
+      //console.log(Smallparent.previousSibing);
+      /*
+      var targetid = event.target.id;
+      var total = document.getElementById('total').innerText
+      console.log(total)
+      var i = 1;
+      while(i<=total){
+        if(i>)
+      }
+      */
+
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        h1{
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+
+        }
+        .bubble{
+            display: inline-block;
+            position: relative;
+            background-color: #FFE65B;
+            border-radius: 15px;
+            width:82px;
+            height:40px;
+            text-align: center;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            border:2px solid #000;
+        }
+        .bubble span{
+            position: absolute;
+            font-size: 12px;
+            font-weight: 600;
+            width:80%;
+            height:30%;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin:auto;
+        }
+        .bubble2{
+            display: inline-block;
+            position: relative;
+            background-color: #FFE65B;
+            border-radius: 15px;
+            width:108px;
+            height:40px;
+            text-align: center;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            border:2px solid #000;
+        }
+        .bubble2 span{
+            position: absolute;
+            font-size: 12px;
+            font-weight: 600;
+            width:80%;
+            height:30%;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin:auto;
+        }
+
+        .bubble3{
+            display: inline-block;
+            position: relative;
+            background-color: #FFE65B;
+            border-radius: 15px;
+            width:170px;
+            height:40px;
+            text-align: center;
+            margin:1px;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            border:2px solid #000;
+        }
+        .bubble3 span{
+            position: absolute;
+            font-size: 12px;
+            font-weight: 600;
+            width:80%;
+            height:30%;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin:auto;
+        }
+        .content{
+            position:absolute;
+            top:140px;
+            left:-2px;
+        }
+        .bubblec{
+            display: inline-block;
+            position: relative;
+            background-color: #4433FF;
+            border-radius: 15px;
+            width:170px;
+            height:40px;
+            text-align: center;
+            margin:1px;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            border:5px solid #FFE65B;
+        }
+        .bubblec span{
+            position: absolute;
+            font-size: 20px;
+            font-weight: 600;
+            width:80%;
+            height:60%;
+            color:#fff;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin:auto;
+        }
+        .continue{
+            position:absolute;
+            bottom: 30px;
+            left:100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Choose the Region</h1>
+    <div class="content">
+        <div id="台北市" class="bubble" onclick="select(this)">
+            <span>台北市</span>
+        </div>
+        <div id="台中市" class="bubble" onclick="select(this)">
+            <span>台中市</span>
+        </div>
+        <div id="台南市" class="bubble" onclick="select(this)">
+            <span>台南市</span>
+        </div>
+        <div id="新北市" class="bubble" onclick="select(this)">
+            <span>新北市</span>
+        </div>
+        <div id="南投縣" class="bubble2" onclick="select(this)">
+            <span>南投縣</span>
+        </div>
+        <div id="基隆市" class="bubble2" onclick="select(this)">
+            <span>基隆市</span>
+        </div>
+        <div id="新竹市" class="bubble2" onclick="select(this)">
+            <span>新竹市</span>
+        </div>
+        <div id="新竹縣" class="bubble3" onclick="select(this)">
+            <span>新竹縣</span>
+        </div>
+        <div id="桃園市" class="bubble3" onclick="select(this)">
+            <span>桃園市</span>
+        </div>
+        <div id="澎湖縣" class="bubble" onclick="select(this)">
+            <span>澎湖縣</span>
+        </div>
+        <div id="花蓮縣" class="bubble" onclick="select(this)">
+            <span>花蓮縣</span>
+        </div>
+        <div id="苗栗縣" class="bubble" onclick="select(this)">
+            <span>苗栗縣</span>
+        </div>
+        <div  id="連江縣" class="bubble" onclick="select(this)">
+            <span>連江縣</span>
+        </div>
+        <div  id="金門縣" class="bubble2" onclick="select(this)">
+            <span>金門縣</span>
+        </div>
+        <div id="高雄市"class="bubble2" onclick="select(this)">
+            <span>高雄市</span>
+        </div>
+        <div  id="雲林縣" class="bubble2" onclick="select(this)">
+            <span>雲林縣</span>
+        </div>
+        <div  id="彰化縣" class="bubble3" onclick="select(this)">
+            <span>彰化縣</span>
+        </div>
+        <div  id="屏東縣" class="bubble3" onclick="select(this)">
+            <span>屏東縣</span>
+        </div>
+        <div  id="宜蘭縣" class="bubble" onclick="select(this)">
+            <span>宜蘭縣</span>
+        </div>
+        <div  id="嘉義市" class="bubble" onclick="select(this)">
+            <span>嘉義市</span>
+        </div>
+        <div  id="嘉義縣" class="bubble" onclick="select(this)">
+            <span>嘉義縣</span>
+        </div>
+        <div id="台東縣" class="bubble" onclick="select(this)">
+            <span>台東縣</span>
+        </div>
+    </div>
+    <div class="bubblec continue" onclick="continuego()">
+        <span>Continue</span>
+    </div>
+    <script>
+        var id = '';
+        function select(event){
+            document.getElementById(event.id).style.backgroundColor = '#ffffff';
+            id = event.id;
+            console.log(id);
+        }
+        
+        function continuego(){
+            location.href = "select_like.html?region="+id;
+        }
+    </script>
+</body>
+</html>

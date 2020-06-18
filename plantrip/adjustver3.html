@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>TripREC</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://kit.fontawesome.com/80f6c102d9.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Dancing+Script|Indie+Flower|Lobster|Pacifico|Slabo+27px|Noto+Sans+TC:300&display=swap" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+<style>
+body{
+	margin:0;
+	background-color: #fff;
+}
+h3{
+	
+	margin:10px 92px;
+	font-size: 20px;
+}
+h2{
+	width: 100%;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+	background: #FFD4CD;
+
+}
+
+.fa-angle-left{
+	float: left;
+	margin-left: 5%;
+	font-size: 28px;
+}
+.add button{
+	color: #F8A588;
+	border: none;
+}
+.container-fluid{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.container-fluid h3{
+	padding-left: 15px;
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.date2{
+	height: 20%;
+	margin-top: 10px;
+	padding:10px 5px;
+	background-color: #ffd31d;
+}
+.date2 div{
+	margin: auto;
+	width: 85%;
+	border: 2px solid #ffffff;
+	background-color: #f5f5f5;
+	border-radius: 10px;
+}
+.fa-edit{
+	margin: 10px 5px 10px;
+	font-size: 25px;
+}
+.add{
+	vertical-align: top;
+    padding-top: 4px;
+    padding-left: 5px;
+	top: 8px;
+	display: inline-block;
+	height: 43px;
+	white-space:nowrap; /*元素不換行*/
+	overflow-x: auto;
+	overflow-y: hidden; 		
+}
+.date2 .add{
+	margin-top: 1px;
+	margin-left: 2px
+}
+
+.date2 .day{
+	margin-left: 1px ;  
+	margin-top: 1px ;
+	padding: 5px 10px;
+	background-color: #3949ab;
+	color: #ffffff;
+	border-radius: 10px;
+	font-size: 18px;
+	font-family: 'Noto Sans TC', sans-serif;
+	
+}
+.add .fa-plus{
+	padding: 5px;
+	color: #ffd31d;
+	border-radius: 5px;
+	background-color: #ffffff;
+	font-size: 20px;
+}
+.add .fa-plus:active{
+	background-color: #e0e0e0;
+}
+
+.add_move{
+	animation-name: addmove; 	
+	animation-duration: 2s;	 
+	animation-fill-mode: forwards;
+}
+@keyframes addmove {
+	from{
+		transform: translateX(0px);
+	}
+
+	to{
+		transform: translateX(20px);
+	}
+}
+
+.container2{
+	overflow: auto;
+	padding: 10px;
+	position: relative;
+	background-color: #f5f5f5;
+}
+
+.line::before{
+	content: "";
+	width:3px;
+	height: 100%;
+	top:0px;
+	left: 6.5%;
+	background-color: #e0e0e0;
+	position: absolute;
+}
+
+.content2{
+	/*background-color: #FFEDCE;*/
+	/*background-color: #ffd31d;*/
+	color: #000;
+	padding: 5px 5px;
+	margin-left: 15%;
+    margin-top: 0;
+	width: 50%;
+	border-radius: 8px;
+	font-size: 17px;
+    font-weight: bold;
+	border: 2px #ffd31d solid;
+    display: inline-block;
+    vertical-align: top;
+}
+.content2::before{
+	display: inline-block;
+	content: "";
+	width: 15px;
+	height: 15px;
+	top: 25%;
+	left: 4.7%;
+	border-radius: 10px;
+	background: #e0e0e0;
+	position: absolute;	
+	transform: translateY(-50%);
+}
+
+.glyphicon-move {
+	cursor: move;
+	cursor: -webkit-grabbing;
+}
+* { 
+	touch-action: auto;
+}
+h4{
+	margin-bottom: 2px;
+	font-size: 20px;
+	font-family: 'Noto Sans TC', sans-serif;
+}
+.list-group{
+    display:flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    height:370px;
+}
+.list-group-item{
+    position:relative;
+    display:block;
+    padding:0.75rem 1.25rem;
+    background-color: #FFF;
+	border: none;
+	margin:5px 0 5px;
+	border-radius: 10px;
+}
+.pickdate2{
+    display: inline-block;
+	text-align: center;
+	width:32.5%;
+}
+
+.pickdate{
+    display: inline-block;
+	text-align: center;
+	width:32.5%;
+}
+.pickdate2 input,.pickdate input{
+	color:#039BE5!important;
+}
+.pickdate2:active{
+	transform: scale(0.8, 0.8);
+	color: #F8A588;
+}
+.pickdate2 input:active{
+	transform: scale(0.8, 0.8);
+	color: #F8A588;
+}
+.fa-calendar-alt{
+    display: block;
+	margin-top: 10px ;
+	margin-left: 12px;
+	margin-right: 12px;
+    font-size: 23px;
+}
+.fa-clock, .fa-map-marker-alt{
+	display: block;
+	margin-top: 10px ;
+	margin-left: 12px;
+	margin-right: 12px;
+	margin-bottom: 3px;
+	font-size: 23px;
+}
+
+.glyphicon-move p{
+	position: relative;
+	width: 75%;
+	top: 5%;
+	left: 17%;
+	font-size: 5px;
+	font-family: 'Noto Sans TC', sans-serif;
+}
+
+.glyphicon-move img{
+	position: relative;
+    float: left;
+	width: 75px;
+    height:95px;
+	top: 5%;
+	left: 10%;
+    border-radius: 5px;
+}
+
+.footer button{
+	margin: 5% 15%;
+	background-color: #3949ab;
+	color: #000000;
+	border-radius: 10px;
+	width: 70%;
+	height: 40px;
+}
+
+.footer{
+	background-color: #fff;
+	position: fixed;
+	bottom: 0;
+	width:100%;
+}
+.footer button{
+	color: #fff;
+	border: none;
+}
+.footer button:active{
+	background-color: #FFEDCE;
+}
+#fixed_wrap {
+	
+    height: 80px;
+    background-color: #f5f5f5;
+}
+#timebar{
+	margin-bottom: 5px;
+}
+/* The Modal (background) */
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: black;
+  opacity: 1; /* Firefox */
+}
+#name{
+	background-color: #fff;
+	font-size: 19px;
+	color: #3949ab;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-decoration: none;
+	font-family: 'Noto Sans TC', sans-serif;
+}
+
+input{
+	border-style: none!important;
+	width:100px!important;
+	margin:0!important;
+	font-size: 15px!important;
+    text-align: center;
+    height:25px!important;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]){
+    box-shadow:none;
+    -webkit-box-shadow:none;
+    border-bottom:none;
+}
+
+.datepicker-date-display,.timepicker-digital-display{
+    background-color:#3949ab;
+
+}
+.datepicker-cancel,.datepicker-done,.timepicker-close,.timepicker-svg,.timepicker-minutes{
+    color:#000;
+}
+
+#map{
+	height:300px;
+}
+#mode{
+	display:flex;
+	flex-wrap:wrap;
+	flex-flow:row;
+	justify-content: center;
+	padding:10px;
+	margin-top: 15px;
+	border:2px #3949ab solid;
+	border-radius: 10px;
+}
+#mode .fas{
+	color: #3949ab;
+	padding-left:5px;
+	flex: 1 1 100px;
+	font-size: 25px;
+}
+
+#mode .fa-walking , #mode .fa-bus{
+	color: #3949ab;
+	font-size: 25px;
+	padding-left: 20px;
+}
+.tripname{
+	text-align: center;
+}
+.modal-body{
+	margin-top: 10px;
+}
+
+.modal-body input{
+	text-align: left;
+	width:200px !important;
+	background-color: #e0e0e0!important;
+	border-radius: 5px!important;
+	font-size: 16px!important;
+	padding:2px 5px!important;
+	font-family: 'Noto Sans TC', sans-serif !important;
+}
+
+#modal1 .modal-content{
+	padding: 20px 10px !important;
+}
+
+#modal1{
+	width:90%!important;
+	max-height: 80%!important;
+}
+
+.modal-content h4{
+	font-weight: bold;
+	padding-left: 3px;
+}
+.fa-trash-alt{
+    position: relative;
+    left: 7px;
+    margin-left: 10px;
+    float: right;
+    font-size: 15px;
+    color: red;
+    background-color: #fff;
+    border: 1px red solid;
+    padding:5px;
+    border-radius: 50%;
+}
+
+.addlist{
+    overflow-x: auto;
+    overflow-y: hidden;
+    height:120px;
+    margin-top: 10px;
+    background-color: #f5f5f5;
+    white-space:nowrap;
+}
+
+.additem{
+    text-align: center;
+    margin: 10px 2px;
+    width:85px;
+    display: inline-block;
+    background-color: #ffffff;  
+    border-radius: 5px;
+    font-family: 'Noto Sans TC', sans-serif;
+    border:2px #efefef solid;
+}
+.additem span{
+    display: block;
+    font-size: 13px;
+    width:80px;
+}
+
+.additem img{
+    display: block;
+    margin: 5px 5px 0px 5px;
+    border-radius: 10px;
+    width:70px;
+    height:70px;
+}
+
+.newattra{
+	margin-left: 1px ;  
+	margin-top: 1px ;
+	padding: 13px;
+	color: #3949ab;
+	border-radius: 10px;
+	font-size: 16px;
+	font-family: 'Noto Sans TC', sans-serif;
+	border:none;
+	position: relative;
+	top:10px;
+	width:150px;
+	left:100px;
+	font-weight: bold;
+}
+
+
+/*新增景點*/
+/* The Overlay (background) */
+.overlay {
+  /* Height & width depends on how you want to reveal the overlay (see JS below) */   
+  height: 100%;
+  width: 0;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  right: 0;
+  top: 0;
+   /* Black fallback color */
+  background-color: #fff; /* Black w/opacity */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+}
+
+/* Position the content inside the overlay */
+.overlay-content {
+  position: relative;
+  top: 15%; /* 25% from the top */
+  width: 100%; /* 100% width */
+  text-align: center; /* Centered text/links */
+  margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+}
+
+/* The navigation links inside the overlay */
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #818181;
+  display: block; /* Display block instead of inline */
+  transition: 0.3s; /* Transition effects on hover (color) */
+}
+
+/* When you mouse over the navigation links, change their color */
+.overlay a:hover, .overlay a:focus {
+  color: #f1f1f1;
+}
+
+/* Position the close button (top right corner) */
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 60px;
+}
+
+/* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+  }
+}
+
+.search-box{
+	text-align: left;
+	margin: auto;
+	width: 80%;
+	background-color: #e0e0e0;
+	border-radius: 10px;
+	padding-top: 5px;
+	padding-left: 10px ;
+	padding-bottom: 10px;
+}
+
+.search-box #search{
+	background-color:#e0e0e0; 
+	text-decoration: none;
+	text-align: left;
+	width: 200px !important;
+	border: none;
+	margin-left: 10px!important;
+	margin-top: 5px;
+	font-size: 14px; 
+	outline:none;
+	font-family: 'Noto Sans TC', sans-serif;
+}
+.ex{
+	text-align: center;
+	margin-top:30%;
+	font-size: 16px;
+	font-weight: bold;
+	font-family: 'Noto Sans TC', sans-serif;
+}
+#snackbar {
+	  visibility: hidden; /* Hidden by default. Visible on click */
+	  min-width: 250px; /* Set a default minimum width */
+	  margin-left: -125px; /* Divide value of min-width by 2 */
+	  background-color: #333; /* Black background color */
+	  color: #fff; /* White text color */
+	  text-align: center; /* Centered text */
+	  border-radius: 2px; /* Rounded borders */
+	  padding: 16px; /* Padding */
+	  position: fixed; /* Sit on top of the screen */
+	  z-index: 4; /* Add a z-index if needed */
+	  left: 45%; /* Center the snackbar */
+	  bottom: 30px; /* 30px from the bottom */
+}
+
+.lds-ring {
+	display: inline-block;
+	position: relative;
+	width: 80px;
+	height: 80px;
+	left:0px;
+	top:160px;
+	color: #ffd31d;
+}
+.lds-ring div {
+	box-sizing: border-box;
+	display: block;
+	position: absolute;
+	width: 64px;
+	height: 64px;
+	margin: 8px;
+	
+	border: 8px solid #ffd31d;
+	border-radius: 50%;
+	animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+	border-color: #ffd31d transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+	animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+	animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+	animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+.search-result{
+	padding-top : 4px;
+	margin:auto;
+	background-color: #ffffff;
+	border-radius: 20px;
+	width: 85%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	box-shadow: 3px 3px 5px #e0e0e0;
+	font-family: 'Noto Sans TC', sans-serif;
+	text-align: left;
+}
+
+.search-result img{
+	vertical-align: middle;
+	display: inline-block;
+	height: 64px;
+	width: 30%;
+	border-radius: 5px;
+	margin-top: 10px;
+	margin-left: 15px;
+	margin-bottom: 10px;
+}
+
+.text-display{
+	position: relative;
+	left:10px;
+	display: inline-block;
+	margin-right: 10px;
+	margin-top: 10px;
+	width: 35%;
+	vertical-align: top;
+}
+
+.col-3 h4{
+	display: inline-block;
+	max-width: 140px;
+	margin-top: 5px;
+	margin-bottom: 2px;
+	font-size: 14px;
+	font-weight: bold;
+	font-family: 'Noto Sans TC', sans-serif;
+}
+
+.plus_bg{
+		float: right;
+		position: relative;
+		background-color: #f5f5f5;
+		border-radius: 50%;
+		width:40px;
+		height:40px;
+		top:-75px;
+		right:40px;
+		z-index:1;
+}
+
+.plus_bg .fa-plus{
+	margin-top: 6px;
+	color:#fff;
+	padding: 5px;
+	border-radius: 5px;
+	font-size: 20px;
+}
+
+.sidenavself{
+        /*height: 100%;*/ /* 100% Full-height */
+        width: 0; /* 0 width - change this with JavaScript */
+        position: fixed;
+        z-index:3;
+		top:0;
+        right:0;
+        bottom:0;
+		overflow-y: auto;
+		background-color: #fff;
+        transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+		font-family: 'Noto Sans TC', sans-serif;
+}
+
+.sidenavself .bg {
+	position: relative;
+	/* The image used */
+	/* Full height */
+	height: 40%; 
+	/* Center and scale the image nicely */
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.bg .content { /* Position the background text */
+	position: absolute;
+	bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+	background: rgb(0, 0, 0); /* Fallback color */
+	background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+	color: #f1f1f1; /* Grey text */
+	width: 100%; /* Full width */
+}
+.sidenavself .bg .content h1,.sidenavself .bg .content p{
+	margin: 10px; 
+}
+
+.detail_bar{
+	padding: 10px;
+	margin-bottom: 15px;
+	background-color: #eeeeee;
+}
+
+.detail_bar .fas , .bg .fas{
+	background-color: #3949ab;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 40px;
+	text-align: center;
+	margin: 5px;
+	width: 16%;
+	right: 0;
+	font-size: 20px;
+	color: #ffffff;
+}
+
+.detail_bar .fas:active , .bg .fas:active{
+	background-color: #FFF4CD;
+}
+.detail_bar .fa-map-marker-alt{
+	display: inline-block;
+}
+.detail{
+	overflow-y: scroll;
+	font-size: 16px;
+	margin: 30px;
+	font-family: 'Noto Sans TC', sans-serif;
+}
+
+
+body::webkit-scrollbar{
+    display: none;
+}
+
+.sidenavself .bg i{
+    border-radius: 25px;
+    opacity: 0.7;
+    width: 10%;
+}
+
+.mapstyle {
+    height: 400px;
+	z-index:2;
+}
+</style>
+</head>
+<body>
+
+<div class="container-fluid">
+	<i class="fas fa-angle-left" onclick="window.history.back()"></i>
+    <h3>Adjust Your Plan</h3>
+</div>
+<div class="edit">
+	<div class="tripname">
+		<a id="name"class="modal-trigger" href="#modal2"></a>
+		<i id="edit_name" class="fas fa-pen modal-trigger"></i>
+    </div>
+	<!--
+	<div id="name">
+	</div>
+	-->
+	<div class="date2">
+		<i class="fas fa-edit"></i>
+		<div class="add">
+			<button id="1" type="button" class="day" onclick="planday()">第1天</button>
+			<i id="plus" class="fas fa-plus" onclick="add_date()"></i>
+		</div>
+	</div>
+	<div id="timebar">
+		<div class="pickdate">
+			<i class="fas fa-calendar-alt"></i>
+			<input id="time_date" type="text" class="datepicker" placeholder="123456">
+            <!--<span id="time_date"></span>-->
+            <!--<input id="date-input" type="text" class="datedropper-init">-->
+		</div>
+		<div class="pickdate">
+			<i class="fas fa-clock"></i>
+            <!--<span id="time_time"></span>-->
+            <input id="time_time" type="text" class="timepicker" placeholder="126546">
+		</div>
+		<div class="pickdate2">
+			<i class="fas fa-map-marker-alt"></i>
+            <!--<span id="mappp">Map</span>-->
+            <a class="modal-trigger" href="#modal1" id="mappp">Map</a>
+		</div>
+	</div>
+	
+	<!-- The overlay 新增景點-->
+	<div id="myNav" class="overlay">
+
+		<!-- Button to close the overlay navigation -->
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+	
+		<!-- Overlay content -->
+		<div class="overlay-content">
+			<div class="search-box">
+				<i id="search_ex" class="fa fa-search"></i>
+				<input id="search" type="text" name="" placeholder="type place to search">
+			</div>
+			<div id="result" class="container">
+				<div class="ex">
+					<p>點擊上方搜尋欄</p>
+					<p>搜尋地方景點(台北、台中...)</p>
+				</div>
+			</div>
+			<input type="hidden" id="temp" value="第1天">
+			<div id="snackbar">Spot is added</div>
+			
+		</div>
+	
+	</div>
+	
+	<!-- Modal Structure -->
+	<div id="modal2" class="modal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4>請修改行程名稱</h4>
+			</div>
+			<div class="modal-body">
+				<i class="far fa-edit"></i>
+				<input id="changename" type="text" placeholder="請輸入...">
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a class="modal-close waves-effect waves-green btn-flat" onclick="changetripname()">確定</a>
+			<a class="modal-close waves-effect waves-green btn-flat">取消</a>
+		</div>
+	</div>
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+			<h4>Mode of Travel:</h4>
+			<div id='mode'>
+				<i id="DRIVING" class="fas fa-car-side"></i>
+				<i id="WALKING" class="fas fa-walking"></i>
+				<i id="BICYCLING" class="fas fa-biking"></i>
+				<i id="TRANSIT" class="fas fa-bus"></i>
+			</div>
+        </div>
+        <div id="map"></div>
+        <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">返回</a>
+        </div>
+    </div>
+	
+	<div id="listWithHandle" class="container2 list-group">
+		
+	</div>
+</div>
+<div id="fixed_wrap">
+	<div class="footer">
+		<button id="save">Save</button>
+	</div>
+</div>
+
+
+<!--
+<script src="https://cdn.datedropper.com/get/af28bae6oeqgrs87myyndn94auqpe2qx"></script>
+-->
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.6.1/Sortable.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="./js/materialize.js"></script>
+<script src="./js/init.js"></script>
+<!--<script src="./datedropper.pro.min.js"></script>-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_crn8-2St09n9dRSmb7GBD85Qaxkd8G0"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
+<script src="../database_setup.js"></script>
+<script>
+
+		function add_spot(e){
+				// Get the snackbar DIV
+			var x = document.getElementById("snackbar");
+			// Add the "show" class to DIV
+			x.className = "show";
+			// After 3 seconds, remove the show class from DIV
+			setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+
+		}
+		function opendetail(e){
+			var id = 'Sidenav'+ e;
+			document.getElementById(id).style.width = "100%";
+		}
+		function closedetail(e){
+			var id = 'Sidenav'+ e;
+			document.getElementById(id).style.width = "0";
+		}
+
+		function showmap(e,lng,lat,name){
+			var id = 'show'+ e;
+			document.getElementById(id).innerHTML = `<div id="map${e}" class="mapstyle"></div>`
+			var newmapid = 'map'+e;
+			var map = new google.maps.Map(document.getElementById(newmapid), {
+				center: {lat: parseFloat(lat), lng:parseFloat(lng)},
+				zoom: 16
+			});
+			var marker = new google.maps.Marker({
+				position: {lat: parseFloat(lat), lng:parseFloat(lng)},
+				map: map,
+				title: name
+			});
+			marker.setMap(map);
+			//document.getElementById(id).innerHTML = `<img 
+			//src="https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&size=400x400&maptype=roadmap&key=AIzaSyC_crn8-2St09n9dRSmb7GBD85Qaxkd8G0"/>`;
+			console.log('mappp');
+			console.log(lng);
+			console.log(lat);
+		}
+			//document.getElementById(id).innerHTML = ;
+
+		function showtel(e,tel){
+			var id = 'show'+ e;
+			var newtel = tel.substr(1);
+			document.getElementById(id).innerHTML = `<a href="tel:+886-${newtel}">連絡電話:${tel}</a>`;
+		}
+	
+		function showdetail(e,intro){
+			var id = 'show'+ e;
+			console.log(id)
+			document.getElementById(id).innerHTML = intro;
+		}
+
+		function getselectdata(id,name,lng,lat,img,intro){
+			add_spot();
+			document.getElementById('plusout'+id).style.color= '#F5CD05';
+			document.getElementById('plus'+id).style.background = '#ffd31d';
+			var date = document.getElementById('temp').value;
+			//select.push([name,lng,lat]);
+			var region = document.getElementById("search").value;
+			var tripdata = {
+				"地區":region,
+				"名字":name,
+				"圖片":img,
+				"介紹":intro,
+				"經度":lng,
+				"緯度":lat
+			}
+			auth.onAuthStateChanged(user => {
+                if (user) {
+                        console.log('user logged in: ', user);
+                        console.log('user logged in: ', user['uid']);
+                        dbtest.ref('users/'+ user['uid']+"/tempplan/"+date+"/"+name).update(tripdata);
+                }else{
+                    console.log('user logged out: ');
+                }
+            });
+		}
+
+
+
+		function Search_Attraction(input){
+			const qscity = input;
+			console.log(qscity);
+	        const attraction = dbtest.ref('attraction/'+qscity);
+			attraction.on('value', function(snapshot) {
+				console.log(snapshot.val());
+				const data = snapshot.val();
+
+				let data_key = [];
+				for(var key in data){
+					console.log(key);
+					data_key.push(key);
+					//data_attraction.push(data_attraction[key]);
+				}
+				console.log(data_key);
+				let savelist = [];
+				let allcontent=``;
+				//allcontent +=`<div id="${qscity}" class="tabs-content">`;
+				for(var i=0 ; i<data_key.length; i++){
+					let attraction_name = data_key[i];
+					//console.log(attraction_name);
+					let attraction_img = data[attraction_name]['照片網址'];
+					//console.log(attraction_img);
+					let attraction_intro = data[attraction_name]['景點介紹'];
+					//console.log(attraction_intro);
+					let attraction_address = data[attraction_name]['詳細地點資訊']["地址"];
+					//console.log(attraction_intro);
+					let attraction_web = data[attraction_name]['詳細地點資訊']["網站"];
+					//console.log(attraction_web);
+					let attraction_tel = data[attraction_name]['詳細地點資訊']["電話"];
+					//console.log(attraction_tel);
+					let attraction_lontitude = data[attraction_name]['詳細地點資訊']["經度"];
+					//console.log(attraction_lontitude);
+					let attraction_latitude = data[attraction_name]['詳細地點資訊']["緯度"];
+					//console.log(attraction_latitude);
+					allcontent += ` 	
+						<div id="${i}" class="search-result" onclick="opendetail(${i})">
+							<img src="${attraction_img}">
+							<div class="text-display">
+								<div class="col-3">
+									<h4>${attraction_name}</h4>
+								</div>	
+							</div>	
+						</div>
+						<div class='plus_bg' onclick="getselectdata(${i},'${attraction_name}','${attraction_lontitude}','${attraction_latitude}','${attraction_img}','${attraction_intro}')"><i id="plusout${i}" class="fa fa-plus"></i></div>
+						<div id="Sidenav${i}" class="sidenavself">
+							<div class="bg" style="background-image:url('${attraction_img}')">
+								<i class="fas fa-angle-left" onclick="closedetail(${i})"></i>
+								<div class="content">
+									<h1>${attraction_name}</h1>
+									<p></p>
+								</div>
+							</div>
+							<div class="detail_bar">
+								<i id="plus${i}" class="fas fa-plus" onclick="getselectdata(${i},'${attraction_name}','${attraction_lontitude}','${attraction_latitude}')"></i>
+								<i class="fas fa-map-marker-alt" onclick="showmap(${i},'${attraction_lontitude}','${attraction_latitude}','${attraction_name}')"></i>
+								<i class="fas fa-phone-alt" onclick="showtel(${i},'${attraction_tel}')"></i>
+								<i class="fas fa-globe" onclick="location.href = '${attraction_web}'"></i>
+								<i class="fas fa-file-alt" onclick="showdetail(${i},'${attraction_intro}')"></i>
+							</div>
+							<div id="show${i}" class="detail">
+								<div id="map${i}"></div>
+								"${attraction_intro}"
+							</div>
+						</div>		
+					`;
+				}
+				document.getElementById('result').innerHTML = allcontent;
+			});
+		}
+		
+		$('#search').change(function(){
+			if($('#search').val()){
+				console.log($('#search').val());
+				document.getElementById('result').innerHTML = `<div class="lds-ring"><div></div><div></div><div></div><div></div></div>`
+				Search_Attraction($('#search').val());
+			}
+			else{
+				alert('沒有成功');
+			}
+		});
+
+
+
+		$('#time_date').change(function(){
+			if($('#time_date').val()){
+				console.log($('#time_date').val());
+				var dayindex = document.getElementById('temp').value
+				var date = document.getElementById('time_date').value
+				auth.onAuthStateChanged(user => {
+					if (user) {
+						//myMap.clear()
+						//mapdistance.clear()
+						dbtest.ref('users/'+ user['uid']+"/tempplan/"+dayindex).update({'date':date})
+					}
+					else{
+						console.log("fail")
+					}
+				});
+				//dbtest.ref('users/'+ user['uid']+"/tempplan/"+dayindex)
+				//Search_Attraction($('#search').val());
+			}
+			else{
+				alert('沒有成功');
+			}
+		});
+
+		$('#time_time').change(function(){
+			if($('#time_time').val()){
+				console.log($('#time_time').val());
+				var dayindex = document.getElementById('temp').value
+				var time = document.getElementById('time_time').value
+				auth.onAuthStateChanged(user => {
+					if (user) {
+						//myMap.clear()
+						//mapdistance.clear()
+						dbtest.ref('users/'+ user['uid']+"/tempplan/"+dayindex).update({'time':time})
+					}
+					else{
+						console.log("fail")
+					}
+				});
+				//dbtest.ref('users/'+ user['uid']+"/tempplan/"+dayindex)
+				//Search_Attraction($('#search').val());
+			}
+			else{
+				alert('沒有成功');
+			}
+		});
+
+
+
+
+
+
+
+
+	/* Open when someone clicks on the span element */
+	function openNav() {
+		document.getElementById("myNav").style.width = "100%";
+	}
+
+	/* Close when someone clicks on the "x" symbol inside the overlay */
+	function closeNav() {
+		auth.onAuthStateChanged(user => {
+				if (user) {
+					var dayindex = document.getElementById('temp').value
+					dbtest.ref('users/'+ user['uid']+"/tempplan/"+dayindex).on('value',function(snapshot){
+								//document.getElementById('listWithHandle').addEventListener('load',getdatabefore());
+						if(snapshot.exists()){
+							document.getElementById('listWithHandle').innerHTML = ""
+							var data = snapshot.val();
+								console.log(data)
+
+								let data_key = [];
+								for(var key in data){
+									if(key != 'date' && key!='time'){
+										console.log(key);
+										data_key.push(key);
+									}
+									
+									//data_attraction.push(data_attraction[key]);
+								}
+								console.log(data_key);
+
+								for(var i=0 ; i<data_key.length; i++){
+									
+									let attraction_name = data_key[i];
+									let attraction_img = data[attraction_name]['圖片'];
+									//document.getElementById(attraction_name).src = attraction_img 
+									console.log(attraction_img)
+									//console.log(attraction_img);
+									let attraction_intro = data[attraction_name]['經度'];
+									console.log(attraction_intro)
+									document.getElementById('listWithHandle').insertAdjacentHTML('beforeend',
+									`<div id="div${i+1}" class="line list-group-item">
+										<div class="glyphicon-move">
+											<img id="${attraction_name}" src="${attraction_img}">
+											<i onclick="deleteitem()" class="far fa-trash-alt"></i>
+											<h4 class="content2">${attraction_name}</h4>
+											<p id="p_${i+1}"></p>
+										</div>
+									</div>`)
+									
+								}
+								distance(distanceservice);
+								document.getElementById("myNav").style.width = "0%";
+						}
+						else{
+							document.getElementById("myNav").style.width = "0%";
+						}
+								
+					});
+				}else{
+					console.log('user logged out: ');
+				}
+		});
+		
+	}
+
+	function planday(){
+		var dayindex = document.getElementById(event.target.id).innerHTML
+		document.getElementById('temp').value = dayindex
+		console.log(dayindex)
+		var timedate = document.getElementById('time_date').getAttribute('placeholder'); //日期
+		console.log(time_date);
+		//var name = tempp[0].split("=")[1]; //行程名稱
+		var timetime = document.getElementById('time_time').getAttribute('placeholder'); //時間
+		console.log(timetime)
+
+		if(dayindex != "第1天"){
+			auth.onAuthStateChanged(user => {
+				if (user) {
+					//var ref = dbtest.ref('users/'+ user['uid']+"/tempplan/"+dayindex);
+					//console.log(ref)
+					//if(ref){
+						console.log('user logged in: ', user);
+						console.log('user logged in: ', user['uid']);
+						//dbtest.getElementById('')
+						//document.getElementById('listWithHandle').innerHTML = ""
+						dbtest.ref('users/'+ user['uid']+"/tempplan/"+dayindex).on('value',function(snapshot){
+							//document.getElementById('listWithHandle').addEventListener('load',getdatabefore());
+							if(snapshot.exists()){
+								document.getElementById('listWithHandle').innerHTML = ""
+								var data = snapshot.val();
+								console.log(data)
+								//dbtest.ref('users/'+ user['uid']+"/tempplan/"+dayindex).update({'date':timedate})
+								//dbtest.ref('users/'+ user['uid']+"/tempplan/"+dayindex).update({'time':timetime})
+								let data_key = [];
+								for(var key in data){
+									if(key != 'date' && key!='time'){
+										console.log(key);
+										data_key.push(key);
+									}
+									//data_attraction.push(data_attraction[key]);
+								}
+								console.log(data_key);
+								myMap.clear()
+								mapdistance.clear()
+								for(var i=0 ; i<data_key.length; i++){
+									
+									let attraction_name = data_key[i];
+									let attraction_img = data[attraction_name]['圖片'];
+									let attraction_lng = data[attraction_name]['經度'];
+									let attraction_lat = data[attraction_name]['緯度'];
+									
+									myMap.set("div"+(i+1).toString(),[attraction_lng,attraction_lat]);
+									mapdistance.set(attraction_name,[attraction_lng,attraction_lat]);
+									//document.getElementById(attraction_name).src = attraction_img 
+									console.log(attraction_img)
+									//console.log(attraction_img);
+									let attraction_intro = data[attraction_name]['經度'];
+									console.log(attraction_intro)
+									document.getElementById('listWithHandle').insertAdjacentHTML('beforeend',
+									`<div id="div${i+1}" class="line list-group-item">
+										<div class="glyphicon-move">
+											<img id="${attraction_name}" src="${attraction_img}">
+											<i onclick="deleteitem()" class="far fa-trash-alt"></i>
+											<h4 class="content2">${attraction_name}</h4>
+											<p id="p_${i+1}"></p>
+										</div>
+									</div>`)
+									
+								}
+								distance(distanceservice);
+							}
+							else{
+								document.getElementById('listWithHandle').innerHTML = ""
+								document.getElementById('listWithHandle').innerHTML = "<button class='newattra' onclick='openNav()'>新增景點</button>"
+							}
+							
+							
+						});
+					}
+					//else{
+						//document.getElementById('listWithHandle').innerHTML = "<button>新增景點</button>"
+					//}
+						
+				else{
+					console.log('user logged out: ');
+				}
+			});
+		}else{
+			auth.onAuthStateChanged(user => {
+				if (user) {
+					//dbtest.ref('users/'+ user['uid']+"/tempplan/"+dayindex).update({'date':timedate})
+					//dbtest.ref('users/'+ user['uid']+"/tempplan/"+dayindex).update({'time':timetime})
+					
+					dbtest.ref('users/'+ user['uid']+"/tempplan/"+dayindex).on('value',function(snapshot){
+								//document.getElementById('listWithHandle').addEventListener('load',getdatabefore());
+								document.getElementById('listWithHandle').innerHTML = ""
+								var data = snapshot.val();
+								console.log(data)
+
+								let data_key = [];
+								for(var key in data){
+									if(key != 'date' && key!='time'){
+										console.log(key);
+										data_key.push(key);
+									}
+									//data_attraction.push(data_attraction[key]);
+								}
+								console.log(data_key);
+
+								for(var i=0 ; i<data_key.length; i++){
+									
+									let attraction_name = data_key[i];
+									let attraction_img = data[attraction_name]['圖片'];
+									//document.getElementById(attraction_name).src = attraction_img 
+									console.log(attraction_img)
+									//console.log(attraction_img);
+									let attraction_intro = data[attraction_name]['經度'];
+									console.log(attraction_intro)
+									document.getElementById('listWithHandle').insertAdjacentHTML('beforeend',
+									`<div id="div${i+1}" class="line list-group-item">
+										<div class="glyphicon-move">
+											<img id="${attraction_name}" src="${attraction_img}">
+											<i onclick="deleteitem()" class="far fa-trash-alt"></i>
+											<h4 class="content2">${attraction_name}</h4>
+											<p id="p_${i+1}"></p>
+										</div>
+									</div>`)
+									
+								}
+								distance(distanceservice);
+							});
+				}else{
+					console.log('user logged out: ');
+				}
+			});
+		}
+		
+	}
+
+	function changetripname(){
+		var chgname = document.getElementById('changename').value
+		console.log(chgname)
+		document.getElementById('name').innerHTML = chgname
+	}
+
+    var dt = new Date();
+    var month = new Array(12);
+    month[0] = "01";
+    month[1] = "02";
+    month[2] = "03";
+    month[3] = "04";
+    month[4] = "05";
+    month[5] = "06";
+    month[6] = "07";
+    month[7] = "08";
+    month[8] = "09";
+    month[9] = "10";
+    month[10] = "11";
+    month[11] = "12";
+
+    function time_check(x){
+        if(x.toString().length != 1){
+            return (x);
+        }
+        else{
+            return ('0'+ x.toString()[0]);
+        }
+    } 
+
+    
+    document.getElementById('time_date').setAttribute('placeholder',dt.getFullYear()+"-"+month[dt.getMonth()]+"-"+time_check(dt.getDate()));
+	document.getElementById('time_time').setAttribute('placeholder',time_check(dt.getHours())+":"+time_check(dt.getMinutes()));
+
+
+	var url = decodeURI(location.href);
+	var temp = url.split("?");
+	console.log(temp);
+	var tempp = url.split("&");
+	console.log(tempp);
+	var name = tempp[0].split("=")[1];
+	console.log(name);
+	document.getElementById('name').insertAdjacentHTML('afterbegin',name);
+	var temppp = tempp[1].split("=")[1];
+	console.log(temppp);
+	var selectarray = temppp.split(",");
+	console.log(selectarray);
+	var itemlength = selectarray.length / 3;
+
+
+	var myMap = new Map();
+	var mapdistance = new Map();
+
+	function getdatabefore(){
+		var temp = 0;
+		for(var i=0; i<itemlength;i++){
+			document.getElementById('listWithHandle').insertAdjacentHTML('beforeend',
+			`<div id="div${i+1}" class="line list-group-item">
+				<div class="glyphicon-move">
+                    <img id="${selectarray[temp]}" src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif">
+                    <i onclick="deleteitem()" class="far fa-trash-alt"></i>
+					<h4 class="content2">${selectarray[temp]}</h4>
+					<p id="p_${i+1}"></p>
+				</div>
+			</div>`)
+			console.log("div"+(i+1).toString());
+			console.log([selectarray[temp+1],selectarray[temp+2]]);
+			myMap.set("div"+(i+1).toString(),[selectarray[temp+1],selectarray[temp+2]]);
+			mapdistance.set(selectarray[temp],[selectarray[temp+1],selectarray[temp+2]]);
+			temp += 3;
+			console.log(temp);
+		}
+	}
+
+    auth.onAuthStateChanged(user => {
+        if (user) {
+                console.log('user logged in: ', user);
+                console.log('user logged in: ', user['uid']);
+                dbtest.ref('users/'+ user['uid']+"/tempplan/第1天/").on('value',function(snapshot){
+                    //document.getElementById('listWithHandle').addEventListener('load',getdatabefore());
+                    var data = snapshot.val();
+                    console.log(data)
+
+                    let data_key = [];
+                    for(var key in data){
+                        if(key != 'date' && key!='time'){
+							console.log(key);
+							data_key.push(key);
+						}
+                        //data_attraction.push(data_attraction[key]);
+                    }
+                    console.log(data_key);
+
+                    for(var i=0 ; i<data_key.length; i++){
+                        let attraction_name = data_key[i];
+                        let attraction_img = data[attraction_name]['圖片'];
+                        document.getElementById(attraction_name).src = attraction_img 
+                        console.log(attraction_img)
+                        //console.log(attraction_img);
+                        let attraction_intro = data[attraction_name]['經度'];
+                        console.log(attraction_intro)
+                    }
+                });
+        }else{
+            console.log('user logged out: ');
+        }
+    });
+
+
+	document.getElementById('listWithHandle').addEventListener('load',getdatabefore());
+    
+	console.log(myMap);
+	console.log(mapdistance);
+	
+
+    function calculateAndDisplayRoute(directionsService, directionsRenderer, mode) {
+        var waypts = [];
+        var checkboxArray = document.getElementById('listWithHandle').children; //list-item數目-2
+        for (var i = 0; i < (checkboxArray.length)-2; i++) {
+            waypts.push({
+                location: {lng:parseFloat(myMap.get(checkboxArray[i+1].id)[0]),lat:parseFloat(myMap.get(checkboxArray[i+1].id)[1])},
+                stopover: true
+            }); 
+        }
+
+        directionsService.route({
+            origin: {lng:parseFloat(myMap.get(checkboxArray[0].id)[0]),lat:parseFloat(myMap.get(checkboxArray[0].id)[1])},
+            destination: {lng:parseFloat(myMap.get(checkboxArray[(checkboxArray.length)-1].id)[0]),lat:parseFloat(myMap.get(checkboxArray[(checkboxArray.length)-1].id)[1])},
+            waypoints: waypts,
+            optimizeWaypoints: true,
+            travelMode: mode
+        }, function(response, status) {
+            if (status === 'OK') {
+                directionsRenderer.setDirections(response);
+            } 
+			else {
+                window.alert('Directions request failed due to ' + status);
+            }
+        });
+	}
+	
+	function distance(directionsService){	
+		var checkboxArray = document.getElementById('listWithHandle').children;
+		var waypts = [];
+		for (var i = 0; i < checkboxArray.length; i++){
+			waypts.push({lng:parseFloat(myMap.get(checkboxArray[i].id)[0]),lat:parseFloat(myMap.get(checkboxArray[i].id)[1])});	
+		}
+		console.log(waypts);
+
+		directionsService.getDistanceMatrix({
+			origins: waypts,
+			destinations: waypts,
+			travelMode: 'DRIVING',
+			unitSystem: google.maps.UnitSystem.METRIC,
+			avoidHighways: false,
+			avoidTolls: false
+		}, function(response, status) {
+			if (status !== 'OK') {
+				alert('Error was: ' + status);
+			} 
+			else {
+                console.log(response)
+				var originList = response.originAddresses;
+				console.log(originList);
+				var destinationList = response.destinationAddresses;
+				console.log(destinationList);
+				
+				for (var j = 0 ; j < originList.length; j++){
+					var outputDiv = document.getElementById('p_'+(j+1).toString());
+					console.log(outputDiv);
+					outputDiv.innerHTML = '';
+				}
+				
+				var distanceSeq = document.querySelectorAll('div.glyphicon-move > p');
+				var nameSeq = document.querySelectorAll('h4.content2');
+				console.log(distanceSeq[0]);
+				console.log(distanceSeq[1]);
+				console.log(distanceSeq[2]);
+				console.log(nameSeq[0].innerText);
+				console.log(nameSeq[1]);
+				console.log(nameSeq[2]);
+				for (var i = 0; i < originList.length; i++) {
+					var outputDiv = distanceSeq[i];
+					//var outputName = nameSeq[i];
+					console.log(outputDiv);
+					
+					//outputDiv.innerHTML = originList[(distanceSeq[i].id).split('_')[1]-1] + ' to ' + destinationList[(distanceSeq[i+1].id).split('_')[1]-1] + ': ' + results.distance.text + ' in ' + results.duration.text + '<br>';
+					if( i != originList.length-1 ){
+						var results = response.rows[(distanceSeq[i].id).split('_')[1]-1].elements[(distanceSeq[i+1].id).split('_')[1]-1];
+						outputDiv.innerHTML = nameSeq[i].innerText + ' to ' + nameSeq[i+1].innerText + ': <br> 距離 : ' + results.distance.text + ' 時間 : ' + results.duration.text;
+					    console.log(outputDiv);
+					}
+					else{
+						outputDiv.innerHTML = '最後一個行程'+ nameSeq[i].innerText +' : <br> 祝您有個美好的Ending'
+						console.log(outputDiv);
+					}
+				}
+			}
+			
+			}	
+		);
+	}
+
+    var distanceservice = new google.maps.DistanceMatrixService;
+	var directionsService = new google.maps.DirectionsService;
+	var directionsRenderer = new google.maps.DirectionsRenderer;
+	var map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 6,
+		center: {lat: 41.85, lng: -87.65},
+		mapTypeControl:false,
+		streetViewControl:false,
+		zoomControlOptions:{position:google.maps.ControlPosition.LEFT_BOTTOM}
+	});
+	directionsRenderer.setMap(map);
+	//id換成map button的id
+	document.getElementById('mappp').addEventListener('click', function() {
+		calculateAndDisplayRoute(directionsService, directionsRenderer,'DRIVING');
+	});
+
+	document.getElementById('mode').addEventListener('click',function(e){
+		var selectmode = e.target.id;
+		console.log(selectmode);
+		calculateAndDisplayRoute(directionsService, directionsRenderer, selectmode);
+	});
+	
+	//document.querySelectorAll('.list-group-item').addEventListener('dragend',distance(distanceservice));
+	
+	distance(distanceservice);
+
+	let date = 1; 
+	var number = document.getElementById(date);
+	var plusbtn = document.getElementById("plus");
+	
+	function temp(){	
+		plusbtn.style.animation = 'addmove 2s both';
+	}
+	
+	function add_date(){
+		var number = document.getElementById(date);
+		var btn = document.createElement('button');
+		plusbtn.style.transform='translateX(10px)';
+		//temp();
+		//setplusbtn.style.animation = 'addmove 2s both';
+		/*
+        setTimeout(function(){ 
+        	date += 1 ;
+			btn.setAttribute('id',date);
+			btn.setAttribute('type', 'button');
+			btn.setAttribute('class', 'day');
+			btn.innerHTML = '第'+date+'天'; 
+			number.after(btn);
+        },2000);*/
+		//plusbtn.style.animation = 'addmove 2s both';
+		
+		date += 1 ;
+		btn.setAttribute('id',date);
+		btn.setAttribute('type', 'button');
+		btn.setAttribute('class', 'day');
+		btn.innerHTML = '第'+date+'天'; 
+		btn.setAttribute('onclick',"javascript:planday()");
+		number.after(btn);
+		
+		//setTimeout('temp(btn)',2000);		;
+		//number.after(btn);
+	}
+
+	// List with handle
+	Sortable.create(listWithHandle, {
+		handle: '.glyphicon-move',
+		animation: 150,
+		preventOnFilter: false,
+		onUpdate: function(evt){
+			console.log(evt);
+			distance(distanceservice);
+		}
+	});
+
+    function deleteitem(){
+        var deleteid = event.target.parentNode.parentNode.id
+        console.log(event.target.parentNode.parentNode.parentNode.removeChild(event.target.parentNode.parentNode))
+        console.log(document.querySelectorAll('div.list-group > div').length);
+        var len = document.querySelectorAll('div.list-group > div').length;
+        var newnodediv = document.querySelectorAll('div.list-group > div');
+		var t = document.getElementById('temp').value
+		
+		var imgid = event.target.parentNode.firstChild.nextSibling.id
+		console.log(imgid)
+		auth.onAuthStateChanged(user => {
+			if (user) {
+				console.log('user logged in: ', user);
+				console.log('user logged in: ', user['uid']);
+				//userkey = user['uid'];
+                dbtest.ref('users/'+user['uid']+'/tempplan/'+t+"/"+imgid).remove();
+				
+			} else {
+				console.log('user logged out');
+			}
+		});
+        for(var i=0;i<len;i++){
+            console.log(newnodediv[i].id)
+            console.log(newnodediv[i].querySelector('p').id)
+            document.getElementById(newnodediv[i].querySelector('p').id).id = "p_" + (i+1).toString();
+            document.getElementById(newnodediv[i].id).id = "div" + (i+1).toString();
+        }
+
+
+        distance(distanceservice);
+    }
+
+
+	dbtest.ref('/temprec').on('value',function(snapshot){
+			var data = snapshot.val()
+			console.log(data)
+		})
+	function save(){
+		//document.getElementById('list').innerHTML='';
+		/*dbtest.ref('users/St7cv6keFnbDC5JHKnkepHKsmnV2/planset').once('value', function (snapshot) {
+			var data = snapshot.val();
+
+			console.log(data);
+		});
+		*/
+		var timedate = document.getElementById('time_date').getAttribute('placeholder'); //日期
+		console.log(time_date);
+		//var name = tempp[0].split("=")[1]; //行程名稱
+		var name = document.getElementById('name').innerText
+		console.log(name);
+		var timetime = document.getElementById('time_time').getAttribute('placeholder'); //時間
+		console.log(timetime)
+		var schedule = document.querySelectorAll('h4.content2');//行程順序
+		var scheduleseq = [];
+		for(var i=0;  i < schedule.length; i++) {
+			var output = schedule[i].innerText;
+			console.log(output);
+			scheduleseq.push(output);
+		}
+		console.log(scheduleseq);
+		var distanceSeq = document.querySelectorAll('div.glyphicon-move > p');
+		var content = [];
+		for(var i=0;  i < distanceSeq.length; i++) {
+			var output = distanceSeq[i].innerText;
+			console.log(output);
+			content.push(output);
+		}
+		console.log(content);
+
+		var selectarray = temppp.split(",");
+		console.log(selectarray);
+		var itemlength = selectarray.length / 3;
+		
+		var temp = 0;
+		var lnglat = [];
+		for(var i=0; i<itemlength;i++){
+			lnglat.push(selectarray[temp]+','+selectarray[temp+1]+','+selectarray[temp+2]);
+			temp += 3;
+		}
+		console.log(mapdistance);
+		//console.log(userkey);
+
+		//const userkey ='';
+		auth.onAuthStateChanged(user => {
+			if (user) {
+				console.log('user logged in: ', user);
+				console.log('user logged in: ', user['uid']);
+				//userkey = user['uid'];
+                dbtest.ref('users/'+user['uid']+'/tempplan').remove();
+				dbtest.ref('users/'+user['uid']+'/planset/'+name).set({date:timedate,time:timetime,schedule:scheduleseq,content:content,lnglat:lnglat});
+				setTimeout(function(){location.href = 'plancollection-ex.html'},1500)
+			} else {
+				console.log('user logged out');
+			}
+		});
+		//dbtest.ref('users/'+userkey+'/planset/'+name).set({date:timedate,time:timetime,schedule:scheduleseq,content:content,lnglat:lnglat});
+	}
+
+	function save2(){
+		//document.getElementById('list').innerHTML='';
+		/*dbtest.ref('users/St7cv6keFnbDC5JHKnkepHKsmnV2/planset').once('value', function (snapshot) {
+			var data = snapshot.val();
+
+			console.log(data);
+		});
+		*/
+		auth.onAuthStateChanged(user => {
+			if (user) {
+				//userkey = user['uid'];
+				var name = document.getElementById('name').innerText
+				console.log(name);
+				dbtest.ref('users/'+ user['uid']+"/tempplan").on('value',function(snapshot){
+                    //document.getElementById('listWithHandle').addEventListener('load',getdatabefore());
+                    var data = snapshot.val();
+					dbtest.ref('users/'+user['uid']+'/planset/'+name).set(data);
+					//setTimeout(function(){dbtest.ref('users/'+user['uid']+'/tempplan').remove();},2500)
+					setTimeout(function(){location.href = 'plancollection-ex.html'},2000)
+                });
+                //dbtest.ref('users/'+user['uid']+'/planset/'+name).set({date:timedate,time:timetime,schedule:scheduleseq,content:content,lnglat:lnglat});
+				//dbtest.ref('users/'+user['uid']+'/planset/'+name).set({date:timedate,time:timetime,schedule:scheduleseq,content:content,lnglat:lnglat});
+				//setTimeout(function(){location.href = 'plancollection-ex.html'},1500)
+			} else {
+				console.log('user logged out');
+			}
+		});
+		
+		
+	}
+	
+	document.getElementById('save').addEventListener('click',function(){
+		save2();
+		//setTimeout(location.href = 'plancollection-ex.html',3000);
+	});
+</script>
+<!-- Latest Sortable -->
+<!-- Sortable v1.6.10 -->
+</body>
+</html>

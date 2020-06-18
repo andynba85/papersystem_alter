@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Using CSS Grid</title>
+	<link href="https://fonts.googleapis.com/css?family=Dancing+Script|Indie+Flower|Lobster|Pacifico|Slabo+27px&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!--Let browser know website is optimized for mobile-->
+	<style>
+		body{
+			color: #01579b;
+			font-family:'Pacifico','Slabo 27px','Dancing Script','Indie Flower','Lobster';
+		}
+
+		h4{
+			text-shadow: 1px 1px #ffffff;
+			font-size: 50px;
+			margin:0;
+		}
+
+		#content{
+			display: grid;
+			grid-template-columns: repeat(6, 1fr);
+            grid-template-rows:repeat(4,minmax(150px,auto));
+			grid-gap: 35px;
+			max-width: 850px;
+			text-align: center;
+			margin: 0 auto;
+		}
+		#content div{
+            border-radius: 40px;
+			padding: 30px;
+		}
+		#content .one{
+			padding: 15px;
+		}
+		#content div:nth-child(even){
+			padding: 30px;
+		}
+        .one{
+			background-color: #F5986F;
+            grid-column-start: 1;
+            grid-column-end: 7;
+            /* grid-column:1/7 */
+        }
+		.one h4{
+			display: inline-block;
+			position:relative;
+			right: 25px;
+			bottom:35%;
+		}
+		.one img{
+			border-radius: 20px;
+			position: relative;
+			top:10px;
+			left:10%;
+			width:350px;
+			height:275px;
+		}
+        .two{
+			background-color: #F5CD6F;
+            grid-column:1/4;
+            grid-row: 2/4;
+        }
+		.two img{
+			border-radius: 20px;
+			top:20px;
+			position: relative;
+			text-align: right;
+			width:350px;
+			height:475px;
+		}
+        .three{
+            background-color: #FFEA4A;
+            grid-column:4/7;
+        }
+		.three img{
+			border-radius: 20px;
+			position: relative;
+			text-align: right;
+			top:10px;
+			width:350px;
+			height:300px;
+		}
+        .four{
+            background-color:#F5986F;
+            grid-column:1/4;
+        }
+		.four img{
+			border-radius: 20px;
+			position: relative;
+			top:10px;
+			left:2px;
+			width:350px;
+			height:300px;
+		}
+        .five{
+            background-color:#F5CD6F;
+            grid-column:4/7;
+            grid-row: 3/5;
+        }
+		.five img{
+			border-radius: 20px;
+			position: relative;
+			text-align: right;
+			top:15px;
+			width:350px;
+			height:475px;
+		}
+		#bar{
+			display: grid;
+			grid-template-columns: repeat(3,1fr);
+			grid-template-rows: repeat(1,minmax(100px,auto));
+			grid-gap: 35px;
+			text-align: center;
+			margin-bottom: 15px;
+			color:#000000;
+		}
+		#bar i{
+			display: inline-block;
+			padding-top: 70px;
+			font-size: 50px;
+			width:220px;
+		
+		}
+		#bar h3{
+			display: inline-block;
+			font-size: 50px;	
+		}
+		#bar img{
+			width:125px;
+			height:140px;
+			border-radius: 50%;
+			display: relative;
+			margin-top: 30px;
+			margin-left: 120px;	
+			border-color: 5px solid #000000;
+		}
+
+        .badge-2{
+            position: absolute;
+            top: 66%;
+            right: 5%;
+            padding: 5px;
+            border-radius: 50%;
+            width:80px;
+            height:80px;
+            font-size: 40px;
+            background-color: red;
+            color: white;
+            opacity:0;
+            transition: opacity 1s;
+        }
+
+        .badge-1{
+            position: absolute;
+            top:76%;
+            left:5%;
+            padding: 5px;
+            border-radius: 50%;
+            width:80px;
+            height:80px;
+            font-size: 40px;
+            background-color: red;
+            color: white;
+        }
+        .badge-2:hover{
+            opacity:1;
+        }
+
+        img:hover{
+            animation: shake 0.5s;
+        }
+
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+	</style>
+</head>
+<body>
+
+	<div id="bar">
+		
+		<i class="fa fa-align-justify"></i>
+		
+		<h3>Hi Andy</h3>
+		<img src="me.jpg">
+	</div>
+	<div id="content">
+
+		<div class="one">
+			<h4>Let's Travel</h4>
+			<img src="Travel.jpg">
+		</div>
+		<div class="two">
+			<h4>Trip Daily</h4>
+			<img src="daily.jpg">
+		</div>
+		<div class="three">
+			<h4>AR Experience</h4>
+			<img src="AR.png">
+		</div>
+		<div class="four">
+			<h4>Assistant</h4>
+            <img id="chatbot" src="chatbot.jpg">
+            <span id="chatbot-badge" class="badge-1">1</span>
+		</div>
+		<div class="five">
+			<h4>Chatroom</h4>
+            <img id="chat" src="chat.jpg">
+            <span class="badge-2">3</span>
+		</div>
+
+	</div>
+<script>
+    //onmessage可以用
+    document.getElementById('chatbot').addEventListener('onclick',function(){
+        document.getElementsByClassName('badge-1').style.opacity = '1';
+    })
+</script>
+</body>
+</html>

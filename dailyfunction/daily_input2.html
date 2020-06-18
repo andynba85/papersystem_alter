@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Import Google Icon Font-->
+    <title>TripREC</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Let browser know website is optimized for mobile-->
+    <!--google font-->
+    <script src="https://kit.fontawesome.com/80f6c102d9.js" crossorigin="anonymous"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.css">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <!--
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
+    
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0 ;
+        }
+        h3{
+            text-align: center;
+            margin-top: 0; 
+            margin-bottom: 0;
+            font-size: 16PX;
+        }
+        p{
+            text-align: center;
+            font-size: 10PX;
+            font-family:'Pacifico','Slabo 27px','Dancing Script','Indie Flower','Lobster';
+            margin: 10px 0; 
+        }
+
+        input[type=text] ,textarea{
+            width: 49.2%;
+            padding: 12px 10px;
+            margin: 10px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            font-family: sans-serif;
+        }
+
+        label{
+            font-size: 16px;
+            margin: 10px 0;
+            color: white;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+        .label_photo{
+            font-size: 16px;
+            margin: 10px 0;
+            color: black;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        #collect,#pushpost {
+            width: 75%;
+            background-color: #ffd31d;
+            color: #3949ab;
+            padding: 14px 20px;
+            margin: 5px 0 0;
+            border: none;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #collect:hover,#pushpost:hover {
+            background-color: #f2f2f2;
+        }
+
+        div.container {
+            border-radius: 10px;
+            background-color: #3949ab;
+            padding: 10px;
+        }
+        textarea {
+            width: 100%;
+            height: 50%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+            font-size: 16px;
+        }
+        .header{
+            width:100%;
+            height:10%;
+            text-align: left;
+            font-size: 20px;
+        }
+        .header h3{
+            display: inline-block;
+            font-family: 'Noto Sans TC', sans-serif;
+            margin-left: 15%;
+            font-size: 21PX;
+        }
+        .fa-arrow-circle-left{
+            vertical-align: sub;
+            margin:10px;
+            font-size: 35px;
+            color: #ffd31d;
+        }
+        .fa-camera,.fa-hand-sparkles{
+            font-size: 25px;
+        }
+        .photo{
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .photo_img{
+            width:270px;
+            height:200px;
+            background-color:#fff;
+            border-width: 5px;
+            border-style: dashed;
+            border-color: #e0e0e0;
+        }       
+
+        .select{
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: grid;
+            grid-template-columns: 187.5px 187.5px;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            position: relative;
+            background-color: #ffffff;
+            margin: auto;
+            padding: 0;
+            border: 1px solid #888;
+            width: 90%;
+            height:500px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+        }
+
+        .modal-content p{
+            font-family: 'Noto Sans TC', sans-serif;
+            margin-left: 5%;
+            font-size:20px;
+        }
+
+        /* Add Animation */
+        @-webkit-keyframes animatetop {
+            from {top:-300px; opacity:0} 
+            to {top:0; opacity:1}
+        }
+
+        @keyframes animatetop {
+            from {top:-300px; opacity:0}
+            to {top:0; opacity:1}
+        }
+
+        /* The Close Button */
+        .close {
+            color: black;
+            float: right;
+            margin-right: 10px;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #btn{
+            position: relative;
+            text-align: center;
+            top:400px;
+            padding:10px 0 ;
+            font-size: 25px;
+        }
+        .option{
+            text-align: center;
+            display: grid;
+            grid-template-columns: auto auto;
+            grid-gap: 6px;
+            font-family: 'Noto Sans TC', sans-serif;
+            margin-bottom: 5px;
+        }
+        .new_photo{
+            font-family: 'Noto Sans TC', sans-serif;
+            font-size: 18PX;
+        }
+        .fa-bookmark{
+            position: relative;
+            left:18%;
+            font-size: 23px;
+        }
+        #P{
+            position: relative;
+            left:38%;
+        }
+        .selectplan{
+            display: inline-block;
+        }
+        .selectplan select {
+            background-color: #fff;
+            color: #000;
+            padding: 13px;
+            width: 175px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            -webkit-appearance: button;
+            appearance: button;
+            outline: none;
+        }
+
+        .swiper-container{
+            width:365px;
+            height:200px;
+            background-color:#fff;
+            border-width: 5px;
+            border-style: dashed;
+            border-color: #e0e0e0;
+            color: black;
+        }
+
+        .swiper-slide {
+            text-align:center;
+            width:365px;
+            height:200px;
+        }
+
+        .swiper-slide img{
+            width:270px;
+            height:200px;
+        }
+    
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <i onclick="location.href='../new_preindex.html'" class="fas fa-arrow-circle-left"></i>
+        <h3>記錄旅遊的美好</h3>
+        <i onclick="location.href='daily-ex.html'" class="far fa-bookmark"></i>
+    </div>
+
+
+    <div class="photo"> 
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+
+            </div>
+            <!--
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="add2.png">
+                </div>
+                <div class="swiper-slide">
+                    <img src="add2.png">
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            -->
+        </div>
+    
+        <div class="select">
+            <div class="new_photo">
+                <label class="label_photo" for="input">
+                    <input hidden id="input" type="file" multiple/>
+                    <i class="fas fa-camera"></i>
+                    <h3>新增相片</h3>
+                </label>
+            </div>
+            <div class="new_DIY">
+                <i class="fas fa-hand-sparkles" onclick="goDIY()"></i>
+                <h3>DIY</h3>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Cut Your want</p>
+            <div id="btn"> Done! </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <form>
+            <label for="topic">Topic</label>
+            <label id="P" for="Plan">Plan</label>
+            <div class="bbb">
+                <input id="topic" type="text"  name="topic" placeholder="Your topic..">
+                <div class="selectplan">
+                    <select name="planlist" id="planlist">
+                        <option value="none">Select plan:</option>
+                    </select>
+                </div>
+                <!--<input id="plan" type="text"  name="topic" placeholder="Your topic..">-->
+            </div>
+        
+            <label for="lname">Content</label>
+            <textarea id="content" name="content" placeholder="Write something.." style="height:100px"></textarea>
+            <div class="option">
+                <div id="collect" onclick="collectpost()">收藏貼文</div>
+                <div id="pushpost" onclick="pushpost()">上傳貼文</div>
+            </div>
+            
+        </form>
+    </div>
+
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
+<script src="../database_setup.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.js"></script>
+<script src="https://unpkg.com/swiper/js/swiper.js"></script>
+<script>
+    
+
+    function gettime(){
+        var today = new Date();
+        var month = today.getMonth()+1; 
+        var day = today.getDate();
+        var output = today.getFullYear() + '年' + 
+        (month<10 ? '0' : '') + month + '月' + 
+        (day<10 ? '0' : '') + day +'日';
+        return output
+    }
+
+    auth.onAuthStateChanged(user => {
+        if (user) {
+                console.log('user logged in: ', user);
+                console.log('user logged in: ', user['uid']);
+                dbtest.ref('users/'+ user['uid'] +'/DIYtempdiary').once('value',function(snapshot){
+                    var data = snapshot.val()
+                    console.log(data.img)
+                    document.getElementById('post').src = data.img;
+                });
+                dbtest.ref('users/'+ user['uid'] +'/planset').once('value',function(snapshot){
+                    var data = snapshot.val()
+                    console.log(data)
+                    snapshot.forEach(function (item) {
+                        document.getElementById('planlist').insertAdjacentHTML('beforeend',
+                            ` <option value="${item.key}">${item.key}</option> `)
+                    })
+                })
+        }else{
+            console.log('user logged out: ');
+        }
+    });
+
+
+    var modal = document.getElementById("myModal");
+    var btn = document.getElementById("upload");
+    var span = document.getElementsByClassName("close")[0]; 
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    var basic = $('.modal-content').croppie({
+        viewport: {
+            width: 250,
+            height: 200,
+        },
+        boundary: { width: 320, height: 300 },
+    });
+
+    var mySwiper;
+
+    $('#input').change(function(){
+        var files = this.files; //所有上傳圖片
+        console.log(files);
+        var length = files.length; //上傳長度
+        console.log(length)
+        var file = $('#input')[0].files[0];
+        console.log(file);
+
+        $.each(files,function(key,value){
+            var reader = new FileReader();
+            var div = document.createElement("div");
+            var img = document.createElement("img");
+            div.className = 'swiper-slide';
+            reader.onload = function(e){
+                img.src = e.target.result;
+                div.appendChild(img)
+                document.querySelector('.swiper-wrapper').appendChild(div);
+            }
+            reader.readAsDataURL(value);
+        })
+
+        var div_bot = document.createElement("div");
+        var div_left = document.createElement("div");
+        div_left.className = 'swiper-button-prev';
+        var div_right = document.createElement("div");
+        div_right.className = 'swiper-button-next';
+        div_bot.className = 'swiper-pagination';
+        document.querySelector('.swiper-container').appendChild(div_bot)
+        document.querySelector('.swiper-container').appendChild(div_left)
+        document.querySelector('.swiper-container').appendChild(div_right)
+        
+        mySwiper = new Swiper('.swiper-container', {
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+            
+    });
+    
+    /*
+        var reader = new FileReader;
+        reader.onload = function(e) {
+            console.log(e.target.result);
+            basic.croppie('bind',{
+                url:e.target.result
+            })
+            //$('#upload').attr('src', e.target.result);
+            // When the user clicks the button, open the modal
+            modal.style.display = "block"; 
+        };
+        reader.readAsDataURL(file);
+    });
+    */
+    
+    $('#btn').click(function () {
+        basic.croppie('result', {
+            type: 'base64',
+            size: 'viewport'
+        }).then(function (resp) {
+            $('#upload').attr('src', resp);
+            document.getElementById('post').src = resp      
+            modal.style.display = "none";
+            
+        });
+    });
+
+    function goDIY(){
+        location.href = './daily_ver2.html';
+    }
+
+    function collectpost(){
+        var topic = document.getElementById('topic').value;
+        var content = document.getElementById('content').value;
+        var post = document.getElementById('post').src;
+        var tt = gettime();
+        auth.onAuthStateChanged(user => {
+			if (user) {
+                dbtest.ref('users/'+ user['uid']).once('value',function(snapshot){
+                    var data = snapshot.val();
+                    console.log(snapshot.val())
+                    dbtest.ref('users/'+ user['uid']+"/diaryset/"+topic).set({pushtime:tt,userimg:data.img,username:data.username,'topic':topic,'content':content,'img':post,'push':false})
+                    setTimeout('location.href="daily-ex.html"',500);
+                });
+                //dbtest.ref('users/'+ user['uid'] +'/diaryset/'+topic).set({topic:topic,content:content,post:post});
+                //dbtest.ref('/onlinepost').push({user:user['uid'],topic:topic,content:content,post:post});
+                console.log('user logged in: ', user);
+                console.log('user logged in: ', user['uid']);
+            }else{
+                console.log('user logged out: ');
+            }
+        });
+    }
+
+    function pushpost(){
+        var topic = document.getElementById('topic').value;
+        var content = document.getElementById('content').value;
+        var post = document.getElementById('post').src;
+        var plan = document.getElementById('planlist').value;
+        var tt = gettime();
+        auth.onAuthStateChanged(user => {
+			if (user) {
+                dbtest.ref('users/'+ user['uid']).once('value',function(snapshot){
+                    var data = snapshot.val();
+                    console.log(snapshot.val())
+                    dbtest.ref('users/'+ user['uid'] +'/diaryset/'+topic).set({pushtime:tt,userimg:data.img,username:data.username,topic:topic,content:content,img:post,plan:plan,push:true});
+                    dbtest.ref('users/'+ user['uid'] +'/planset/').once('value',function(ddd){
+                        ddd.forEach(function(item){
+                            if(item.key == plan){
+                                dbtest.ref('/onlinepost').push({pushtime:tt,user:user['uid'],userimg:data.img,username:data.username,topic:topic,content:content,post:post,plan:item.val(),good:0});
+                            }
+                        });
+                        setTimeout('location.href="../new_preindex.html"',2500);
+                    })
+                    //dbtest.ref('/onlinepost').push({user:user['uid'],userimg:data.img,username:data.username,topic:topic,content:content,post:post,plan:plan,good:0});
+                    //setTimeout('location.href="../new_preindex.html"',2500);
+                });
+                //dbtest.ref('users/'+ user['uid'] +'/diaryset/'+topic).set({topic:topic,content:content,post:post});
+                //dbtest.ref('/onlinepost').push({user:user['uid'],topic:topic,content:content,post:post});
+                console.log('user logged in: ', user);
+                console.log('user logged in: ', user['uid']);
+                //setTimeout('location.href="../new_preindex.html"',500);
+            }else{
+                console.log('user logged out: ');
+            }
+        });
+    }
+    /*
+    document.getElementById('next').addEventListener('click',function(){
+        var topic = document.getElementById('topic').value;
+        var content = document.getElementById('content').value;
+        
+        console.log(topic);
+        console.log(content);
+        auth.onAuthStateChanged(user => {
+			if (user) {
+                console.log('user logged in: ', user);
+                console.log('user logged in: ', user['uid']);
+                dbtest.ref('users/'+ user['uid'] +'/diaryset/'+topic).set({topic:topic,content:content});
+                location.href='daily_ver2.html?topic='+topic;
+            }else{
+                console.log('user logged out: ');
+            }
+        });
+    });
+    */
+</script>
+</body>
+</html>

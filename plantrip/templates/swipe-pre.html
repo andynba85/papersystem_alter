@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        h1{
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+
+        }
+        .bubble{
+            display: inline-block;
+            position: relative;
+            background-color: #FFE65B;
+            border-radius: 15px;
+            width:82px;
+            height:40px;
+            text-align: center;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            border:2px solid #000;
+        }
+        .bubble span{
+            position: absolute;
+            font-size: 12px;
+            font-weight: 600;
+            width:80%;
+            height:30%;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin:auto;
+        }
+        .bubble2{
+            display: inline-block;
+            position: relative;
+            background-color: #FFE65B;
+            border-radius: 15px;
+            width:108px;
+            height:40px;
+            text-align: center;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            border:2px solid #000;
+        }
+        .bubble2 span{
+            position: absolute;
+            font-size: 12px;
+            font-weight: 600;
+            width:80%;
+            height:30%;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin:auto;
+        }
+
+        .bubble3{
+            display: inline-block;
+            position: relative;
+            background-color: #FFE65B;
+            border-radius: 15px;
+            width:170px;
+            height:40px;
+            text-align: center;
+            margin:1px;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            border:2px solid #000;
+        }
+        .bubble3 span{
+            position: absolute;
+            font-size: 12px;
+            font-weight: 600;
+            width:80%;
+            height:30%;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin:auto;
+        }
+        .content{
+            position:absolute;
+            top:140px;
+            left:-2px;
+        }
+        .bubblec{
+            display: inline-block;
+            position: relative;
+            background-color: #4433FF;
+            border-radius: 15px;
+            width:170px;
+            height:40px;
+            text-align: center;
+            margin:1px;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            border:5px solid #FFE65B;
+        }
+        .bubblec span{
+            position: absolute;
+            font-size: 20px;
+            font-weight: 600;
+            width:80%;
+            height:60%;
+            color:#fff;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin:auto;
+        }
+        .continue{
+            position:absolute;
+            bottom: 30px;
+            left:100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Choose the Region</h1>
+    <div class="content">
+        <div id="1" class="bubble" onclick="select(this)">
+            <span>台北市</span>
+        </div>
+        <div id="2" class="bubble" onclick="select(this)">
+            <span>台中市</span>
+        </div>
+        <div id="3" class="bubble" onclick="select(this)">
+            <span>台南市</span>
+        </div>
+        <div id="4" class="bubble" onclick="select(this)">
+            <span>新北市</span>
+        </div>
+        <div id="5" class="bubble2" onclick="select(this)">
+            <span>南投縣</span>
+        </div>
+        <div id="6" class="bubble2" onclick="select(this)">
+            <span>基隆市</span>
+        </div>
+        <div id="7" class="bubble2" onclick="select(this)">
+            <span>新竹市</span>
+        </div>
+        <div id="8" class="bubble3" onclick="select(this)">
+            <span>新竹縣</span>
+        </div>
+        <div id="9" class="bubble3" onclick="select(this)">
+            <span>桃園市</span>
+        </div>
+        <div id="10" class="bubble" onclick="select(this)">
+            <span>澎湖縣</span>
+        </div>
+        <div id="11" class="bubble" onclick="select(this)">
+            <span>花蓮縣</span>
+        </div>
+        <div id="12" class="bubble" onclick="select(this)">
+            <span>苗栗縣</span>
+        </div>
+        <div  id="13" class="bubble" onclick="select(this)">
+            <span>連江縣</span>
+        </div>
+        <div  id="14" class="bubble2" onclick="select(this)">
+            <span>金門縣</span>
+        </div>
+        <div id="15"class="bubble2" onclick="select(this)">
+            <span>高雄市</span>
+        </div>
+        <div  id="16" class="bubble2" onclick="select(this)">
+            <span>雲林縣</span>
+        </div>
+        <div  id="17" class="bubble3" onclick="select(this)">
+            <span>彰化縣</span>
+        </div>
+        <div  id="18" class="bubble3" onclick="select(this)">
+            <span>屏東縣</span>
+        </div>
+        <div  id="19" class="bubble" onclick="select(this)">
+            <span>宜蘭縣</span>
+        </div>
+        <div  id="20" class="bubble" onclick="select(this)">
+            <span>嘉義市</span>
+        </div>
+        <div  id="21" class="bubble" onclick="select(this)">
+            <span>嘉義縣</span>
+        </div>
+        <div id="22" class="bubble" onclick="select(this)">
+            <span>台東縣</span>
+        </div>
+    </div>
+    <div class="bubblec continue" onclick="continuego()">
+        <span>Continue</span>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
+    <script src="{{ url_for('static', filename='js/database_setup.js') }}"></script>
+    <script>
+        var id = '';
+        function select(event){
+            document.getElementById(event.id).style.backgroundColor = '#ffffff';
+            id = event.id;
+            console.log(id);
+        }
+        
+
+        function continuego(){
+            if( id === '1'){
+                location.href = "{{ url_for('region', region='台北市')}}";
+            }else if(id === '2'){
+                location.href = "{{ url_for('region', region='台中市')}}";
+            }else if(id === '3'){
+                location.href = "{{ url_for('region', region='台南市')}}";
+            }else if(id === '4'){
+                location.href = "{{ url_for('region', region='新北市')}}";
+            }else if(id === '5'){
+                location.href = "{{ url_for('region', region='南投縣')}}";
+            }else if(id === '6'){
+                location.href = "{{ url_for('region', region='基隆市')}}";
+            }else if(id === '7'){
+                location.href = "{{ url_for('region', region='新竹市')}}";
+            }else if(id === '8'){
+                location.href = "{{ url_for('region', region='新竹縣')}}";
+            }else if(id === '9'){
+                location.href = "{{ url_for('region', region='桃園市')}}";
+            }else if(id === '10'){
+                location.href = "{{ url_for('region', region='澎湖縣')}}";
+            }else if(id === '11'){
+                location.href = "{{ url_for('region', region='花蓮縣')}}";
+            }else if(id === '12'){
+                location.href = "{{ url_for('region', region='苗栗縣')}}";
+            }else if(id === '13'){
+                location.href = "{{ url_for('region', region='連江縣')}}";
+            }else if(id === '14'){
+                location.href = "{{ url_for('region', region='金門縣')}}";
+            }else if(id === '15'){
+                location.href = "{{ url_for('region', region='高雄市')}}";
+            }else if(id === '16'){
+                location.href = "{{ url_for('region', region='雲林縣')}}";
+            }else if(id === '17'){
+                location.href = "{{ url_for('region', region='彰化縣')}}";
+            }else if(id === '18'){
+                location.href = "{{ url_for('region', region='屏東縣')}}";
+            }else if(id === '19'){
+                location.href = "{{ url_for('region', region='宜蘭縣')}}";
+            }else if(id === '20'){
+                location.href = "{{ url_for('region', region='嘉義市')}}";
+            }else if(id === '21'){
+                location.href = "{{ url_for('region', region='嘉義縣')}}";
+            }else{
+                location.href = "{{ url_for('region', region='台東縣')}}";
+            }
+            
+            //location.href = "swipe-habit.html?region="+id;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ar test</title>
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width,height=device-height">
+    <!-- IOS SUPPORT -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<!doctype HTML>
+<html>
+<script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+<script src="https://raw.githack.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
+
+<!-- UIkit JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script>
+
+<script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
+<script src="https://rawgit.com/Utopiah/googlepoly-load-component/master/googlepoly-load-component.js"></script>
+<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v5.0.1/dist/aframe-extras.min.js"></script>
+
+<script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+
+
+
+<body style='margin : 0px; overflow: hidden;'>
+
+
+    <a-scene id="scene" position="0 0 -1" cursor="fuse: false; rayOrigin:mouse" embedded arjs>
+
+          <a-marker preset="hiro">
+  
+              <!-- loot box -->
+            <a-box id="boxBody"
+                   position="0 0.25 0" scale="1.2 0.6 1.2"
+                   opacity="0.8"
+                   event-set__enter="_event:mouseenter; color: #FFFF84"
+                   event-set__leave="_event:mouseleave; color: #FFFFFF;
+                                          position: 0 0.3 0;
+                                          scale: 1.2 0.6 1.2"
+                   event-set__down="_event:mousedown; position: 0 0.15 0;
+                                         scale: 1.2 0.3 1.2"
+                   event-set__up="_event:mouseup; color: #FFFFFF;
+                                       position: 0 0.3 0;
+                                       scale: 1.2 0.6 1.2">
+            </a-box>
+
+
+ <!--打開後的box-->
+            <a-entity id="boxCover0"
+                      position="0.6 0.25 0" rotation="0 0 180">
+              <a-box class="board"
+                     position="0.5 0 0" scale="0.8 0.05 1"
+                     opacity="0.5">
+              </a-box>
+            </a-entity>
+            <a-entity  id="boxCover1"
+                      position="-0.6 0.25 0" rotation="0 0 -180">
+              <a-box class="board"
+                     position="-0.5 0 0" scale="0.8 0.05 1"
+                     opacity="0.5">
+              </a-box>
+            </a-entity>
+            <a-entity id="boxCover2"
+                      position="0 0.25 0.6" rotation="-180 0 0">
+              <a-box class="board"
+                     position="0 0 0.5" scale="1 0.05 0.8"
+                     opacity="0.5">
+              </a-box>
+            </a-entity>
+            <a-entity id="boxCover3"
+                      position="0 0.25 -0.6" rotation="180 0 0">
+              <a-box class="board"
+                     position="0 0 -0.5" scale="1 0.05 0.8"
+                     opacity="0.5">
+              </a-box>
+            </a-entity>
+            
+
+            <!-- effects -->
+            <a-entity id="particles"
+                      position="0 0 0"
+                      particle-system="enabled: false;
+                                       color: #EEFF00, #FF8800;
+                                       particleCount: 50;
+                                       maxParticleCount: 200;
+                                       maxAge: 2;
+                                       duration: 1;
+                                       velocityValue: 0 5 0;
+                                       velocitySpread: 5 5 5;
+                                       accelerationSpread: 5 0 5;
+                      texture: https://unpkg.com/aframe-particle-system-component@1.0.x/dist/images/star.png">
+            </a-entity>
+            
+            <!-- loot -->
+            <!-- Alex “SAFFY” Safayan:
+                 https://poly.google.com/view/bVepm2yfJTh -->
+            <a-entity id="plant"
+                      visible="false"
+                      scale="1.6 1.6 1.6" position="0 0.3 0"
+                      gpoly="polyid: bVepm2yfJTh;
+                             API_KEY: AIzaSyDsovdrekNH2A-NiKfMtMWA8LXebZQ41nk;">
+            </a-entity>
+            
+            <!-- Anastasiia Ku:
+                 https://poly.google.com/view/0-_UGETLPsX -->
+            <a-entity id="book"
+                      visible="false"
+                      scale="1.6 1.6 1.6" position="0 0.3 0" rotation="6 0 45"
+                      gpoly="polyid: 0-_UGETLPsX;
+                             API_KEY: AIzaSyDsovdrekNH2A-NiKfMtMWA8LXebZQ41nk;">
+            </a-entity>
+            
+            <!-- Tiff Eidmann:
+                 https://poly.google.com/view/fkPRnm8iSXI -->
+            <a-entity id="books"
+                      visible="false"
+                      scale="7 7 7" position="0 0.3 0" rotation="0 90 -2"
+                      gpoly="polyid: fkPRnm8iSXI;
+                             API_KEY: AIzaSyDsovdrekNH2A-NiKfMtMWA8LXebZQ41nk;">
+            </a-entity>
+            
+            <a-entity id="boat"
+                      visible="false">
+                <!-- Poly by Google:
+                     https://poly.google.com/view/adoP7kR7S17 -->
+                <a-entity scale="0.015 0.015 0.015" position="0 0.2 0" rotation="0 180 0"
+                          gpoly="polyid: adoP7kR7S17;
+                                 API_KEY: AIzaSyDsovdrekNH2A-NiKfMtMWA8LXebZQ41nk;">
+                </a-entity>
+                <!-- ocean -->
+                <a-ocean color="#92E2E2"
+                         scale="0.12 0.12 0.2" position="0 0.19 0"
+                         density="5" speed="2">
+                </a-ocean>
+            </a-entity>
+            
+            <!-- HEAD apelab:
+                 https://poly.google.com/view/9HNeWBLGiRV -->
+            <a-entity id="lamp"
+                      visible="false"
+                      scale="1.2 1.2 1.2" position="0 0.3 0" rotation="0 -60 0"
+                      gpoly="polyid: 9HNeWBLGiRV;
+                             API_KEY: AIzaSyDsovdrekNH2A-NiKfMtMWA8LXebZQ41nk;">
+            </a-entity>
+
+
+            <!-- text -->
+            <a-text value="TripREC box"
+                    scale="0.2 0.2 0.2"
+                    position="0 0.65 0.5" rotation="-90 0 0"
+                    color="#445EA0" material="side: double"></a-text>
+
+            <a-text  id="openInst"
+                    value="Click to open"
+                    scale="0.6 0.6 0.6"
+                    position="-0.4 0.65 0" rotation="-90 0 0"
+                    color="#000000" material="side: double" onclick="animBox()"></a-text>
+
+            <a-text id="closeInst"
+                    value="Click to retry"
+                    scale="0.6 0.6 0.6"
+                    position="-0.4 0.65 0" rotation="-90 0 0"
+                    color="#FFFF84" material="side: double" onclick="animBox()"></a-text>
+
+          </a-marker>
+      
+      <a-entity camera position="0 0 0"></a-entity>
+    </a-scene>
+
+<script>
+// box
+const boxBody = document.querySelector('#boxBody');
+let boxCovers = ["boxCover0","boxCover1","boxCover2","boxCover3"];
+const boards = document.querySelectorAll('.board');
+const boxRotations = [];
+let boxOpen = false;
+const animToggle = {true: "from", false: "to"};
+for (let i = 0; i < 4; i++) {
+  let rotI = document.getElementById(boxCovers[i]).getAttribute('rotation');
+  console.log(rotI);
+  boxRotations[i] = rotI.x + " " + rotI.y + " " + rotI.z;
+  }
+console.log(boxRotations);
+
+// effects
+const particles = document.querySelector('#particles');
+
+// loot
+const plant = document.querySelector('#plant');
+const book = document.querySelector('#book');
+const books = document.querySelector('#books');
+const boat = document.querySelector('#boat');
+const lamp = document.querySelector('#lamp');
+
+let curLoot = null;
+const lootList = [plant, book, books, boat, lamp];
+const numLoot = lootList.length;
+
+// text
+const openInst = document.querySelector('#openInst');
+const closeInst = document.querySelector('#closeInst');
+closeInst.setAttribute('visible', false);
+
+
+function chooseLoot() {
+  let rand = Math.floor(Math.random() * numLoot);
+  console.log(rand, numLoot);
+  return lootList[rand];
+}
+
+function animBox() {
+  //dependencies: ['raycaster'];
+  console.log(123456);
+  
+  // animate box body
+  if (boxOpen) {
+    boxBody.setAttribute('visible', boxOpen);
+  } 
+  else {
+    window.setTimeout(function() {
+      boxBody.setAttribute('visible', !boxOpen);
+      console.log('disappear');
+    }, 500);
+  }
+
+  boxBody.setAttribute('animation',
+                        "property: opacity; " + animToggle[!boxOpen] +
+                        ": 0.8; " + animToggle[boxOpen] +
+                        ": 0; dur: 500");
+  
+  // animate box covers
+  boxCovers.forEach(function(el, i) {
+    document.querySelector(el).setAttribute('animation',
+                    "property: rotation; " + animToggle[!boxOpen] +
+                    ": " + boxRotations[i] + "; " +animToggle[boxOpen] +
+                    ": 0 0 0; dur: 500");
+    boards[i].setAttribute('animation',
+                           "property: color; " + animToggle[!boxOpen] +
+                           ": #FFFFFF; " + animToggle[boxOpen] +
+                           ": #FFFF84; dur: 500");
+  });
+  
+  // show effects
+  particles.setAttribute('particle-system', 'enabled:'+!boxOpen);
+  
+  // change instructions
+  openInst.setAttribute('visible', boxOpen);
+  closeInst.setAttribute('visible', !boxOpen);
+  
+  if (boxOpen) {
+    // hide loot
+    curLoot.setAttribute('visible', !boxOpen);
+    curLoot.removeEventListener('click', animBox());
+    //boxCovers.forEach(function(el, i) {
+      //document.getElementById(el).removeEventListener('click', animBox());
+    //});
+    //boxBody.addEventListener('click', animBox(),
+    // once=true);
+  } else {
+    // show loot
+    curLoot = chooseLoot();
+    curLoot.setAttribute('visible', !boxOpen);
+    //curLoot.addEventListener('click', animBox(),
+      //                       once=true);
+    //boxCovers.forEach(function(el, i) {
+      //document.getElementById(el).addEventListener('click', animBox(),
+       //                    once=true);
+     //boxBody.removeEventListener('click', 
+      //                           animBox());
+     //});
+     //closeInst.addEventListener('click', animBox());
+  }
+  
+  boxOpen = !boxOpen;
+  console.log(999999999)
+}
+
+// add click listener to texts to accommodate mobile and older aframe version
+
+openInst.addEventListener('click', animBox());
+//closeInst.addEventListener('click', animBox());
+//boxBody.addEventListener('click', animBox());
+</script>
+</body>
+
+</html>
